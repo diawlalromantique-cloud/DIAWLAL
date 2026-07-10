@@ -1,11 +1,176 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
-<meta charset="UTF-8">
-<title>DIAWLAL</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>DIAWLAL</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            color: white;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 8%;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            color: #8b85ff;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-left: 25px;
+        }
+
+        .accueil {
+            min-height: 80vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+        }
+
+        h1 {
+            font-size: 55px;
+            margin-bottom: 10px;
+        }
+
+        .description {
+            font-size: 20px;
+            color: #cccccc;
+            max-width: 600px;
+            line-height: 1.6;
+        }
+
+        button {
+            margin-top: 25px;
+            background-color: #6c63ff;
+            color: white;
+            padding: 16px 35px;
+            font-size: 18px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background-color: #5148e5;
+            transform: scale(1.05);
+        }
+
+        .services {
+            background-color: #ffffff;
+            color: #222222;
+            padding: 60px 8%;
+            text-align: center;
+        }
+
+        .services h2 {
+            font-size: 35px;
+        }
+
+        .cartes {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+
+        .carte {
+            width: 250px;
+            padding: 25px;
+            background-color: #eeeeee;
+            border-radius: 15px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 25px;
+            background-color: #10101d;
+        }
+    </style>
 </head>
+
 <body>
-    <h1>bienvenue sur DIAWLAL</h1>
-<p>Dècouvrez une nouvelle expèrience.</p>
+
+    <nav>
+        <div class="logo">DIAWLAL</div>
+
+        <div>
+            <a href="#">Accueil</a>
+            <a href="#services">Services</a>
+            <a href="contact.html">Contact</a>
+        </div>
+    </nav>
+
+    <section class="accueil">
+
+        <h1>Bienvenue sur DIAWLAL</h1>
+
+        <p class="description">
+            Une nouvelle plateforme moderne conçue pour vous offrir
+            une expérience simple, rapide et innovante.
+        </p>
+
+        <button onclick="afficherMessage()">Commencer</button>
+
+    </section>
+
+    <section class="services" id="services">
+
+        <h2>Nos services</h2>
+
+        <div class="cartes">
+
+            <div class="carte">
+                <h3>Rapidité</h3>
+                <p>Une plateforme simple et rapide à utiliser.</p>
+            </div>
+
+            <div class="carte">
+                <h3>Sécurité</h3>
+                <p>Une expérience conçue pour protéger les utilisateurs.</p>
+            </div>
+
+            <div class="carte">
+                <h3>Innovation</h3>
+                <p>Des solutions modernes pour construire l'avenir.</p>
+            </div>
+
+        </div>
+
+    </section>
+
+    <footer>
+        <p>© 2026 DIAWLAL - Tous droits réservés</p>
+    </footer>
+
+    <script>
+        function afficherMessage() {
+            alert("Bienvenue sur DIAWLAL !");
+        }
+    </script>
+
 </body>
+
 </html>
