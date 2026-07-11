@@ -1,105 +1,58 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Services - DIAWLAL</title>
-
-    <style>
-        * {
-            box-sizing: border-box;
-        }
-
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background: linear-gradient(135deg, #1a1a2e, #16213e);
-            color: white;
-            text-align: center;
-            min-height: 100vh;
-        }
-
-        header {
-            padding: 30px;
-        }
-
-        h1 {
-            color: #8db8f8;
-            font-size: 40px;
-        }
-
-        nav a {
-            color: white;
-            text-decoration: none;
-            margin: 15px;
-            font-weight: bold;
-        }
-
-        nav a:hover {
-            color: #8db8f8;
-        }
-
-        .services {
-            display: flex;
-            justify-content: center;
-            gap: 25px;
-            flex-wrap: wrap;
-            padding: 50px 20px;
-        }
-
-        .service {
-            background: white;
-            color: #333;
-            width: 260px;
-            padding: 30px 20px;
-            border-radius: 20px;
-        }
-
-        .service h2 {
-            color: #16213e;
-        }
-
-        footer {
-            margin-top: 40px;
-            padding: 20px;
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-    <header>
-        <h1>DIAWLAL</h1>
+    <nav>
+        <div class="logo">DIAWLAL</div>
 
-        <nav>
+        <div>
             <a href="index.html">Accueil</a>
             <a href="services.html">Services</a>
             <a href="contact.html">Contact</a>
-        </nav>
-    </header>
+        </div>
+    </nav>
 
     <main>
+
         <h2>Nos services</h2>
-        <p>Découvrez les services proposés par DIAWLAL.</p>
 
-        <section class="services">
+        <p>
+            Découvrez les services proposés par DIAWLAL.
+        </p>
 
-            <div class="service">
-                <h2>🌍 Découverte</h2>
-                <p>Découvrez de nouvelles expériences et de nouvelles opportunités.</p>
+        <div class="cartes">
+
+            <div class="carte">
+                <h3>Rapidité</h3>
+                <p>
+                    Une plateforme simple, moderne et rapide à utiliser.
+                </p>
             </div>
 
-            <div class="service">
-                <h2>🤝 Accompagnement</h2>
-                <p>DIAWLAL vous accompagne dans vos projets et vos idées.</p>
+            <div class="carte">
+                <h3>Sécurité</h3>
+                <p>
+                    Une expérience conçue pour protéger les utilisateurs.
+                </p>
             </div>
 
-            <div class="service">
-                <h2>💡 Innovation</h2>
-                <p>Des solutions modernes pour construire l'avenir ensemble.</p>
+            <div class="carte">
+                <h3>Innovation</h3>
+                <p>
+                    Des solutions modernes pour construire l'avenir.
+                </p>
             </div>
 
-        </section>
+        </div>
+
     </main>
 
     <footer>
@@ -107,4 +60,5 @@
     </footer>
 
 </body>
+
 </html>

@@ -4,124 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>Contact - DIAWLAL</title>
-
-    <style>
-        * {
-            box-sizing: border-box;
-        }
-
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background: linear-gradient(135deg, #1a1a2e, #16213e);
-            color: white;
-        }
-
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px 8%;
-        }
-
-        .logo {
-            font-size: 28px;
-            font-weight: bold;
-            color: #8b85ff;
-        }
-
-        nav a {
-            color: white;
-            text-decoration: none;
-            margin-left: 25px;
-        }
-
-        .contact-section {
-            min-height: 80vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 40px 20px;
-        }
-
-        .contact-box {
-            width: 100%;
-            max-width: 600px;
-            background-color: white;
-            color: #222;
-            padding: 35px;
-            border-radius: 18px;
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
-        }
-
-        .contact-box h1 {
-            text-align: center;
-            color: #1a1a2e;
-            margin-bottom: 10px;
-        }
-
-        .contact-box p {
-            text-align: center;
-            color: #666;
-            margin-bottom: 30px;
-        }
-
-        label {
-            display: block;
-            margin-top: 15px;
-            margin-bottom: 7px;
-            font-weight: bold;
-        }
-
-        input,
-        textarea {
-            width: 100%;
-            padding: 13px;
-            border: 1px solid #ccc;
-            border-radius: 9px;
-            font-size: 16px;
-        }
-
-        textarea {
-            min-height: 140px;
-            resize: vertical;
-        }
-
-        button {
-            width: 100%;
-            margin-top: 22px;
-            background-color: #6c63ff;
-            color: white;
-            padding: 15px;
-            font-size: 18px;
-            border: none;
-            border-radius: 10px;
-            cursor: pointer;
-        }
-
-        button:hover {
-            background-color: #5148e5;
-        }
-
-        footer {
-            text-align: center;
-            padding: 25px;
-            background-color: #10101d;
-        }
-
-        @media (max-width: 600px) {
-            nav {
-                flex-direction: column;
-                gap: 15px;
-            }
-
-            nav a {
-                margin: 0 10px;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
@@ -131,7 +15,7 @@
 
         <div>
             <a href="index.html">Accueil</a>
-            <a href="index.html#services">Services</a>
+            <a href="services.html">Services</a>
             <a href="contact.html">Contact</a>
         </div>
     </nav>
@@ -150,15 +34,29 @@
             <form onsubmit="envoyerMessage(event)">
 
                 <label for="nom">Nom</label>
-                <input type="text" id="nom" placeholder="Votre nom" required>
+                <input
+                    type="text"
+                    id="nom"
+                    placeholder="Votre nom"
+                    required
+                >
 
-                <label for="email">E-mail</label>
-                <input type="email" id="email" placeholder="Votre e-mail" required>
+                <label for="email">Email</label>
+                <input
+                    type="email"
+                    id="email"
+                    placeholder="Votre adresse email"
+                    required
+                >
 
                 <label for="message">Message</label>
-                <textarea id="message" placeholder="Votre message" required></textarea>
+                <textarea
+                    id="message"
+                    placeholder="Écrivez votre message"
+                    required
+                ></textarea>
 
-                <button type="submit">Envoyer le message</button>
+                <button type="submit">Envoyer</button>
 
             </form>
 
@@ -167,14 +65,14 @@
     </section>
 
     <footer>
-        <p>© 2026 DIAWLAL - Comprendre. Analyser. Évoluer.</p>
+        <p>© 2026 DIAWLAL - Tous droits réservés</p>
     </footer>
 
     <script>
         function envoyerMessage(event) {
             event.preventDefault();
 
-            alert("Merci ! Votre message a bien été préparé.");
+            alert("Merci ! Votre message a bien été envoyé.");
 
             document.querySelector("form").reset();
         }
