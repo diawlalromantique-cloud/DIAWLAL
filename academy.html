@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DIAWLAL Academy</title>
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        .academy {
+            width: min(1100px, 92%);
+            margin: 0 auto;
+            padding: 50px 0;
+        }
+
+        .academy-header {
+            text-align: center;
+            margin-bottom: 35px;
+        }
+
+        .academy-header h1 {
+            font-size: 44px;
+            margin-bottom: 12px;
+        }
+
+        .progression-box {
+            background: rgba(255, 255, 255, 0.12);
+            padding: 24px;
+            border-radius: 18px;
+            margin-bottom: 30px;
+        }
+
+        .barre {
+            width: 100%;
+            height: 18px;
+            background: rgba(255, 255, 255, 0.20);
+            border-radius: 20px;
+            overflow: hidden;
+            margin-top: 12px;
+        }
+
+        .barre-interieure {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, #6c63ff, #38bdf8);
+            transition: 0.4s;
+        }
+
+        .lecons {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 22px;
+        }
+
+        .lecon {
+            background: white;
+            color: #1f2937;
+            padding: 25px;
+            border-radius: 18px;
+            box-shadow: 0 14px 30px rgba(0, 0, 0, 0.18);
+        }
+
+        .lecon h2 {
+            color: #1e3a5f;
+            margin-bottom: 10px;
+        }
+
+        .lecon p {
+            line-height: 1.6;
+            color: #4b5563;
+        }
+
+        .terminee {
+            background: #16a34a;
+        }
+
+        .terminee:hover {
+            background: #15803d;
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+        <div class="logo">DIAWLAL</div>
+
+        <div>
+            <a href="dashboard.html">Tableau de bord</a>
+            <a href="academy.html">Academy</a>
+            <a href="services.html">Services</a>
+            <a href="contact.html">Contact</a>
+        </div>
+    </nav>
+
+    <main class="academy">
+
+        <div class="academy-header">
+            <h1>DIAWLAL Academy</h1>
+            <p>Apprenez les bases de la finance et de l’investissement.</p>
+        </div>
+
+        <section class="progression-box">
+            <h2>Votre progression</h2>
+            <p id="progressionTexte">0 % terminé</p>
+
+            <div class="barre">
+                <div class="barre-interieure" id="barreProgression"></div>
+            </div>
+        </section>
+
+        <section class="lecons">
+
+            <article class="lecon">
+                <h2>Leçon 1</h2>
+                <h3>Comprendre son capital</h3>
+                <p>
+                    Apprenez à calculer votre capital disponible et à séparer
+                    votre argent personnel de votre argent d’investissement.
+                </p>
+                <button onclick="terminerLecon(1)">Terminer la leçon</button>
+            </article>
+
+            <article class="lecon">
+                <h2>Leçon 2</h2>
+                <h3>Épargne de sécurité</h3>
+                <p>
+                    Découvrez pourquoi il est important de constituer une
+                    réserve avant de prendre des risques financiers.
+                </p>
+                <button onclick="terminerLecon(2)">Terminer la leçon</button>
+            </article>
+
+            <article class="lecon">
+                <h2>Leçon 3</h2>
+                <h3>Investissement et spéculation</h3>
+                <p>
+                    Apprenez à distinguer un investissement réfléchi
+                    d’une décision prise au hasard.
+                </p>
+                <button onclick="terminerLecon(3)">Terminer la leçon</button>
+            </article>
+
+            <article class="lecon">
+                <h2>Leçon 4</h2>
+                <h3>Gestion du risque</h3>
+                <p>
+                    Découvrez comment limiter les pertes et protéger
+                    votre capital sur le long terme.
+                </p>
+                <button onclick="terminerLecon(4)">Terminer la leçon</button>
+            </article>
+
+        </section>
+
+    </main>
+
+    <footer>
+        <p>© 2026 DIAWLAL — Comprendre. Analyser. Évoluer.</p>
+    </footer>
+
+    <script>
+        function lireProgression() {
+            return Number(localStorage.getItem("diawlalProgression")) || 0;
+        }
+
+        function afficherProgression() {
+            const progression = lireProgression();
+
+            document.getElementById("progressionTexte").textContent =
+                progression + " % terminé";
+
+            document.getElementById("barreProgression").style.width =
+                progression + "%";
+        }
+
+        function terminerLecon(numero) {
+            const cle = "diawlalLecon" + numero;
+
+            if (localStorage.getItem(cle) === "terminee") {
+                alert("Cette leçon est déjà terminée.");
+                return;
+            }
+
+            localStorage.setItem(cle, "terminee");
+
+            let progression = lireProgression() + 25;
+
+            if (progression > 100) {
+                progression = 100;
+            }
+
+            localStorage.setItem("diawlalProgression", progression);
+
+            afficherProgression();
+
+            alert("Leçon terminée !");
+        }
+
+        afficherProgression();
+    </script>
+
+</body>
+
+</html>

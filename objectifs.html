@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Objectifs financiers - DIAWLAL</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        .objectifs-page {
+            width: min(1000px, 92%);
+            margin: 0 auto;
+            padding: 50px 0;
+        }
+
+        .objectifs-header {
+            text-align: center;
+            margin-bottom: 35px;
+        }
+
+        .objectifs-header h1 {
+            font-size: 44px;
+            margin-bottom: 12px;
+        }
+
+        .objectif-form,
+        .objectif-card {
+            background: white;
+            color: #1f2937;
+            padding: 28px;
+            border-radius: 18px;
+            box-shadow: 0 14px 30px rgba(0, 0, 0, 0.18);
+        }
+
+        .objectif-form {
+            margin-bottom: 30px;
+        }
+
+        .objectif-form h2 {
+            margin-bottom: 20px;
+            color: #1e3a5f;
+        }
+
+        .objectif-form input {
+            width: 100%;
+            padding: 14px;
+            margin-bottom: 16px;
+            border: 1px solid #cbd5e1;
+            border-radius: 10px;
+            font-size: 16px;
+        }
+
+        .liste-objectifs {
+            display: grid;
+            gap: 22px;
+        }
+
+        .objectif-card h2 {
+            color: #1e3a5f;
+            margin-bottom: 12px;
+        }
+
+        .montants {
+            display: flex;
+            justify-content: space-between;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-bottom: 14px;
+        }
+
+        .barre {
+            width: 100%;
+            height: 20px;
+            background: #e5e7eb;
+            border-radius: 20px;
+            overflow: hidden;
+            margin: 15px 0;
+        }
+
+        .progression {
+            height: 100%;
+            background: linear-gradient(90deg, #6c63ff, #38bdf8);
+            border-radius: 20px;
+        }
+
+        .pourcentage {
+            font-size: 24px;
+            font-weight: bold;
+            color: #4f46e5;
+        }
+
+        .actions {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .supprimer {
+            background: #dc2626;
+        }
+
+        .supprimer:hover {
+            background: #b91c1c;
+        }
+
+        .ajouter {
+            background: #16a34a;
+        }
+
+        .ajouter:hover {
+            background: #15803d;
+        }
+
+        @media (max-width: 650px) {
+            .objectifs-header h1 {
+                font-size: 34px;
+            }
+
+            .objectif-form,
+            .objectif-card {
+                padding: 22px 18px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+        <div class="logo">DIAWLAL</div>
+
+        <div>
+            <a href="dashboard.html">Tableau de bord</a>
+            <a href="academy.html">Academy</a>
+            <a href="portefeuille.html">Portefeuille</a>
+            <a href="objectifs.html">Objectifs</a>
+            <a href="alertes.html">Alertes</a>
+            <a href="profil.html">Profil</a>
+        </div>
+    </nav>
+
+    <main class="objectifs-page">
+
+        <div class="objectifs-header">
+            <h1>Mes objectifs financiers</h1>
+            <p>Définissez vos objectifs et suivez votre progression.</p>
+        </div>
+
+        <section class="objectif-form">
+
+            <h2>Créer un objectif</h2>
+
+            <input
+                type="text"
+                id="nomObjectif"
+                placeholder="Exemple : Acheter une voiture"
+            >
+
+            <input
+                type="number"
+                id="montantObjectif"
+                placeholder="Montant total en FCFA"
+                min="1"
+            >
+
+            <input
+                type="number"
+                id="montantActuel"
+                placeholder="Montant déjà économisé"
+                min="0"
+            >
+
+            <button onclick="creerObjectif()">
+                Ajouter l’objectif
+            </button>
+
+        </section>
+
+        <section class="liste-objectifs" id="listeObjectifs"></section>
+
+    </main>
+
+    <footer>
+        <p>© 2026 DIAWLAL — Comprendre. Analyser. Évoluer.</p>
+    </footer>
+
+    <script>
+        function lireObjectifs() {
+            return JSON.parse(
+                localStorage.getItem("diawlalObjectifs")
+            ) || [];
+        }
+
+        function enregistrerObjectifs(objectifs) {
+            localStorage.setItem(
+                "diawlalObjectifs",
+                JSON.stringify(objectifs)
+            );
+        }
+
+        function creerObjectif() {
+            const nom = document
+                .getElementById("nomObjectif")
+                .value
+                .trim();
+
+            const montantTotal = Number(
+                document.getElementById("montantObjectif").value
+            );
+
+            const montantActuel = Number(
+                document.getElementById("montantActuel").value
+            );
+
+            if (!nom || montantTotal <= 0 || montantActuel < 0) {
+                alert("Veuillez remplir correctement tous les champs.");
+                return;
+            }
+
+            if (montantActuel > montantTotal) {
+                alert(
+                    "Le montant économisé ne peut pas dépasser l’objectif."
+                );
+                return;
+            }
+
+            const objectifs = lireObjectifs();
+
+            objectifs.push({
+                id: Date.now(),
+                nom: nom,
+                montantTotal: montantTotal,
+                montantActuel: montantActuel
+            });
+
+            enregistrerObjectifs(objectifs);
+
+            document.getElementById("nomObjectif").value = "";
+            document.getElementById("montantObjectif").value = "";
+            document.getElementById("montantActuel").value = "";
+
+            afficherObjectifs();
+
+            alert("Objectif ajouté avec succès.");
+        }
+
+        function ajouterMontant(id) {
+            const montant = Number(
+                prompt("Quel montant voulez-vous ajouter ?")
+            );
+
+            if (!montant || montant <= 0) {
+                alert("Montant invalide.");
+                return;
+            }
+
+            const objectifs = lireObjectifs();
+
+            const objectif = objectifs.find(
+                element => element.id === id
+            );
+
+            if (!objectif) {
+                return;
+            }
+
+            objectif.montantActuel += montant;
+
+            if (objectif.montantActuel > objectif.montantTotal) {
+                objectif.montantActuel = objectif.montantTotal;
+            }
+
+            enregistrerObjectifs(objectifs);
+            afficherObjectifs();
+        }
+
+        function supprimerObjectif(id) {
+            const confirmation = confirm(
+                "Voulez-vous vraiment supprimer cet objectif ?"
+            );
+
+            if (!confirmation) {
+                return;
+            }
+
+            const objectifs = lireObjectifs().filter(
+                objectif => objectif.id !== id
+            );
+
+            enregistrerObjectifs(objectifs);
+            afficherObjectifs();
+        }
+
+        function afficherObjectifs() {
+            const objectifs = lireObjectifs();
+
+            const liste = document.getElementById("listeObjectifs");
+
+            if (objectifs.length === 0) {
+                liste.innerHTML = `
+                    <div class="objectif-card">
+                        <p>Aucun objectif enregistré pour le moment.</p>
+                    </div>
+                `;
+
+                return;
+            }
+
+            liste.innerHTML = objectifs.map(objectif => {
+                const pourcentage = Math.min(
+                    100,
+                    Math.round(
+                        objectif.montantActuel /
+                        objectif.montantTotal *
+                        100
+                    )
+                );
+
+                return `
+                    <div class="objectif-card">
+
+                        <h2>${objectif.nom}</h2>
+
+                        <div class="montants">
+                            <p>
+                                Économisé :
+                                <strong>
+                                    ${objectif.montantActuel.toLocaleString("fr-FR")}
+                                    FCFA
+                                </strong>
+                            </p>
+
+                            <p>
+                                Objectif :
+                                <strong>
+                                    ${objectif.montantTotal.toLocaleString("fr-FR")}
+                                    FCFA
+                                </strong>
+                            </p>
+                        </div>
+
+                        <div class="barre">
+                            <div
+                                class="progression"
+                                style="width: ${pourcentage}%"
+                            ></div>
+                        </div>
+
+                        <p class="pourcentage">
+                            ${pourcentage} %
+                        </p>
+
+                        <div class="actions">
+
+                            <button
+                                class="ajouter"
+                                onclick="ajouterMontant(${objectif.id})"
+                            >
+                                Ajouter de l’argent
+                            </button>
+
+                            <button
+                                class="supprimer"
+                                onclick="supprimerObjectif(${objectif.id})"
+                            >
+                                Supprimer
+                            </button>
+
+                        </div>
+
+                    </div>
+                `;
+            }).join("");
+        }
+
+        afficherObjectifs();
+    </script>
+
+</body>
+
+</html>

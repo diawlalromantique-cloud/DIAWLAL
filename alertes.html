@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alertes - DIAWLAL</title>
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        .alertes-page {
+            width: min(900px, 92%);
+            margin: 0 auto;
+            padding: 50px 0;
+        }
+
+        .alerte {
+            background: white;
+            color: #1f2937;
+            padding: 24px;
+            border-radius: 16px;
+            margin-bottom: 18px;
+            border-left: 7px solid #f59e0b;
+        }
+
+        .alerte h2 {
+            color: #1e3a5f;
+            margin-bottom: 10px;
+        }
+
+        .alerte.importante {
+            border-left-color: #dc2626;
+        }
+
+        .alerte.conseil {
+            border-left-color: #2563eb;
+        }
+
+        .alerte.lue {
+            opacity: 0.55;
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+        <div class="logo">DIAWLAL</div>
+
+        <div>
+            <a href="dashboard.html">Tableau de bord</a>
+            <a href="academy.html">Academy</a>
+            <a href="portefeuille.html">Portefeuille</a>
+            <a href="alertes.html">Alertes</a>
+            <a href="profil.html">Profil</a>
+        </div>
+    </nav>
+
+    <main class="alertes-page">
+
+        <h1>Mes alertes</h1>
+
+        <div class="alerte importante" id="alerte1">
+            <h2>Réserve de sécurité</h2>
+            <p>
+                Avant d’investir, assurez-vous de disposer d’une réserve
+                pour les dépenses imprévues.
+            </p>
+            <button onclick="marquerLue('alerte1')">
+                Marquer comme lue
+            </button>
+        </div>
+
+        <div class="alerte conseil" id="alerte2">
+            <h2>Academy</h2>
+            <p>
+                Continuez vos leçons afin d’améliorer votre progression
+                financière.
+            </p>
+            <button onclick="marquerLue('alerte2')">
+                Marquer comme lue
+            </button>
+        </div>
+
+        <div class="alerte" id="alerte3">
+            <h2>Portefeuille</h2>
+            <p>
+                Pensez à enregistrer régulièrement vos revenus et vos dépenses.
+            </p>
+            <button onclick="marquerLue('alerte3')">
+                Marquer comme lue
+            </button>
+        </div>
+
+    </main>
+
+    <footer>
+        <p>© 2026 DIAWLAL — Comprendre. Analyser. Évoluer.</p>
+    </footer>
+
+    <script>
+        function chargerAlertes() {
+            ["alerte1", "alerte2", "alerte3"].forEach(id => {
+                if (
+                    localStorage.getItem("diawlal_" + id) === "lue"
+                ) {
+                    document.getElementById(id).classList.add("lue");
+                }
+            });
+        }
+
+        function marquerLue(id) {
+            localStorage.setItem("diawlal_" + id, "lue");
+
+            document.getElementById(id).classList.add("lue");
+
+            alert("Alerte marquée comme lue.");
+        }
+
+        chargerAlertes();
+    </script>
+
+</body>
+
+</html>
