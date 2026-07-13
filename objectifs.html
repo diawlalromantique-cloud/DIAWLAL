@@ -5,97 +5,160 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Objectifs financiers - DIAWLAL</title>
-
-    <link rel="stylesheet" href="style.css">
+    <title>Objectifs - DIAWLAL</title>
 
     <style>
-        .objectifs-page {
-            width: min(1000px, 92%);
-            margin: 0 auto;
-            padding: 50px 0;
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
         }
 
-        .objectifs-header {
+        body {
+            min-height: 100vh;
+            font-family: Arial, sans-serif;
+            color: white;
+            background: linear-gradient(135deg, #111827, #334155);
+        }
+
+        nav {
+            width: min(1150px, 94%);
+            margin: auto;
+            padding: 25px 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .logo {
+            color: #60a5fa;
+            font-size: 30px;
+            font-weight: bold;
+        }
+
+        nav div:last-child {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 18px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .container {
+            width: min(1050px, 92%);
+            margin: auto;
+            padding: 35px 0 60px;
+        }
+
+        .entete {
             text-align: center;
-            margin-bottom: 35px;
-        }
-
-        .objectifs-header h1 {
-            font-size: 44px;
-            margin-bottom: 12px;
-        }
-
-        .objectif-form,
-        .objectif-card {
-            background: white;
-            color: #1f2937;
-            padding: 28px;
-            border-radius: 18px;
-            box-shadow: 0 14px 30px rgba(0, 0, 0, 0.18);
-        }
-
-        .objectif-form {
             margin-bottom: 30px;
         }
 
-        .objectif-form h2 {
+        .entete h1 {
+            font-size: clamp(36px, 6vw, 50px);
+            margin-bottom: 10px;
+        }
+
+        .entete p {
+            color: #cbd5e1;
+            font-size: 18px;
+        }
+
+        .bloc {
+            margin-top: 25px;
+            padding: 28px;
+            color: #374151;
+            background: white;
+            border-radius: 20px;
+        }
+
+        .bloc h2 {
             margin-bottom: 20px;
             color: #1e3a5f;
         }
 
-        .objectif-form input {
+        input {
             width: 100%;
-            padding: 14px;
-            margin-bottom: 16px;
+            padding: 15px;
+            margin-bottom: 15px;
             border: 1px solid #cbd5e1;
             border-radius: 10px;
             font-size: 16px;
         }
 
-        .liste-objectifs {
-            display: grid;
-            gap: 22px;
+        button {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 10px;
+            color: white;
+            background: #3b82f6;
+            font-size: 17px;
+            font-weight: bold;
+            cursor: pointer;
         }
 
-        .objectif-card h2 {
-            color: #1e3a5f;
+        button:hover {
+            background: #2563eb;
+        }
+
+        .liste {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 20px;
+            margin-top: 25px;
+        }
+
+        .objectif {
+            padding: 24px;
+            color: #374151;
+            background: white;
+            border-radius: 20px;
+        }
+
+        .objectif h2 {
             margin-bottom: 12px;
+            color: #1e3a5f;
         }
 
         .montants {
             display: flex;
             justify-content: space-between;
             gap: 15px;
-            flex-wrap: wrap;
-            margin-bottom: 14px;
+            margin: 15px 0;
         }
 
         .barre {
             width: 100%;
-            height: 20px;
-            background: #e5e7eb;
-            border-radius: 20px;
+            height: 18px;
             overflow: hidden;
             margin: 15px 0;
+            background: #e5e7eb;
+            border-radius: 20px;
         }
 
         .progression {
             height: 100%;
-            background: linear-gradient(90deg, #6c63ff, #38bdf8);
-            border-radius: 20px;
+            background: linear-gradient(90deg, #3b82f6, #22c55e);
         }
 
         .pourcentage {
+            margin-bottom: 15px;
+            color: #3b82f6;
             font-size: 24px;
             font-weight: bold;
-            color: #4f46e5;
         }
 
-        .actions {
+        .boutons {
             display: flex;
-            gap: 12px;
-            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 15px;
         }
 
         .supprimer {
@@ -106,31 +169,44 @@
             background: #b91c1c;
         }
 
-        .ajouter {
-            background: #16a34a;
+        .message-vide {
+            margin-top: 25px;
+            padding: 30px;
+            text-align: center;
+            color: #374151;
+            background: white;
+            border-radius: 20px;
         }
 
-        .ajouter:hover {
-            background: #15803d;
-        }
-
-        @media (max-width: 650px) {
-            .objectifs-header h1 {
-                font-size: 34px;
+        @media (max-width: 700px) {
+            nav {
+                flex-direction: column;
             }
 
-            .objectif-form,
-            .objectif-card {
-                padding: 22px 18px;
+            nav div:last-child {
+                justify-content: center;
+            }
+
+            .liste {
+                grid-template-columns: 1fr;
+            }
+
+            .montants,
+            .boutons {
+                flex-direction: column;
             }
         }
     </style>
+
 </head>
 
 <body>
 
     <nav>
-        <div class="logo">DIAWLAL</div>
+
+        <div class="logo">
+            DIAWLAL
+        </div>
 
         <div>
             <a href="dashboard.html">Tableau de bord</a>
@@ -140,16 +216,22 @@
             <a href="alertes.html">Alertes</a>
             <a href="profil.html">Profil</a>
         </div>
+
     </nav>
 
-    <main class="objectifs-page">
+    <main class="container">
 
-        <div class="objectifs-header">
-            <h1>Mes objectifs financiers</h1>
-            <p>Définissez vos objectifs et suivez votre progression.</p>
-        </div>
+        <section class="entete">
 
-        <section class="objectif-form">
+            <h1>Mes objectifs</h1>
+
+            <p>
+                Créez et suivez vos objectifs financiers.
+            </p>
+
+        </section>
+
+        <section class="bloc">
 
             <h2>Créer un objectif</h2>
 
@@ -162,221 +244,361 @@
             <input
                 type="number"
                 id="montantObjectif"
-                placeholder="Montant total en FCFA"
-                min="1"
+                placeholder="Montant cible en FCFA"
             >
 
             <input
                 type="number"
                 id="montantActuel"
                 placeholder="Montant déjà économisé"
-                min="0"
             >
 
-            <button onclick="creerObjectif()">
-                Ajouter l’objectif
+            <button onclick="ajouterObjectif()">
+                Créer l'objectif
             </button>
 
         </section>
 
-        <section class="liste-objectifs" id="listeObjectifs"></section>
+        <section id="listeObjectifs" class="liste"></section>
+
+        <div id="messageVide" class="message-vide">
+            Aucun objectif enregistré.
+        </div>
 
     </main>
 
-    <footer>
-        <p>© 2026 DIAWLAL — Comprendre. Analyser. Évoluer.</p>
-    </footer>
-
     <script>
-        function lireObjectifs() {
-            return JSON.parse(
+
+        let objectifs =
+            JSON.parse(
                 localStorage.getItem("diawlalObjectifs")
             ) || [];
+
+
+        function formaterMontant(montant) {
+
+            return Number(montant)
+                .toLocaleString("fr-FR") + " FCFA";
+
         }
 
-        function enregistrerObjectifs(objectifs) {
+
+        function sauvegarderObjectifs() {
+
             localStorage.setItem(
                 "diawlalObjectifs",
                 JSON.stringify(objectifs)
             );
+
         }
 
-        function creerObjectif() {
-            const nom = document
-                .getElementById("nomObjectif")
-                .value
-                .trim();
 
-            const montantTotal = Number(
-                document.getElementById("montantObjectif").value
-            );
+        function ajouterObjectif() {
 
-            const montantActuel = Number(
-                document.getElementById("montantActuel").value
-            );
+            const nom =
+                document
+                    .getElementById("nomObjectif")
+                    .value
+                    .trim();
 
-            if (!nom || montantTotal <= 0 || montantActuel < 0) {
-                alert("Veuillez remplir correctement tous les champs.");
-                return;
-            }
 
-            if (montantActuel > montantTotal) {
-                alert(
-                    "Le montant économisé ne peut pas dépasser l’objectif."
+            const montantCible =
+                Number(
+                    document
+                        .getElementById("montantObjectif")
+                        .value
                 );
+
+
+            const montantActuel =
+                Number(
+                    document
+                        .getElementById("montantActuel")
+                        .value
+                );
+
+
+            if (
+                nom === "" ||
+                montantCible <= 0 ||
+                montantActuel < 0
+            ) {
+
+                alert(
+                    "Veuillez remplir correctement tous les champs."
+                );
+
                 return;
+
             }
 
-            const objectifs = lireObjectifs();
 
-            objectifs.push({
+            const nouvelObjectif = {
+
                 id: Date.now(),
+
                 nom: nom,
-                montantTotal: montantTotal,
+
+                montantCible: montantCible,
+
                 montantActuel: montantActuel
-            });
 
-            enregistrerObjectifs(objectifs);
+            };
 
-            document.getElementById("nomObjectif").value = "";
-            document.getElementById("montantObjectif").value = "";
-            document.getElementById("montantActuel").value = "";
+
+            objectifs.push(nouvelObjectif);
+
+
+            sauvegarderObjectifs();
+
+
+            document
+                .getElementById("nomObjectif")
+                .value = "";
+
+
+            document
+                .getElementById("montantObjectif")
+                .value = "";
+
+
+            document
+                .getElementById("montantActuel")
+                .value = "";
+
 
             afficherObjectifs();
 
-            alert("Objectif ajouté avec succès.");
         }
 
-        function ajouterMontant(id) {
-            const montant = Number(
-                prompt("Quel montant voulez-vous ajouter ?")
-            );
-
-            if (!montant || montant <= 0) {
-                alert("Montant invalide.");
-                return;
-            }
-
-            const objectifs = lireObjectifs();
-
-            const objectif = objectifs.find(
-                element => element.id === id
-            );
-
-            if (!objectif) {
-                return;
-            }
-
-            objectif.montantActuel += montant;
-
-            if (objectif.montantActuel > objectif.montantTotal) {
-                objectif.montantActuel = objectif.montantTotal;
-            }
-
-            enregistrerObjectifs(objectifs);
-            afficherObjectifs();
-        }
 
         function supprimerObjectif(id) {
-            const confirmation = confirm(
-                "Voulez-vous vraiment supprimer cet objectif ?"
-            );
+
+            const confirmation =
+                confirm(
+                    "Voulez-vous supprimer cet objectif ?"
+                );
+
 
             if (!confirmation) {
+
                 return;
+
             }
 
-            const objectifs = lireObjectifs().filter(
-                objectif => objectif.id !== id
-            );
 
-            enregistrerObjectifs(objectifs);
+            objectifs =
+                objectifs.filter(
+                    function(objectif) {
+
+                        return objectif.id !== id;
+
+                    }
+                );
+
+
+            sauvegarderObjectifs();
+
             afficherObjectifs();
+
         }
 
-        function afficherObjectifs() {
-            const objectifs = lireObjectifs();
 
-            const liste = document.getElementById("listeObjectifs");
+        function ajouterEpargne(id) {
 
-            if (objectifs.length === 0) {
-                liste.innerHTML = `
-                    <div class="objectif-card">
-                        <p>Aucun objectif enregistré pour le moment.</p>
-                    </div>
-                `;
-
-                return;
-            }
-
-            liste.innerHTML = objectifs.map(objectif => {
-                const pourcentage = Math.min(
-                    100,
-                    Math.round(
-                        objectif.montantActuel /
-                        objectif.montantTotal *
-                        100
+            const montant =
+                Number(
+                    prompt(
+                        "Combien souhaitez-vous ajouter ?"
                     )
                 );
 
-                return `
-                    <div class="objectif-card">
 
-                        <h2>${objectif.nom}</h2>
+            if (
+                montant <= 0 ||
+                isNaN(montant)
+            ) {
+
+                return;
+
+            }
+
+
+            const objectif =
+                objectifs.find(
+                    function(objectif) {
+
+                        return objectif.id === id;
+
+                    }
+                );
+
+
+            if (!objectif) {
+
+                return;
+
+            }
+
+
+            objectif.montantActuel += montant;
+
+
+            sauvegarderObjectifs();
+
+            afficherObjectifs();
+
+        }
+
+
+        function afficherObjectifs() {
+
+            const liste =
+                document.getElementById(
+                    "listeObjectifs"
+                );
+
+
+            const messageVide =
+                document.getElementById(
+                    "messageVide"
+                );
+
+
+            liste.innerHTML = "";
+
+
+            if (objectifs.length === 0) {
+
+                messageVide.style.display = "block";
+
+                return;
+
+            }
+
+
+            messageVide.style.display = "none";
+
+
+            objectifs.forEach(
+                function(objectif) {
+
+
+                    let pourcentage =
+                        Math.round(
+                            (
+                                objectif.montantActuel /
+                                objectif.montantCible
+                            ) * 100
+                        );
+
+
+                    pourcentage =
+                        Math.min(
+                            pourcentage,
+                            100
+                        );
+
+
+                    const carte =
+                        document.createElement(
+                            "article"
+                        );
+
+
+                    carte.className =
+                        "objectif";
+
+
+                    carte.innerHTML = `
+
+                        <h2>
+                            ${objectif.nom}
+                        </h2>
+
 
                         <div class="montants">
-                            <p>
+
+                            <span>
                                 Économisé :
                                 <strong>
-                                    ${objectif.montantActuel.toLocaleString("fr-FR")}
-                                    FCFA
+                                    ${formaterMontant(
+                                        objectif.montantActuel
+                                    )}
                                 </strong>
-                            </p>
+                            </span>
 
-                            <p>
+
+                            <span>
                                 Objectif :
                                 <strong>
-                                    ${objectif.montantTotal.toLocaleString("fr-FR")}
-                                    FCFA
+                                    ${formaterMontant(
+                                        objectif.montantCible
+                                    )}
                                 </strong>
-                            </p>
+                            </span>
+
                         </div>
 
+
                         <div class="barre">
+
                             <div
                                 class="progression"
-                                style="width: ${pourcentage}%"
-                            ></div>
+                                style="
+                                    width:
+                                    ${pourcentage}%
+                                "
+                            >
+                            </div>
+
                         </div>
+
 
                         <p class="pourcentage">
                             ${pourcentage} %
                         </p>
 
-                        <div class="actions">
+
+                        <div class="boutons">
 
                             <button
-                                class="ajouter"
-                                onclick="ajouterMontant(${objectif.id})"
+                                onclick="
+                                    ajouterEpargne(
+                                        ${objectif.id}
+                                    )
+                                "
                             >
-                                Ajouter de l’argent
+                                Ajouter de l'épargne
                             </button>
+
 
                             <button
                                 class="supprimer"
-                                onclick="supprimerObjectif(${objectif.id})"
+                                onclick="
+                                    supprimerObjectif(
+                                        ${objectif.id}
+                                    )
+                                "
                             >
                                 Supprimer
                             </button>
 
                         </div>
 
-                    </div>
-                `;
-            }).join("");
+                    `;
+
+
+                    liste.appendChild(carte);
+
+                }
+            );
+
         }
 
+
         afficherObjectifs();
+
     </script>
 
 </body>

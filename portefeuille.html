@@ -1,76 +1,155 @@
 <!DOCTYPE html>
 <html lang="fr">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portefeuille - DIAWLAL</title>
-    <link rel="stylesheet" href="style.css">
 
     <style>
-        .portefeuille {
-            width: min(1000px, 92%);
-            margin: 0 auto;
-            padding: 50px 0;
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
         }
 
-        .resume {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #111827, #334155);
+            color: white;
+            min-height: 100vh;
+        }
+
+        nav {
+            max-width: 1100px;
+            margin: auto;
+            padding: 25px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             gap: 20px;
+        }
+
+        .logo {
+            font-size: 30px;
+            font-weight: bold;
+            color: #3b82f6;
+        }
+
+        nav div:last-child {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 18px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1100px;
+            margin: 30px auto;
+        }
+
+        h1 {
+            font-size: 48px;
+            margin-bottom: 10px;
+        }
+
+        .sous-titre {
+            color: #d1d5db;
             margin-bottom: 30px;
         }
 
-        .resume-card,
-        .operation-box,
-        .historique-box {
-            background: white;
-            color: #1f2937;
-            padding: 25px;
-            border-radius: 18px;
-            box-shadow: 0 14px 30px rgba(0, 0, 0, 0.18);
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 20px;
         }
 
-        .resume-card h2 {
-            color: #1e3a5f;
-            margin-bottom: 12px;
+        .stat-card {
+            background: white;
+            color: #374151;
+            border-radius: 20px;
+            padding: 30px 20px;
+            text-align: center;
+        }
+
+        .stat-card h2 {
+            font-size: 28px;
+            margin-bottom: 20px;
         }
 
         .montant {
-            font-size: 28px;
+            color: #3b82f6;
+            font-size: 25px;
             font-weight: bold;
-            color: #4f46e5;
         }
 
-        .operation-box,
-        .historique-box {
+        .formulaire {
+            background: white;
+            color: #374151;
+            border-radius: 20px;
+            padding: 30px;
             margin-top: 25px;
         }
 
-        .operation-box h2,
-        .historique-box h2 {
-            margin-bottom: 18px;
+        .formulaire h2 {
+            font-size: 32px;
+            margin-bottom: 20px;
         }
 
+        input,
         select {
             width: 100%;
-            padding: 14px;
-            border-radius: 10px;
+            padding: 15px;
             margin-bottom: 15px;
+            border: 1px solid #cbd5e1;
+            border-radius: 10px;
             font-size: 16px;
         }
 
+        button {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 10px;
+            background: #3b82f6;
+            color: white;
+            font-size: 17px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #2563eb;
+        }
+
+        #historique {
+            margin-top: 20px;
+        }
+
         .operation {
-            padding: 14px 0;
-            border-bottom: 1px solid #e5e7eb;
+            background: #f1f5f9;
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 10px;
         }
 
-        .positif {
-            color: #15803d;
-        }
+        @media (max-width: 700px) {
+            .stats {
+                grid-template-columns: 1fr;
+            }
 
-        .negatif {
-            color: #dc2626;
+            nav {
+                flex-direction: column;
+            }
+
+            h1 {
+                font-size: 36px;
+            }
         }
     </style>
 </head>
@@ -84,35 +163,61 @@
             <a href="dashboard.html">Tableau de bord</a>
             <a href="academy.html">Academy</a>
             <a href="portefeuille.html">Portefeuille</a>
+            <a href="objectifs.html">Objectifs</a>
             <a href="alertes.html">Alertes</a>
             <a href="profil.html">Profil</a>
         </div>
     </nav>
 
-    <main class="portefeuille">
+    <main class="container">
 
         <h1>Mon portefeuille</h1>
 
-        <section class="resume">
+        <p class="sous-titre">
+            Gérez votre capital, vos revenus et vos dépenses.
+        </p>
 
-            <div class="resume-card">
-                <h2>Capital disponible</h2>
-                <p class="montant" id="capitalDisponible">0 FCFA</p>
+        <section class="stats">
+
+            <div class="stat-card">
+                <h2>Capital initial</h2>
+                <p class="montant" id="capitalAffichage">0 FCFA</p>
             </div>
 
-            <div class="resume-card">
-                <h2>Total des revenus</h2>
-                <p class="montant" id="totalRevenus">0 FCFA</p>
+            <div class="stat-card">
+                <h2>Revenus</h2>
+                <p class="montant" id="revenusAffichage">0 FCFA</p>
             </div>
 
-            <div class="resume-card">
-                <h2>Total des dépenses</h2>
-                <p class="montant" id="totalDepenses">0 FCFA</p>
+            <div class="stat-card">
+                <h2>Dépenses</h2>
+                <p class="montant" id="depensesAffichage">0 FCFA</p>
+            </div>
+
+            <div class="stat-card">
+                <h2>Solde disponible</h2>
+                <p class="montant" id="soldeAffichage">0 FCFA</p>
             </div>
 
         </section>
 
-        <section class="operation-box">
+        <section class="formulaire">
+
+            <h2>Définir le capital initial</h2>
+
+            <input
+                type="number"
+                id="capitalInput"
+                placeholder="Exemple : 500000"
+            >
+
+            <button onclick="enregistrerCapital()">
+                Enregistrer le capital
+            </button>
+
+        </section>
+
+        <section class="formulaire">
 
             <h2>Ajouter une opération</h2>
 
@@ -123,7 +228,7 @@
 
             <input
                 type="text"
-                id="descriptionOperation"
+                id="description"
                 placeholder="Description"
             >
 
@@ -131,43 +236,92 @@
                 type="number"
                 id="montantOperation"
                 placeholder="Montant en FCFA"
-                min="1"
             >
 
             <button onclick="ajouterOperation()">
-                Enregistrer l’opération
+                Enregistrer l'opération
             </button>
 
         </section>
 
-        <section class="historique-box">
+        <section class="formulaire">
 
-            <h2>Historique</h2>
+            <h2>Historique des opérations</h2>
 
-            <div id="listeOperations">
-                <p>Aucune opération enregistrée.</p>
-            </div>
+            <div id="historique"></div>
 
         </section>
 
     </main>
 
-    <footer>
-        <p>© 2026 DIAWLAL — Comprendre. Analyser. Évoluer.</p>
-    </footer>
-
     <script>
-        function lireOperations() {
-            return JSON.parse(
-                localStorage.getItem("diawlalOperations")
-            ) || [];
+        let capital =
+            Number(localStorage.getItem("diawlalCapital")) || 0;
+
+        let operations =
+            JSON.parse(localStorage.getItem("diawlalOperations")) || [];
+
+        function formatMontant(montant) {
+            return Number(montant).toLocaleString("fr-FR") + " FCFA";
         }
 
-        function enregistrerOperations(operations) {
-            localStorage.setItem(
-                "diawlalOperations",
-                JSON.stringify(operations)
-            );
+        function calculerTotaux() {
+            let revenus = 0;
+            let depenses = 0;
+
+            operations.forEach(function(operation) {
+                if (operation.type === "revenu") {
+                    revenus += Number(operation.montant);
+                }
+
+                if (operation.type === "depense") {
+                    depenses += Number(operation.montant);
+                }
+            });
+
+            return {
+                revenus: revenus,
+                depenses: depenses
+            };
+        }
+
+        function afficherDonnees() {
+            const totaux = calculerTotaux();
+
+            const solde =
+                capital + totaux.revenus - totaux.depenses;
+
+            document.getElementById("capitalAffichage").textContent =
+                formatMontant(capital);
+
+            document.getElementById("revenusAffichage").textContent =
+                formatMontant(totaux.revenus);
+
+            document.getElementById("depensesAffichage").textContent =
+                formatMontant(totaux.depenses);
+
+            document.getElementById("soldeAffichage").textContent =
+                formatMontant(solde);
+
+            afficherHistorique();
+        }
+
+        function enregistrerCapital() {
+            const valeur =
+                Number(document.getElementById("capitalInput").value);
+
+            if (valeur < 0 || isNaN(valeur)) {
+                alert("Veuillez entrer un capital valide.");
+                return;
+            }
+
+            capital = valeur;
+
+            localStorage.setItem("diawlalCapital", capital);
+
+            document.getElementById("capitalInput").value = "";
+
+            afficherDonnees();
         }
 
         function ajouterOperation() {
@@ -175,95 +329,67 @@
                 document.getElementById("typeOperation").value;
 
             const description =
-                document.getElementById("descriptionOperation").value.trim();
+                document.getElementById("description").value.trim();
 
             const montant =
                 Number(document.getElementById("montantOperation").value);
 
-            if (!description || montant <= 0) {
-                alert("Veuillez remplir correctement les champs.");
+            if (description === "" || montant <= 0 || isNaN(montant)) {
+                alert("Veuillez remplir correctement tous les champs.");
                 return;
             }
 
-            const operations = lireOperations();
+            const operation = {
+                type: type,
+                description: description,
+                montant: montant
+            };
 
-            operations.unshift({
-                type,
-                description,
-                montant,
-                date: new Date().toLocaleDateString("fr-FR")
-            });
+            operations.push(operation);
 
-            enregistrerOperations(operations);
+            localStorage.setItem(
+                "diawlalOperations",
+                JSON.stringify(operations)
+            );
 
-            document.getElementById("descriptionOperation").value = "";
+            document.getElementById("description").value = "";
             document.getElementById("montantOperation").value = "";
 
-            afficherPortefeuille();
+            afficherDonnees();
         }
 
-        function afficherPortefeuille() {
-            const operations = lireOperations();
+        function afficherHistorique() {
+            const historique =
+                document.getElementById("historique");
 
-            let revenus = 0;
-            let depenses = 0;
-
-            operations.forEach(operation => {
-                if (operation.type === "revenu") {
-                    revenus += operation.montant;
-                } else {
-                    depenses += operation.montant;
-                }
-            });
-
-            const capitalInitial =
-                Number(localStorage.getItem("diawlalCapital")) || 0;
-
-            const capitalDisponible =
-                capitalInitial + revenus - depenses;
-
-            document.getElementById("capitalDisponible").textContent =
-                capitalDisponible.toLocaleString("fr-FR") + " FCFA";
-
-            document.getElementById("totalRevenus").textContent =
-                revenus.toLocaleString("fr-FR") + " FCFA";
-
-            document.getElementById("totalDepenses").textContent =
-                depenses.toLocaleString("fr-FR") + " FCFA";
-
-            const liste =
-                document.getElementById("listeOperations");
+            historique.innerHTML = "";
 
             if (operations.length === 0) {
-                liste.innerHTML =
+                historique.innerHTML =
                     "<p>Aucune opération enregistrée.</p>";
+
                 return;
             }
 
-            liste.innerHTML = operations.map(operation => {
-                const classe =
-                    operation.type === "revenu"
-                        ? "positif"
-                        : "negatif";
+            operations.forEach(function(operation) {
+                const element = document.createElement("div");
 
-                const signe =
-                    operation.type === "revenu" ? "+" : "-";
+                element.className = "operation";
 
-                return `
-                    <div class="operation">
-                        <strong>${operation.description}</strong>
-                        <p>${operation.date}</p>
-                        <p class="${classe}">
-                            ${signe}${operation.montant.toLocaleString("fr-FR")} FCFA
-                        </p>
-                    </div>
-                `;
-            }).join("");
+                element.textContent =
+                    operation.description +
+                    " — " +
+                    formatMontant(operation.montant) +
+                    " (" +
+                    operation.type +
+                    ")";
+
+                historique.appendChild(element);
+            });
         }
 
-        afficherPortefeuille();
+        afficherDonnees();
     </script>
 
 </body>
-
 </html>
