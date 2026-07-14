@@ -1,5 +1,5 @@
 /* ==================================================
-   DIAWLAL — STYLE COMPLET NOIR, BLANC ET OR
+   DIAWLAL — STYLE COMPLET NOIR ET OR
    ================================================== */
 
 :root {
@@ -8,25 +8,22 @@
     --or-fonce: #9d7515;
 
     --noir: #0d0d0d;
-    --noir-doux: #151515;
-    --carte: #1b1b1b;
-    --carte-claire: #232323;
+    --noir-2: #141414;
+    --noir-3: #222222;
 
     --blanc: #f2f2f2;
     --gris: #b8b8b8;
-    --gris-fonce: #777777;
 
     --vert: #22c55e;
     --rouge: #ef4444;
 
-    --bordure: rgba(212, 175, 55, 0.3);
-    --ombre: 0 18px 45px rgba(0, 0, 0, 0.45);
-    --lueur-or: 0 0 24px rgba(212, 175, 55, 0.18);
+    --bordure: rgba(212, 175, 55, 0.38);
+    --ombre: 0 18px 45px rgba(0, 0, 0, 0.48);
 }
 
 
 /* ==================================================
-   RÉINITIALISATION
+   BASE
    ================================================== */
 
 * {
@@ -48,18 +45,13 @@ body {
     background:
         radial-gradient(
             circle at top left,
-            rgba(212, 175, 55, 0.14),
-            transparent 30%
-        ),
-        radial-gradient(
-            circle at bottom right,
-            rgba(212, 175, 55, 0.08),
-            transparent 30%
+            rgba(212, 175, 55, 0.13),
+            transparent 32%
         ),
         linear-gradient(
             135deg,
             #080808,
-            #111111 55%,
+            #111111,
             #181818
         );
 
@@ -68,6 +60,7 @@ body {
 
 a {
     color: inherit;
+    text-decoration: none;
 }
 
 
@@ -81,72 +74,72 @@ nav {
 }
 
 header {
-    padding: 28px 7%;
+    padding: 25px 7%;
     text-align: center;
 }
 
 nav {
-    width: min(1180px, 94%);
+    width: min(1180px, 95%);
     margin: 0 auto;
-    padding: 24px 18px;
+    padding: 22px 15px;
 
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 24px;
+    gap: 22px;
 
-    border-bottom: 1px solid rgba(212, 175, 55, 0.16);
+    border-bottom: 1px solid rgba(212, 175, 55, 0.18);
 }
 
 .logo,
 header h1 {
-    color: var(--or);
-    font-size: 32px;
+    color: var(--or) !important;
+
+    font-size: 31px;
     font-weight: 900;
     letter-spacing: 3px;
 
-    text-shadow: 0 0 20px rgba(212, 175, 55, 0.26);
+    text-shadow: 0 0 20px rgba(212, 175, 55, 0.25);
 }
 
 nav > div:last-child {
     display: flex;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
     flex-wrap: wrap;
-    gap: 8px;
+    gap: 7px;
 }
 
 nav a {
-    padding: 10px 13px;
+    padding: 9px 12px;
+
+    color: var(--blanc) !important;
+
     border-radius: 8px;
 
-    color: var(--blanc);
-    text-decoration: none;
     font-size: 15px;
     font-weight: 700;
 
-    transition:
-        color 0.25s ease,
-        background 0.25s ease,
-        transform 0.25s ease;
+    transition: 0.25s;
 }
 
 nav a:hover {
-    color: var(--or-clair);
+    color: var(--or-clair) !important;
     background: rgba(212, 175, 55, 0.1);
     transform: translateY(-2px);
 }
 
 
 /* ==================================================
-   ACCUEIL ET CONTENU PRINCIPAL
+   CONTENU PRINCIPAL
    ================================================== */
 
+main,
 .accueil,
-main {
-    width: min(1120px, 92%);
+.dashboard {
+    width: min(1120px, 94%);
     margin: 0 auto;
-    padding: 70px 20px;
+    padding: 65px 18px;
 }
 
 .accueil {
@@ -161,23 +154,22 @@ main {
 }
 
 .accueil h1,
-main h1,
-main h2 {
-    color: var(--blanc);
+.dashboard h1,
+main h1 {
+    color: var(--blanc) !important;
+
+    font-size: clamp(38px, 6vw, 68px);
     line-height: 1.08;
 }
 
 .accueil h1 {
     max-width: 900px;
-    margin-bottom: 22px;
-
-    font-size: clamp(42px, 7vw, 76px);
-    font-weight: 900;
-    letter-spacing: -2px;
+    margin-bottom: 20px;
 }
 
 .accueil h1::after {
     content: "";
+
     display: block;
 
     width: 110px;
@@ -194,24 +186,23 @@ main h2 {
     );
 }
 
-main h1 {
-    margin-bottom: 12px;
-    font-size: clamp(36px, 6vw, 56px);
-}
-
-main h2 {
-    margin-bottom: 16px;
-}
-
 .description,
+.sous-titre,
 main > p,
-.sous-titre {
-    max-width: 760px;
-    margin: 0 auto;
+.entete p {
+    color: var(--gris) !important;
 
-    color: var(--gris);
     font-size: 18px;
-    line-height: 1.7;
+    line-height: 1.65;
+}
+
+.entete {
+    margin-bottom: 35px;
+    text-align: center;
+}
+
+.entete h1 {
+    margin-bottom: 12px;
 }
 
 
@@ -226,134 +217,130 @@ a.btn {
     justify-content: center;
     align-items: center;
 
-    min-height: 50px;
-    padding: 14px 28px;
-    margin-top: 24px;
-
-    border: 1px solid rgba(244, 215, 107, 0.65);
-    border-radius: 10px;
+    min-height: 48px;
+    padding: 13px 27px;
+    margin-top: 22px;
 
     color: #111111 !important;
 
-    background:
-        linear-gradient(
-            135deg,
-            var(--or-clair),
-            var(--or),
-            var(--or-fonce)
-        ) !important;
+    background: linear-gradient(
+        135deg,
+        var(--or-clair),
+        var(--or),
+        var(--or-fonce)
+    ) !important;
+
+    border: 1px solid rgba(244, 215, 107, 0.7) !important;
+    border-radius: 10px !important;
 
     font-size: 16px;
     font-weight: 800;
-    text-decoration: none;
+
     cursor: pointer;
 
-    box-shadow:
-        0 10px 28px rgba(212, 175, 55, 0.22),
-        inset 0 1px 0 rgba(255, 255, 255, 0.28);
+    box-shadow: 0 10px 28px rgba(212, 175, 55, 0.24);
 
-    transition:
-        transform 0.25s ease,
-        box-shadow 0.25s ease,
-        filter 0.25s ease;
+    transition: 0.25s;
 }
 
 button:hover,
 .btn:hover,
 a.btn:hover {
     transform: translateY(-3px);
-    filter: brightness(1.07);
+    filter: brightness(1.08);
 
-    box-shadow:
-        0 14px 35px rgba(212, 175, 55, 0.32),
-        0 0 20px rgba(212, 175, 55, 0.14);
-}
-
-button:active,
-.btn:active {
-    transform: translateY(0);
+    box-shadow: 0 14px 35px rgba(212, 175, 55, 0.34);
 }
 
 button.supprimer,
 .supprimer,
 button.danger {
     color: white !important;
-    border-color: rgba(239, 68, 68, 0.55) !important;
 
-    background:
-        linear-gradient(
-            135deg,
-            #ef4444,
-            #b91c1c
-        ) !important;
+    background: linear-gradient(
+        135deg,
+        #ef4444,
+        #991b1b
+    ) !important;
+
+    border-color: rgba(239, 68, 68, 0.5) !important;
 }
 
 button.terminee {
     color: white !important;
-    border-color: rgba(34, 197, 94, 0.5) !important;
 
-    background:
-        linear-gradient(
-            135deg,
-            #22c55e,
-            #15803d
-        ) !important;
+    background: linear-gradient(
+        135deg,
+        #22c55e,
+        #15803d
+    ) !important;
 }
 
 
 /* ==================================================
-   PAGE SERVICES
+   SERVICES
    ================================================== */
 
 .services {
     width: min(1180px, 94%);
     margin: 0 auto;
-    padding: 70px 20px;
+    padding: 65px 18px;
 
     text-align: center;
 }
 
 .services > h1,
 .services > h2 {
-    margin-bottom: 35px;
+    margin-bottom: 30px;
 
-    color: var(--or-clair);
+    color: var(--or-clair) !important;
+
     font-size: clamp(34px, 5vw, 48px);
-}
-
-.services > p {
-    max-width: 760px;
-    margin: 0 auto 30px;
-
-    color: var(--gris);
-    font-size: 18px;
-    line-height: 1.6;
 }
 
 .cartes {
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 22px;
 }
 
+.services .cartes {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+
+/* ==================================================
+   TOUTES LES CARTES
+   ================================================== */
+
+.carte,
+.card,
+.stat-card,
+.carte-solde,
+.resume-card,
+.dashboard-card,
+.portefeuille-card,
 .service,
-.carte {
+.lecon,
+.objectif,
+.bloc,
+.formulaire,
+.progression-box,
+.message-vide {
     position: relative;
     overflow: hidden;
 
     width: 100%;
     min-width: 0;
-    height: 100%;
     padding: 28px 24px;
 
     color: var(--blanc) !important;
 
-    background:
-        linear-gradient(
-            145deg,
-            rgba(35, 35, 35, 0.98),
-            rgba(20, 20, 20, 0.98)
-        ) !important;
+    background: linear-gradient(
+        145deg,
+        #232323,
+        #121212
+    ) !important;
 
     border: 1px solid var(--bordure) !important;
     border-radius: 18px !important;
@@ -366,108 +353,14 @@ button.terminee {
         box-shadow 0.25s ease;
 }
 
-.service::before,
-.carte::before {
-    content: "";
-    display: block;
-
-    width: 100%;
-    height: 3px;
-    margin-bottom: 22px;
-
-    background: linear-gradient(
-        90deg,
-        transparent,
-        var(--or),
-        transparent
-    );
-}
-
-.service:hover,
-.carte:hover {
-    transform: translateY(-5px);
-    border-color: rgba(212, 175, 55, 0.58) !important;
-    box-shadow: var(--ombre), var(--lueur-or) !important;
-}
-
-.service h2,
-.service h3,
-.carte h2,
-.carte h3 {
-    margin-bottom: 12px;
-    color: var(--or-clair) !important;
-}
-
-.service p,
-.carte p {
-    color: var(--gris) !important;
-    line-height: 1.65;
-}
-
-
-/* ==================================================
-   GRILLES DE L’APPLICATION
-   ================================================== */
-
-.stats,
-.lecons,
-.liste,
-.resume,
-.dashboard-stats,
-.portefeuille-stats {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 22px;
-}
-
-
-/* ==================================================
-   CARTES TABLEAU DE BORD ET PORTEFEUILLE
-   ================================================== */
-
-.stat-card,
-.carte-solde,
-.resume-card,
-.dashboard-card,
-.portefeuille-card,
-.lecon,
-.objectif,
-.bloc,
-.formulaire,
-.progression-box,
-.message-vide {
-    position: relative;
-    overflow: hidden;
-
-    padding: 28px;
-
-    color: var(--blanc) !important;
-
-    background:
-        linear-gradient(
-            145deg,
-            #232323,
-            #151515
-        ) !important;
-
-    border: 1px solid rgba(212, 175, 55, 0.35) !important;
-    border-radius: 18px !important;
-
-    box-shadow:
-        0 18px 45px rgba(0, 0, 0, 0.45),
-        0 0 20px rgba(212, 175, 55, 0.08) !important;
-
-    transition:
-        transform 0.25s ease,
-        border-color 0.25s ease,
-        box-shadow 0.25s ease;
-}
-
+.carte::before,
+.card::before,
 .stat-card::before,
 .carte-solde::before,
 .resume-card::before,
 .dashboard-card::before,
 .portefeuille-card::before,
+.service::before,
 .lecon::before,
 .objectif::before,
 .bloc::before,
@@ -489,84 +382,149 @@ button.terminee {
     );
 }
 
+.carte:hover,
+.card:hover,
 .stat-card:hover,
 .carte-solde:hover,
 .resume-card:hover,
 .dashboard-card:hover,
 .portefeuille-card:hover,
+.service:hover,
 .lecon:hover,
 .objectif:hover {
     transform: translateY(-5px);
 
-    border-color: rgba(212, 175, 55, 0.58) !important;
+    border-color: rgba(212, 175, 55, 0.7) !important;
 
     box-shadow:
         var(--ombre),
-        var(--lueur-or) !important;
+        0 0 22px rgba(212, 175, 55, 0.14) !important;
 }
 
+
+/* ==================================================
+   CORRECTION EXACTE DASHBOARD
+   ================================================== */
+
+.dashboard .cartes .carte,
+main.dashboard .cartes .carte,
+.dashboard section.cartes article.carte {
+    background: linear-gradient(
+        145deg,
+        #232323,
+        #111111
+    ) !important;
+
+    color: var(--blanc) !important;
+
+    border: 1px solid rgba(212, 175, 55, 0.5) !important;
+    border-radius: 18px !important;
+
+    box-shadow:
+        0 18px 45px rgba(0, 0, 0, 0.48),
+        0 0 18px rgba(212, 175, 55, 0.1) !important;
+}
+
+
+/* ==================================================
+   CORRECTION EXACTE PORTEFEUILLE
+   ================================================== */
+
+main .cartes .carte,
+.portefeuille .cartes .carte,
+main section.cartes article.carte {
+    background: linear-gradient(
+        145deg,
+        #232323,
+        #111111
+    ) !important;
+
+    color: var(--blanc) !important;
+
+    border: 1px solid rgba(212, 175, 55, 0.5) !important;
+}
+
+
+/* ==================================================
+   TITRES ET TEXTES DES CARTES
+   ================================================== */
+
+.carte h1,
+.carte h2,
+.carte h3,
+.card h1,
+.card h2,
+.card h3,
 .stat-card h1,
 .stat-card h2,
 .stat-card h3,
-.carte-solde h1,
-.carte-solde h2,
-.carte-solde h3,
-.resume-card h1,
-.resume-card h2,
-.resume-card h3,
-.dashboard-card h1,
-.dashboard-card h2,
-.dashboard-card h3,
-.portefeuille-card h1,
-.portefeuille-card h2,
-.portefeuille-card h3,
+.service h1,
+.service h2,
+.service h3,
 .lecon h2,
 .lecon h3,
 .objectif h2,
 .bloc h2,
-.formulaire h2 {
+.formulaire h2,
+.dashboard .carte h2,
+.dashboard .carte h3 {
     color: var(--or-clair) !important;
 }
 
+.carte p,
+.card p,
 .stat-card p,
-.carte-solde p,
-.resume-card p,
-.dashboard-card p,
-.portefeuille-card p,
+.service p,
 .lecon p,
 .objectif p,
 .bloc p,
-.formulaire p {
+.formulaire p,
+.dashboard .carte p {
     color: var(--gris) !important;
     line-height: 1.65;
 }
 
-.stat-card,
-.carte-solde,
-.resume-card,
-.dashboard-card,
-.portefeuille-card {
+.dashboard .cartes .carte,
+main .cartes .carte {
     text-align: center;
 }
 
-.stat-card h2,
-.carte-solde h2,
-.resume-card h2,
-.dashboard-card h2,
-.portefeuille-card h2 {
-    margin-bottom: 16px;
-    font-size: 25px;
+.dashboard .cartes .carte h2,
+main .cartes .carte h2 {
+    margin-bottom: 15px;
+    font-size: 26px;
 }
 
+
+/* ==================================================
+   MONTANTS
+   ================================================== */
+
+.valeur,
 .montant,
+.card strong,
+.carte strong,
 .stat-card strong,
-.carte-solde strong,
-.resume-card strong,
-.dashboard-card strong,
-.portefeuille-card strong {
+.dashboard .carte .valeur,
+.dashboard .carte .montant,
+main .carte .valeur,
+main .carte .montant {
     color: var(--or) !important;
+
     font-size: clamp(24px, 4vw, 34px);
-    font-weight: 900;
+    font-weight: 900 !important;
+}
+
+.positif,
+.revenu,
+.gain {
+    color: var(--vert) !important;
+}
+
+.negatif,
+.depense,
+.perte {
+    color: var(--rouge) !important;
 }
 
 
@@ -575,37 +533,34 @@ button.terminee {
    ================================================== */
 
 .contact-section {
-    width: min(720px, 92%);
+    width: min(720px, 94%);
     margin: 0 auto;
-    padding: 60px 20px;
+    padding: 55px 15px;
 }
 
 .contact-box,
 form {
     color: var(--blanc) !important;
 
-    background:
-        linear-gradient(
-            145deg,
-            #1f1f1f,
-            #111111
-        ) !important;
+    background: linear-gradient(
+        145deg,
+        #202020,
+        #101010
+    ) !important;
 
     border: 1px solid var(--bordure) !important;
     border-radius: 20px !important;
 
-    box-shadow:
-        var(--ombre),
-        var(--lueur-or) !important;
+    box-shadow: var(--ombre) !important;
 }
 
 .contact-box {
-    padding: 34px;
+    padding: 32px;
 }
 
 form {
-    margin-top: 24px;
-    padding: 28px;
+    margin-top: 22px;
+    padding: 27px;
 }
 
 .contact-box h1 {
@@ -613,11 +568,10 @@ form {
 
     color: var(--or-clair) !important;
     text-align: center;
-    font-size: 38px;
 }
 
 .contact-box > p {
-    margin-bottom: 24px;
+    margin-bottom: 22px;
 
     color: var(--gris) !important;
     text-align: center;
@@ -625,7 +579,8 @@ form {
 
 label {
     display: block;
-    margin: 16px 0 8px;
+
+    margin: 15px 0 8px;
 
     color: var(--blanc) !important;
     font-weight: 700;
@@ -640,31 +595,25 @@ select {
     color: var(--blanc) !important;
     background: #101010 !important;
 
-    border: 1px solid rgba(212, 175, 55, 0.3) !important;
+    border: 1px solid rgba(212, 175, 55, 0.35) !important;
     border-radius: 10px !important;
 
     font-size: 16px;
     outline: none;
-
-    transition:
-        border-color 0.2s ease,
-        box-shadow 0.2s ease,
-        background 0.2s ease;
 }
 
 input::placeholder,
 textarea::placeholder {
-    color: var(--gris-fonce);
+    color: #777777;
 }
 
 input:focus,
 textarea:focus,
 select:focus {
-    background: #151515 !important;
     border-color: var(--or) !important;
 
     box-shadow:
-        0 0 0 3px rgba(212, 175, 55, 0.12) !important;
+        0 0 0 3px rgba(212, 175, 55, 0.13) !important;
 }
 
 select option {
@@ -683,7 +632,7 @@ form button {
 
 
 /* ==================================================
-   BARRES DE PROGRESSION
+   PROGRESSION
    ================================================== */
 
 .barre {
@@ -694,7 +643,8 @@ form button {
     overflow: hidden;
 
     background: #0d0d0d;
-    border: 1px solid rgba(212, 175, 55, 0.2);
+
+    border: 1px solid rgba(212, 175, 55, 0.25);
     border-radius: 30px;
 }
 
@@ -702,18 +652,14 @@ form button {
 .barre-interieure {
     height: 100%;
 
-    background:
-        linear-gradient(
-            90deg,
-            var(--or-fonce),
-            var(--or),
-            var(--or-clair)
-        );
+    background: linear-gradient(
+        90deg,
+        var(--or-fonce),
+        var(--or),
+        var(--or-clair)
+    );
 
     border-radius: 30px;
-
-    box-shadow:
-        0 0 15px rgba(212, 175, 55, 0.34);
 }
 
 .pourcentage,
@@ -724,7 +670,7 @@ form button {
 
 
 /* ==================================================
-   HISTORIQUE DES OPÉRATIONS
+   OPÉRATIONS
    ================================================== */
 
 #historique {
@@ -738,7 +684,7 @@ form button {
     color: var(--blanc) !important;
     background: #151515 !important;
 
-    border: 1px solid rgba(212, 175, 55, 0.2);
+    border: 1px solid rgba(212, 175, 55, 0.25);
     border-left: 4px solid var(--or);
     border-radius: 10px;
 }
@@ -749,7 +695,7 @@ form button {
    ================================================== */
 
 .alertes-page {
-    width: min(960px, 92%);
+    width: min(960px, 94%);
     margin: 0 auto;
     padding: 50px 0;
 }
@@ -760,12 +706,11 @@ form button {
 
     color: var(--blanc) !important;
 
-    background:
-        linear-gradient(
-            145deg,
-            #202020,
-            #141414
-        ) !important;
+    background: linear-gradient(
+        145deg,
+        #202020,
+        #141414
+    ) !important;
 
     border: 1px solid var(--bordure) !important;
     border-left: 6px solid var(--or) !important;
@@ -775,58 +720,36 @@ form button {
 }
 
 .alerte h2 {
-    margin-bottom: 10px;
     color: var(--or-clair) !important;
 }
 
 .alerte p {
     color: var(--gris) !important;
-    line-height: 1.65;
 }
 
 .alerte.importante {
     border-left-color: var(--rouge) !important;
 }
 
-.alerte.conseil {
-    border-left-color: var(--or-clair) !important;
-}
-
 .alerte.lue {
-    opacity: 0.48;
+    opacity: 0.5;
 }
 
 
 /* ==================================================
-   COULEURS FINANCIÈRES
-   ================================================== */
-
-.positif,
-.revenu,
-.gain {
-    color: var(--vert) !important;
-}
-
-.negatif,
-.depense,
-.perte {
-    color: var(--rouge) !important;
-}
-
-
-/* ==================================================
-   PIED DE PAGE
+   FOOTER
    ================================================== */
 
 footer {
     margin-top: 40px;
-    padding: 30px 20px;
+    padding: 28px 20px;
 
     color: var(--gris);
     text-align: center;
 
-    background: rgba(0, 0, 0, 0.3);
-    border-top: 1px solid rgba(212, 175, 55, 0.14);
+    background: rgba(0, 0, 0, 0.35);
+
+    border-top: 1px solid rgba(212, 175, 55, 0.16);
 }
 
 
@@ -835,13 +758,8 @@ footer {
    ================================================== */
 
 @media (max-width: 900px) {
-    .cartes {
+    .services .cartes {
         grid-template-columns: 1fr;
-    }
-
-    .service,
-    .carte {
-        width: 100%;
     }
 }
 
@@ -854,59 +772,45 @@ footer {
     nav {
         flex-direction: column;
         justify-content: center;
-        padding: 20px 12px;
-    }
 
-    nav > div:last-child {
-        gap: 4px;
+        padding: 18px 10px;
     }
 
     nav a {
-        padding: 8px 9px;
+        padding: 8px;
         font-size: 14px;
     }
 
+    main,
     .accueil,
-    main {
-        width: 94%;
-        padding: 50px 12px;
+    .dashboard {
+        width: 95%;
+        padding: 48px 10px;
     }
 
-    .accueil h1 {
-        font-size: clamp(38px, 12vw, 58px);
-    }
-
-    .stats,
-    .lecons,
-    .liste,
-    .resume,
-    .dashboard-stats,
-    .portefeuille-stats {
+    .cartes {
         grid-template-columns: 1fr;
     }
 
     .services {
-        padding: 50px 14px;
+        padding: 48px 12px;
     }
 
     .contact-section {
         width: 96%;
-        padding: 35px 10px;
+        padding: 35px 8px;
     }
 
-    .contact-box,
-    form,
-    .service,
     .carte,
+    .card,
     .stat-card,
-    .carte-solde,
-    .resume-card,
-    .dashboard-card,
-    .portefeuille-card,
+    .service,
     .lecon,
     .objectif,
     .bloc,
-    .formulaire {
+    .formulaire,
+    form,
+    .contact-box {
         padding: 22px 18px;
     }
 
@@ -919,126 +823,28 @@ footer {
 
 
 /* ==================================================
-   TRÈS PETITS ÉCRANS
+   PETITS MOBILES
    ================================================== */
 
 @media (max-width: 480px) {
     .logo,
     header h1 {
-        font-size: 27px;
+        font-size: 26px;
     }
 
-    nav a {
-        font-size: 13px;
-    }
-
-    .contact-box h1 {
-        font-size: 30px;
-    }
-
+    .accueil h1,
+    .dashboard h1,
     main h1 {
         font-size: 36px;
     }
 
-    .stat-card h2,
-    .carte-solde h2,
-    .resume-card h2,
-    .dashboard-card h2,
-    .portefeuille-card h2 {
+    .dashboard .cartes .carte h2,
+    main .cartes .carte h2 {
         font-size: 22px;
     }
 
+    .valeur,
     .montant {
         font-size: 27px;
     }
-}
-/* ==================================================
-   CORRECTION DES CARTES DU DASHBOARD ET PORTEFEUILLE
-   ================================================== */
-
-.logo {
-    color: #d4af37 !important;
-}
-
-.card,
-.stat-card,
-.carte-solde,
-.resume-card,
-.dashboard-card,
-.portefeuille-card {
-    background: linear-gradient(
-        145deg,
-        #232323,
-        #121212
-    ) !important;
-
-    color: #f2f2f2 !important;
-
-    border: 1px solid rgba(212, 175, 55, 0.45) !important;
-    border-radius: 18px !important;
-
-    box-shadow:
-        0 18px 45px rgba(0, 0, 0, 0.45),
-        0 0 18px rgba(212, 175, 55, 0.1) !important;
-}
-
-.card h1,
-.card h2,
-.card h3,
-.stat-card h1,
-.stat-card h2,
-.stat-card h3,
-.carte-solde h1,
-.carte-solde h2,
-.carte-solde h3,
-.resume-card h1,
-.resume-card h2,
-.resume-card h3,
-.dashboard-card h1,
-.dashboard-card h2,
-.dashboard-card h3,
-.portefeuille-card h1,
-.portefeuille-card h2,
-.portefeuille-card h3 {
-    color: #f4d76b !important;
-}
-
-.card p,
-.stat-card p,
-.carte-solde p,
-.resume-card p,
-.dashboard-card p,
-.portefeuille-card p {
-    color: #b8b8b8 !important;
-}
-
-.card .montant,
-.card strong,
-.stat-card .montant,
-.stat-card strong,
-.carte-solde .montant,
-.carte-solde strong,
-.resume-card .montant,
-.resume-card strong,
-.dashboard-card .montant,
-.dashboard-card strong,
-.portefeuille-card .montant,
-.portefeuille-card strong {
-    color: #d4af37 !important;
-}
-
-.card button,
-.stat-card button,
-.carte-solde button,
-.resume-card button,
-.dashboard-card button,
-.portefeuille-card button {
-    background: linear-gradient(
-        135deg,
-        #f4d76b,
-        #d4af37,
-        #9d7515
-    ) !important;
-
-    color: #111111 !important;
 }
