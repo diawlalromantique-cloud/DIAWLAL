@@ -1,5 +1,5 @@
 /* ==================================================
-   DIAWLAL — THÈME PREMIUM NOIR, BLANC ET OR
+   DIAWLAL — STYLE COMPLET NOIR, BLANC ET OR
    ================================================== */
 
 :root {
@@ -14,6 +14,7 @@
 
     --blanc: #f2f2f2;
     --gris: #b8b8b8;
+    --gris-fonce: #777777;
 
     --vert: #22c55e;
     --rouge: #ef4444;
@@ -40,6 +41,7 @@ html {
 
 body {
     min-height: 100vh;
+
     font-family: Arial, Helvetica, sans-serif;
     color: var(--blanc);
 
@@ -102,6 +104,7 @@ header h1 {
     font-size: 32px;
     font-weight: 900;
     letter-spacing: 3px;
+
     text-shadow: 0 0 20px rgba(212, 175, 55, 0.26);
 }
 
@@ -230,7 +233,7 @@ a.btn {
     border: 1px solid rgba(244, 215, 107, 0.65);
     border-radius: 10px;
 
-    color: #111111;
+    color: #111111 !important;
 
     background:
         linear-gradient(
@@ -238,7 +241,7 @@ a.btn {
             var(--or-clair),
             var(--or),
             var(--or-fonce)
-        );
+        ) !important;
 
     font-size: 16px;
     font-weight: 800;
@@ -274,27 +277,27 @@ button:active,
 button.supprimer,
 .supprimer,
 button.danger {
-    color: white;
-    border-color: rgba(239, 68, 68, 0.55);
+    color: white !important;
+    border-color: rgba(239, 68, 68, 0.55) !important;
 
     background:
         linear-gradient(
             135deg,
             #ef4444,
             #b91c1c
-        );
+        ) !important;
 }
 
 button.terminee {
-    color: white;
-    border-color: rgba(34, 197, 94, 0.5);
+    color: white !important;
+    border-color: rgba(34, 197, 94, 0.5) !important;
 
     background:
         linear-gradient(
             135deg,
             #22c55e,
             #15803d
-        );
+        ) !important;
 }
 
 
@@ -307,29 +310,20 @@ button.terminee {
     margin: 0 auto;
     padding: 70px 20px;
 
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 22px;
-
     text-align: center;
 }
 
 .services > h1,
-.services > h2,
-.services > p {
-    grid-column: 1 / -1;
-}
-
-.services > h1,
 .services > h2 {
-    margin-bottom: 12px;
+    margin-bottom: 35px;
 
     color: var(--or-clair);
     font-size: clamp(34px, 5vw, 48px);
 }
 
 .services > p {
-    margin-bottom: 20px;
+    max-width: 760px;
+    margin: 0 auto 30px;
 
     color: var(--gris);
     font-size: 18px;
@@ -337,8 +331,6 @@ button.terminee {
 }
 
 .cartes {
-    grid-column: 1 / -1;
-
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 22px;
@@ -346,25 +338,27 @@ button.terminee {
 
 .service,
 .carte {
+    position: relative;
+    overflow: hidden;
+
     width: 100%;
     min-width: 0;
     height: 100%;
-
     padding: 28px 24px;
 
-    color: var(--blanc);
+    color: var(--blanc) !important;
 
     background:
         linear-gradient(
             145deg,
             rgba(35, 35, 35, 0.98),
             rgba(20, 20, 20, 0.98)
-        );
+        ) !important;
 
-    border: 1px solid var(--bordure);
-    border-radius: 18px;
+    border: 1px solid var(--bordure) !important;
+    border-radius: 18px !important;
 
-    box-shadow: var(--ombre);
+    box-shadow: var(--ombre) !important;
 
     transition:
         transform 0.25s ease,
@@ -392,8 +386,8 @@ button.terminee {
 .service:hover,
 .carte:hover {
     transform: translateY(-5px);
-    border-color: rgba(212, 175, 55, 0.58);
-    box-shadow: var(--ombre), var(--lueur-or);
+    border-color: rgba(212, 175, 55, 0.58) !important;
+    box-shadow: var(--ombre), var(--lueur-or) !important;
 }
 
 .service h2,
@@ -401,29 +395,41 @@ button.terminee {
 .carte h2,
 .carte h3 {
     margin-bottom: 12px;
-    color: var(--or-clair);
+    color: var(--or-clair) !important;
 }
 
 .service p,
 .carte p {
-    color: var(--gris);
+    color: var(--gris) !important;
     line-height: 1.65;
 }
 
 
 /* ==================================================
-   GRILLES ET CARTES DE L’APPLICATION
+   GRILLES DE L’APPLICATION
    ================================================== */
 
 .stats,
 .lecons,
-.liste {
+.liste,
+.resume,
+.dashboard-stats,
+.portefeuille-stats {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 22px;
 }
 
+
+/* ==================================================
+   CARTES TABLEAU DE BORD ET PORTEFEUILLE
+   ================================================== */
+
 .stat-card,
+.carte-solde,
+.resume-card,
+.dashboard-card,
+.portefeuille-card,
 .lecon,
 .objectif,
 .bloc,
@@ -435,19 +441,21 @@ button.terminee {
 
     padding: 28px;
 
-    color: var(--blanc);
+    color: var(--blanc) !important;
 
     background:
         linear-gradient(
             145deg,
-            rgba(35, 35, 35, 0.98),
-            rgba(20, 20, 20, 0.98)
-        );
+            #232323,
+            #151515
+        ) !important;
 
-    border: 1px solid var(--bordure);
-    border-radius: 18px;
+    border: 1px solid rgba(212, 175, 55, 0.35) !important;
+    border-radius: 18px !important;
 
-    box-shadow: var(--ombre);
+    box-shadow:
+        0 18px 45px rgba(0, 0, 0, 0.45),
+        0 0 20px rgba(212, 175, 55, 0.08) !important;
 
     transition:
         transform 0.25s ease,
@@ -456,6 +464,10 @@ button.terminee {
 }
 
 .stat-card::before,
+.carte-solde::before,
+.resume-card::before,
+.dashboard-card::before,
+.portefeuille-card::before,
 .lecon::before,
 .objectif::before,
 .bloc::before,
@@ -478,42 +490,81 @@ button.terminee {
 }
 
 .stat-card:hover,
+.carte-solde:hover,
+.resume-card:hover,
+.dashboard-card:hover,
+.portefeuille-card:hover,
 .lecon:hover,
 .objectif:hover {
     transform: translateY(-5px);
-    border-color: rgba(212, 175, 55, 0.58);
-    box-shadow: var(--ombre), var(--lueur-or);
+
+    border-color: rgba(212, 175, 55, 0.58) !important;
+
+    box-shadow:
+        var(--ombre),
+        var(--lueur-or) !important;
 }
 
+.stat-card h1,
 .stat-card h2,
+.stat-card h3,
+.carte-solde h1,
+.carte-solde h2,
+.carte-solde h3,
+.resume-card h1,
+.resume-card h2,
+.resume-card h3,
+.dashboard-card h1,
+.dashboard-card h2,
+.dashboard-card h3,
+.portefeuille-card h1,
+.portefeuille-card h2,
+.portefeuille-card h3,
 .lecon h2,
 .lecon h3,
 .objectif h2,
 .bloc h2,
 .formulaire h2 {
-    color: var(--or-clair);
+    color: var(--or-clair) !important;
 }
 
 .stat-card p,
+.carte-solde p,
+.resume-card p,
+.dashboard-card p,
+.portefeuille-card p,
 .lecon p,
 .objectif p,
 .bloc p,
 .formulaire p {
-    color: var(--gris);
+    color: var(--gris) !important;
     line-height: 1.65;
 }
 
-.stat-card {
+.stat-card,
+.carte-solde,
+.resume-card,
+.dashboard-card,
+.portefeuille-card {
     text-align: center;
 }
 
-.stat-card h2 {
+.stat-card h2,
+.carte-solde h2,
+.resume-card h2,
+.dashboard-card h2,
+.portefeuille-card h2 {
     margin-bottom: 16px;
     font-size: 25px;
 }
 
-.montant {
-    color: var(--or-clair) !important;
+.montant,
+.stat-card strong,
+.carte-solde strong,
+.resume-card strong,
+.dashboard-card strong,
+.portefeuille-card strong {
+    color: var(--or) !important;
     font-size: clamp(24px, 4vw, 34px);
     font-weight: 900;
 }
@@ -531,19 +582,21 @@ button.terminee {
 
 .contact-box,
 form {
-    color: var(--blanc);
+    color: var(--blanc) !important;
 
     background:
         linear-gradient(
             145deg,
-            rgba(31, 31, 31, 0.98),
-            rgba(17, 17, 17, 0.98)
-        );
+            #1f1f1f,
+            #111111
+        ) !important;
 
-    border: 1px solid var(--bordure);
-    border-radius: 20px;
+    border: 1px solid var(--bordure) !important;
+    border-radius: 20px !important;
 
-    box-shadow: var(--ombre), var(--lueur-or);
+    box-shadow:
+        var(--ombre),
+        var(--lueur-or) !important;
 }
 
 .contact-box {
@@ -558,7 +611,7 @@ form {
 .contact-box h1 {
     margin-bottom: 12px;
 
-    color: var(--or-clair);
+    color: var(--or-clair) !important;
     text-align: center;
     font-size: 38px;
 }
@@ -566,7 +619,7 @@ form {
 .contact-box > p {
     margin-bottom: 24px;
 
-    color: var(--gris);
+    color: var(--gris) !important;
     text-align: center;
 }
 
@@ -574,7 +627,7 @@ label {
     display: block;
     margin: 16px 0 8px;
 
-    color: var(--blanc);
+    color: var(--blanc) !important;
     font-weight: 700;
 }
 
@@ -584,11 +637,11 @@ select {
     width: 100%;
     padding: 14px 15px;
 
-    color: var(--blanc);
-    background: #111111;
+    color: var(--blanc) !important;
+    background: #101010 !important;
 
-    border: 1px solid rgba(212, 175, 55, 0.25);
-    border-radius: 10px;
+    border: 1px solid rgba(212, 175, 55, 0.3) !important;
+    border-radius: 10px !important;
 
     font-size: 16px;
     outline: none;
@@ -601,15 +654,17 @@ select {
 
 input::placeholder,
 textarea::placeholder {
-    color: #777777;
+    color: var(--gris-fonce);
 }
 
 input:focus,
 textarea:focus,
 select:focus {
-    background: #151515;
-    border-color: var(--or);
-    box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.12);
+    background: #151515 !important;
+    border-color: var(--or) !important;
+
+    box-shadow:
+        0 0 0 3px rgba(212, 175, 55, 0.12) !important;
 }
 
 select option {
@@ -657,12 +712,13 @@ form button {
 
     border-radius: 30px;
 
-    box-shadow: 0 0 15px rgba(212, 175, 55, 0.34);
+    box-shadow:
+        0 0 15px rgba(212, 175, 55, 0.34);
 }
 
 .pourcentage,
 #progressionTexte {
-    color: var(--or-clair);
+    color: var(--or-clair) !important;
     font-weight: 800;
 }
 
@@ -679,9 +735,10 @@ form button {
     margin-top: 12px;
     padding: 15px;
 
-    color: var(--blanc);
-    background: #151515;
+    color: var(--blanc) !important;
+    background: #151515 !important;
 
+    border: 1px solid rgba(212, 175, 55, 0.2);
     border-left: 4px solid var(--or);
     border-radius: 10px;
 }
@@ -701,38 +758,38 @@ form button {
     margin-bottom: 18px;
     padding: 24px;
 
-    color: var(--blanc);
+    color: var(--blanc) !important;
 
     background:
         linear-gradient(
             145deg,
             #202020,
             #141414
-        );
+        ) !important;
 
-    border: 1px solid var(--bordure);
-    border-left: 6px solid var(--or);
-    border-radius: 16px;
+    border: 1px solid var(--bordure) !important;
+    border-left: 6px solid var(--or) !important;
+    border-radius: 16px !important;
 
-    box-shadow: var(--ombre);
+    box-shadow: var(--ombre) !important;
 }
 
 .alerte h2 {
     margin-bottom: 10px;
-    color: var(--or-clair);
+    color: var(--or-clair) !important;
 }
 
 .alerte p {
-    color: var(--gris);
+    color: var(--gris) !important;
     line-height: 1.65;
 }
 
 .alerte.importante {
-    border-left-color: var(--rouge);
+    border-left-color: var(--rouge) !important;
 }
 
 .alerte.conseil {
-    border-left-color: var(--or-clair);
+    border-left-color: var(--or-clair) !important;
 }
 
 .alerte.lue {
@@ -774,22 +831,11 @@ footer {
 
 
 /* ==================================================
-   TABLETTES ET PETITS ÉCRANS
+   TABLETTES
    ================================================== */
 
 @media (max-width: 900px) {
-    .services {
-        grid-template-columns: 1fr;
-    }
-
-    .services > h1,
-    .services > h2,
-    .services > p {
-        grid-column: auto;
-    }
-
     .cartes {
-        grid-column: auto;
         grid-template-columns: 1fr;
     }
 
@@ -832,8 +878,15 @@ footer {
 
     .stats,
     .lecons,
-    .liste {
+    .liste,
+    .resume,
+    .dashboard-stats,
+    .portefeuille-stats {
         grid-template-columns: 1fr;
+    }
+
+    .services {
+        padding: 50px 14px;
     }
 
     .contact-section {
@@ -846,6 +899,10 @@ footer {
     .service,
     .carte,
     .stat-card,
+    .carte-solde,
+    .resume-card,
+    .dashboard-card,
+    .portefeuille-card,
     .lecon,
     .objectif,
     .bloc,
@@ -883,7 +940,11 @@ footer {
         font-size: 36px;
     }
 
-    .stat-card h2 {
+    .stat-card h2,
+    .carte-solde h2,
+    .resume-card h2,
+    .dashboard-card h2,
+    .portefeuille-card h2 {
         font-size: 22px;
     }
 
