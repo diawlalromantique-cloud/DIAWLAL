@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Objectifs - DIAWLAL</title>
+
+    <style>
+        :root {
+            --or: #d4af37;
+            --or-clair: #f4d76b;
+            --or-fonce: #9d7515;
+
+            --noir: #080808;
+            --noir-doux: #111111;
+            --carte: #1f1f1f;
+
+            --blanc: #f2f2f2;
+            --gris: #b8b8b8;
+
+            --vert: #22c55e;
+            --rouge: #ef4444;
+
+            --bordure: rgba(212, 175, 55, 0.45);
+            --ombre: 0 18px 45px rgba(0, 0, 0, 0.48);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            min-height: 100vh;
+
+            font-family: Arial, Helvetica, sans-serif;
+            color: var(--blanc);
+
+            background:
+                radial-gradient(
+                    circle at top left,
+                    rgba(212, 175, 55, 0.12),
+                    transparent 30%
+                ),
+                linear-gradient(
+                    135deg,
+                    #080808,
+                    #111111,
+                    #181818
+                );
+
+            background-attachment: fixed;
+        }
+
+        nav {
+            width: min(1150px, 94%);
+            margin: 0 auto;
+            padding: 24px 10px;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+
+            border-bottom: 1px solid rgba(212, 175, 55, 0.18);
+        }
+
+        .logo {
+            color: var(--or);
+
+            font-size: 30px;
+            font-weight: 900;
+            letter-spacing: 3px;
+
+            text-shadow:
+                0 0 18px rgba(212, 175, 55, 0.24);
+        }
+
+        nav div:last-child {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        nav a {
+            padding: 9px 11px;
+
+            color: white;
+            text-decoration: none;
+            font-weight: 700;
+
+            border-radius: 8px;
+
+            transition:
+                color 0.25s ease,
+                background 0.25s ease,
+                transform 0.25s ease;
+        }
+
+        nav a:hover {
+            color: var(--or-clair);
+            background: rgba(212, 175, 55, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .container {
+            width: min(1050px, 92%);
+            margin: 0 auto;
+            padding: 45px 0 70px;
+        }
+
+        .entete {
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .entete h1 {
+            margin-bottom: 10px;
+
+            font-size: clamp(38px, 6vw, 54px);
+            line-height: 1.1;
+        }
+
+        .entete p {
+            color: var(--gris);
+            font-size: 18px;
+            line-height: 1.6;
+        }
+
+        .bloc,
+        .objectif,
+        .message-vide {
+            position: relative;
+            overflow: hidden;
+
+            color: var(--blanc);
+
+            background:
+                linear-gradient(
+                    145deg,
+                    #232323,
+                    #111111
+                );
+
+            border: 1px solid var(--bordure);
+            border-radius: 20px;
+
+            box-shadow: var(--ombre);
+        }
+
+        .bloc::before,
+        .objectif::before,
+        .message-vide::before {
+            content: "";
+
+            position: absolute;
+            top: 0;
+            left: 0;
+
+            width: 100%;
+            height: 3px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    transparent,
+                    var(--or),
+                    transparent
+                );
+        }
+
+        .bloc {
+            padding: 28px;
+        }
+
+        .bloc h2,
+        .objectif h2 {
+            margin-bottom: 20px;
+            color: var(--or-clair);
+        }
+
+        input {
+            width: 100%;
+            padding: 15px;
+            margin-bottom: 15px;
+
+            color: var(--blanc);
+            background: #0d0d0d;
+
+            border: 1px solid rgba(212, 175, 55, 0.32);
+            border-radius: 10px;
+
+            font-size: 16px;
+            outline: none;
+
+            transition:
+                border-color 0.2s ease,
+                box-shadow 0.2s ease;
+        }
+
+        input::placeholder {
+            color: #777777;
+        }
+
+        input:focus {
+            border-color: var(--or);
+
+            box-shadow:
+                0 0 0 3px rgba(212, 175, 55, 0.12);
+        }
+
+        button {
+            width: 100%;
+            padding: 15px;
+
+            color: #111111;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    var(--or-clair),
+                    var(--or),
+                    var(--or-fonce)
+                );
+
+            border: 1px solid rgba(244, 215, 107, 0.7);
+            border-radius: 10px;
+
+            font-size: 17px;
+            font-weight: 800;
+            cursor: pointer;
+
+            box-shadow:
+                0 10px 28px rgba(212, 175, 55, 0.22);
+
+            transition:
+                transform 0.25s ease,
+                filter 0.25s ease,
+                box-shadow 0.25s ease;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            filter: brightness(1.08);
+
+            box-shadow:
+                0 14px 34px rgba(212, 175, 55, 0.32);
+        }
+
+        .liste {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 20px;
+
+            margin-top: 25px;
+        }
+
+        .objectif {
+            padding: 24px;
+        }
+
+        .montants {
+            display: flex;
+            justify-content: space-between;
+            gap: 15px;
+
+            margin: 15px 0;
+
+            color: var(--gris);
+        }
+
+        .montants strong {
+            color: var(--or-clair);
+        }
+
+        .barre {
+            width: 100%;
+            height: 18px;
+            margin: 15px 0;
+
+            overflow: hidden;
+
+            background: #0d0d0d;
+
+            border: 1px solid rgba(212, 175, 55, 0.25);
+            border-radius: 20px;
+        }
+
+        .progression {
+            height: 100%;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    var(--or-fonce),
+                    var(--or),
+                    var(--or-clair)
+                );
+
+            transition: width 0.3s ease;
+        }
+
+        .pourcentage {
+            margin-bottom: 15px;
+
+            color: var(--or-clair);
+
+            font-size: 24px;
+            font-weight: 900;
+        }
+
+        .boutons {
+            display: flex;
+            gap: 10px;
+
+            margin-top: 15px;
+        }
+
+        .supprimer {
+            color: white;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #ef4444,
+                    #991b1b
+                );
+
+            border-color: rgba(239, 68, 68, 0.55);
+        }
+
+        .message-vide {
+            margin-top: 25px;
+            padding: 30px;
+
+            color: var(--gris);
+            text-align: center;
+        }
+
+        @media (max-width: 700px) {
+            nav {
+                flex-direction: column;
+            }
+
+            .liste {
+                grid-template-columns: 1fr;
+            }
+
+            .montants,
+            .boutons {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+        <div class="logo">
+            DIAWLAL
+        </div>
+
+        <div>
+            <a href="dashboard.html">Tableau de bord</a>
+            <a href="academy.html">Academy</a>
+            <a href="portefeuille.html">Portefeuille</a>
+            <a href="objectifs.html">Objectifs</a>
+            <a href="alertes.html">Alertes</a>
+            <a href="profil.html">Profil</a>
+        </div>
+    </nav>
+
+    <main class="container">
+
+        <section class="entete">
+            <h1>Mes objectifs</h1>
+
+            <p>
+                Créez et suivez vos objectifs financiers.
+            </p>
+        </section>
+
+        <section class="bloc">
+
+            <h2>Créer un objectif</h2>
+
+            <input
+                type="text"
+                id="nomObjectif"
+                placeholder="Exemple : Acheter une voiture"
+            >
+
+            <input
+                type="number"
+                id="montantObjectif"
+                placeholder="Montant cible en FCFA"
+                min="1"
+            >
+
+            <input
+                type="number"
+                id="montantActuel"
+                placeholder="Montant déjà économisé"
+                min="0"
+            >
+
+            <button
+                type="button"
+                onclick="ajouterObjectif()"
+            >
+                Créer l'objectif
+            </button>
+
+        </section>
+
+        <section
+            id="listeObjectifs"
+            class="liste"
+        ></section>
+
+        <div
+            id="messageVide"
+            class="message-vide"
+        >
+            Aucun objectif enregistré.
+        </div>
+
+    </main>
+
+    <script>
+        let objectifs =
+            JSON.parse(
+                localStorage.getItem("diawlalObjectifs")
+            ) || [];
+
+        function formaterMontant(montant) {
+            return (
+                Number(montant).toLocaleString("fr-FR") +
+                " FCFA"
+            );
+        }
+
+        function sauvegarderObjectifs() {
+            localStorage.setItem(
+                "diawlalObjectifs",
+                JSON.stringify(objectifs)
+            );
+        }
+
+        function ajouterObjectif() {
+            const nom =
+                document
+                    .getElementById("nomObjectif")
+                    .value
+                    .trim();
+
+            const montantCible =
+                Number(
+                    document
+                        .getElementById("montantObjectif")
+                        .value
+                );
+
+            const montantActuel =
+                Number(
+                    document
+                        .getElementById("montantActuel")
+                        .value
+                );
+
+            if (
+                nom === "" ||
+                montantCible <= 0 ||
+                montantActuel < 0 ||
+                isNaN(montantCible) ||
+                isNaN(montantActuel)
+            ) {
+                alert(
+                    "Veuillez remplir correctement tous les champs."
+                );
+
+                return;
+            }
+
+            const nouvelObjectif = {
+                id: Date.now(),
+                nom: nom,
+                montantCible: montantCible,
+                montantActuel: montantActuel
+            };
+
+            objectifs.push(nouvelObjectif);
+
+            sauvegarderObjectifs();
+
+            document
+                .getElementById("nomObjectif")
+                .value = "";
+
+            document
+                .getElementById("montantObjectif")
+                .value = "";
+
+            document
+                .getElementById("montantActuel")
+                .value = "";
+
+            afficherObjectifs();
+        }
+
+        function supprimerObjectif(id) {
+            const confirmation =
+                confirm(
+                    "Voulez-vous supprimer cet objectif ?"
+                );
+
+            if (!confirmation) {
+                return;
+            }
+
+            objectifs =
+                objectifs.filter(
+                    function(objectif) {
+                        return objectif.id !== id;
+                    }
+                );
+
+            sauvegarderObjectifs();
+
+            afficherObjectifs();
+        }
+
+        function ajouterEpargne(id) {
+            const montant =
+                Number(
+                    prompt(
+                        "Combien souhaitez-vous ajouter ?"
+                    )
+                );
+
+            if (
+                montant <= 0 ||
+                isNaN(montant)
+            ) {
+                return;
+            }
+
+            const objectif =
+                objectifs.find(
+                    function(objectif) {
+                        return objectif.id === id;
+                    }
+                );
+
+            if (!objectif) {
+                return;
+            }
+
+            objectif.montantActuel += montant;
+
+            sauvegarderObjectifs();
+
+            afficherObjectifs();
+        }
+
+        function afficherObjectifs() {
+            const liste =
+                document.getElementById(
+                    "listeObjectifs"
+                );
+
+            const messageVide =
+                document.getElementById(
+                    "messageVide"
+                );
+
+            liste.innerHTML = "";
+
+            if (objectifs.length === 0) {
+                messageVide.style.display = "block";
+                return;
+            }
+
+            messageVide.style.display = "none";
+
+            objectifs.forEach(
+                function(objectif) {
+                    let pourcentage =
+                        Math.round(
+                            (
+                                objectif.montantActuel /
+                                objectif.montantCible
+                            ) * 100
+                        );
+
+                    pourcentage =
+                        Math.min(
+                            pourcentage,
+                            100
+                        );
+
+                    const carte =
+                        document.createElement(
+                            "article"
+                        );
+
+                    carte.className =
+                        "objectif";
+
+                    carte.innerHTML = `
+                        <h2>
+                            ${objectif.nom}
+                        </h2>
+
+                        <div class="montants">
+                            <span>
+                                Économisé :
+                                <strong>
+                                    ${formaterMontant(
+                                        objectif.montantActuel
+                                    )}
+                                </strong>
+                            </span>
+
+                            <span>
+                                Objectif :
+                                <strong>
+                                    ${formaterMontant(
+                                        objectif.montantCible
+                                    )}
+                                </strong>
+                            </span>
+                        </div>
+
+                        <div class="barre">
+                            <div
+                                class="progression"
+                                style="width: ${pourcentage}%"
+                            ></div>
+                        </div>
+
+                        <p class="pourcentage">
+                            ${pourcentage} %
+                        </p>
+
+                        <div class="boutons">
+                            <button
+                                type="button"
+                                onclick="ajouterEpargne(${objectif.id})"
+                            >
+                                Ajouter de l'épargne
+                            </button>
+
+                            <button
+                                type="button"
+                                class="supprimer"
+                                onclick="supprimerObjectif(${objectif.id})"
+                            >
+                                Supprimer
+                            </button>
+                        </div>
+                    `;
+
+                    liste.appendChild(carte);
+                }
+            );
+        }
+
+        afficherObjectifs();
+    </script>
+
+</body>
+
+</html>
