@@ -75,7 +75,7 @@
                     required
                 >
 
-                <button type="submit">
+            <button type="button" onclick="creerCompte()">
                     Créer mon compte
                 </button>
 
@@ -95,80 +95,99 @@
             © 2026 DIAWLAL — Comprendre. Analyser. Évoluer.
         </p>
     </footer>
+<script>
+    const formulaire = document.querySelector("form");
 
-    <script>
-        const formInscription =
-            document.getElementById("formInscription");
+    formulaire.addEventListener("submit", async function(event) {
+        event.preventDefault();
 
-        formInscription.addEventListener(
-            "submit",
-            function(event) {
-                event.preventDefault();
+        const nom = document.getElementById("nom").value.trim();
+        const email = document.getElementById("email").value.trim();
+        const motDePasse = document.getElementById("motDePasse").value;
 
-                const nom =
-                    document.getElementById("nom").value.trim();
-
-                const email =
-                    document.getElementById("email").value.trim();
-
-                const motdepasse =
-                    document.getElementById("motdepasse").value;
-
-                const confirmation =
-                    document.getElementById("confirmation").value;
-
-                if (
-                    nom === "" ||
-                    email === "" ||
-                    motdepasse === "" ||
-                    confirmation === ""
-                ) {
-                    alert("Veuillez remplir tous les champs.");
-                    return;
+        const { error } = await window.diawlalSupabase.auth.signUp({
+            email: email,
+            password: motDePasse,
+            options: {
+                data: {
+                    nom_complet: nom
                 }
-
-                if (motdepasse.length < 6) {
-                    alert(
-                        "Le mot de passe doit contenir au moins 6 caractères."
-                    );
-                    return;
-                }
-
-                if (motdepasse !== confirmation) {
-                    alert(
-                        "Les mots de passe ne correspondent pas."
-                    );
-                    return;
-                }
-
-                localStorage.setItem(
-                    "diawlalNom",
-                    nom
-                );
-
-                localStorage.setItem(
-                    "diawlalEmail",
-                    email
-                );
-
-                localStorage.setItem(
-                    "diawlalMotDePasse",
-                    motdepasse
-                );
-
-                localStorage.setItem(
-                    "diawlalConnecte",
-                    "oui"
-                );
-
-                alert("Compte créé avec succès !");
-
-                window.location.href =
-                    "dashboard.html";
             }
-        );
-    </script>
+        });
+
+        if (error) {
+            alert(error.message);
+            return;
+        }
+
+        alert("Compte créé. Vérifie ton e-mail pour confirmer ton inscription.");
+        window.location.href = "connexion.html";
+    });
+</script><script>
+    const formulaire = document.querySelector("form");
+
+    formulaire.addEventListener("submit", async function(event) {
+        event.preventDefault();
+
+        const nom = document.getElementById("nom").value.trim();
+        const email = document.getElementById("email").value.trim();
+        const motDePasse = document.getElementById("motDePasse").value;
+
+        const { error } = await window.diawlalSupabase.auth.signUp({
+            email: email,
+            password: motDePasse,
+            options: {
+                data: {
+                    nom_complet: nom
+                }
+            }
+        });
+
+        if (error) {
+            alert(error.message);
+            return;
+        }
+
+        alert("Compte créé. Vérifie ton e-mail pour confirmer ton inscription.");
+        window.location.href = "connexion.html";
+    });
+</script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="supabase.js"></script>    
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="supabase.js"></script>
+
+<script>
+    async function creerCompte() {
+        const nom = document.getElementById("nom").value.trim();
+        const email = document.getElementById("email").value.trim();
+        const motDePasse = document.getElementById("motDePasse").value;
+
+        if (nom === "" || email === "" || motDePasse === "") {
+            alert("Veuillez remplir tous les champs.");
+            return;
+        }
+
+        const { error } = await window.diawlalSupabase.auth.signUp({
+            email: email,
+            password: motDePasse,
+            options: {
+                data: {
+                    nom_complet: nom
+                }
+            }
+        });
+
+        if (error) {
+            alert("Erreur : " + error.message);
+            return;
+        }
+
+        alert("Compte créé. Vérifie ton e-mail pour confirmer l’inscription.");
+        window.location.href = "connexion.html";
+    }
+</script>
 
 </body>
-
+</html>
 </html>

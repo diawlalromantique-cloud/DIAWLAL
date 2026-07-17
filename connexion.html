@@ -76,65 +76,31 @@
         </p>
     </footer>
 
-    <script>
-        const formConnexion =
-            document.getElementById("formConnexion");
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="supabase.js"></script>
+<script>
+    const formulaire = document.querySelector("form");
 
-        formConnexion.addEventListener(
-            "submit",
-            function(event) {
-                event.preventDefault();
+    formulaire.addEventListener("submit", async function(event) {
+        event.preventDefault();
 
-                const email =
-                    document.getElementById("email").value.trim();
+        const email = document.getElementById("email").value.trim();
+        const motDePasse = document.getElementById("motDePasse").value;
 
-                const motdepasse =
-                    document.getElementById("motdepasse").value;
+        const { error } =
+            await window.diawlalSupabase.auth.signInWithPassword({
+                email: email,
+                password: motDePasse
+            });
 
-                const emailEnregistre =
-                    localStorage.getItem("diawlalEmail");
+        if (error) {
+            alert("E-mail ou mot de passe incorrect.");
+            return;
+        }
 
-                const motDePasseEnregistre =
-                    localStorage.getItem(
-                        "diawlalMotDePasse"
-                    );
-
-                if (
-                    !emailEnregistre ||
-                    !motDePasseEnregistre
-                ) {
-                    alert(
-                        "Aucun compte enregistré. Créez d'abord un compte."
-                    );
-
-                    window.location.href =
-                        "inscription.html";
-
-                    return;
-                }
-
-                if (
-                    email === emailEnregistre &&
-                    motdepasse === motDePasseEnregistre
-                ) {
-                    localStorage.setItem(
-                        "diawlalConnecte",
-                        "oui"
-                    );
-
-                    alert("Connexion réussie !");
-
-                    window.location.href =
-                        "dashboard.html";
-                } else {
-                    alert(
-                        "E-mail ou mot de passe incorrect."
-                    );
-                }
-            }
-        );
-    </script>
-
+        window.location.href = "dashboard.html";
+    });
+</script>
 </body>
 
 </html>
