@@ -3,55 +3,123 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
     <title>Tableau de bord - DIAWLAL</title>
 
     <style>
+        :root {
+            --or: #d4af37;
+            --or-clair: #f4d76b;
+            --or-fonce: #9d7515;
+
+            --noir: #080808;
+            --noir-doux: #111111;
+            --carte: #191919;
+
+            --blanc: #f2f2f2;
+            --gris: #b8b8b8;
+
+            --vert: #22c55e;
+            --rouge: #ef4444;
+
+            --bordure: rgba(212, 175, 55, 0.48);
+        }
+
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
         }
 
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
             min-height: 100vh;
-            font-family: Arial, sans-serif;
-            color: white;
-            background: linear-gradient(135deg, #111827, #334155);
+
+            font-family: Arial, Helvetica, sans-serif;
+            color: var(--blanc);
+
+            background:
+                radial-gradient(
+                    circle at top left,
+                    rgba(212, 175, 55, 0.10),
+                    transparent 28%
+                ),
+                linear-gradient(
+                    135deg,
+                    #080808,
+                    #111111,
+                    #181818
+                );
+
+            background-attachment: fixed;
         }
 
         nav {
-            width: min(1150px, 94%);
+            width: min(1200px, 95%);
             margin: auto;
-            padding: 25px 10px;
+            padding: 24px 10px;
+
             display: flex;
             justify-content: space-between;
             align-items: center;
             gap: 20px;
+
+            border-bottom:
+                1px solid rgba(212, 175, 55, 0.18);
         }
 
         .logo {
-            color: #60a5fa;
+            color: var(--or);
+
             font-size: 30px;
-            font-weight: bold;
+            font-weight: 900;
+            letter-spacing: 2px;
         }
 
-        nav div:last-child {
+        .menu {
             display: flex;
+            align-items: center;
+            justify-content: center;
             flex-wrap: wrap;
-            gap: 18px;
+            gap: 5px;
         }
 
-        nav a {
+        nav a,
+        .deconnexion {
+            padding: 9px 10px;
+
             color: white;
+            background: transparent;
+
+            border: none;
+            border-radius: 8px;
+
             text-decoration: none;
-            font-weight: bold;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+
+            transition: 0.25s;
+        }
+
+        nav a:hover,
+        .deconnexion:hover {
+            color: var(--or-clair);
+            background: rgba(212, 175, 55, 0.10);
         }
 
         .dashboard {
-            width: min(1150px, 92%);
+            width: min(1050px, 92%);
             margin: auto;
-            padding: 35px 0 60px;
+            padding: 55px 0 70px;
         }
 
         .entete {
@@ -60,495 +128,1108 @@
         }
 
         .entete h1 {
-            font-size: clamp(34px, 6vw, 52px);
-            margin-bottom: 10px;
+            margin-bottom: 12px;
+
+            font-size: clamp(38px, 6vw, 60px);
+            line-height: 1.1;
         }
 
         .entete p {
-            color: #cbd5e1;
+            color: var(--gris);
             font-size: 18px;
         }
 
         .cartes {
             display: grid;
-            grid-template-columns: repeat(2, minmax(0, 1fr));
+            grid-template-columns:
+                repeat(2, minmax(0, 1fr));
+
             gap: 20px;
         }
 
         .carte {
-            min-width: 0;
-            padding: 28px 22px;
+            position: relative;
+            overflow: hidden;
+
+            min-height: 200px;
+            padding: 30px;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
             text-align: center;
-            color: #374151;
-            background: white;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    #202020,
+                    #111111
+                );
+
+            border:
+                1px solid var(--bordure);
+
             border-radius: 20px;
-            box-shadow: 0 14px 30px rgba(0, 0, 0, 0.18);
+
+            box-shadow:
+                0 18px 40px
+                rgba(0, 0, 0, 0.40);
+        }
+
+        .carte::before {
+            content: "";
+
+            position: absolute;
+            top: 0;
+            left: 0;
+
+            width: 100%;
+            height: 2px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    transparent,
+                    var(--or),
+                    transparent
+                );
         }
 
         .carte h2 {
-            margin-bottom: 16px;
+            margin-bottom: 18px;
+
+            color: var(--or-clair);
             font-size: 28px;
         }
 
         .valeur {
-            margin-bottom: 12px;
-            color: #3b82f6;
-            font-size: 27px;
-            font-weight: bold;
+            margin-bottom: 14px;
+
+            color: var(--or-clair);
+
+            font-size: clamp(27px, 4vw, 34px);
+            font-weight: 900;
         }
 
         .carte p {
+            color: var(--gris);
             line-height: 1.5;
         }
 
-        button {
+        .bouton {
             width: 100%;
             margin-top: 20px;
-            padding: 14px;
+            padding: 14px 18px;
+
+            display: block;
+
+            color: #111111;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    var(--or-clair),
+                    var(--or),
+                    var(--or-fonce)
+                );
+
             border: none;
             border-radius: 10px;
-            color: white;
-            background: #3b82f6;
-            font-size: 16px;
-            font-weight: bold;
+
+            text-decoration: none;
+            text-align: center;
+
+            font-weight: 900;
+
             cursor: pointer;
         }
 
-        button:hover {
-            background: #2563eb;
+        .sections-secondaires {
+            margin-top: 25px;
+
+            display: grid;
+            grid-template-columns:
+                repeat(2, minmax(0, 1fr));
+
+            gap: 20px;
         }
 
-        .resume,
-        .brief {
+        .petite-carte {
+            min-height: 180px;
+        }
+
+        .profil {
             margin-top: 25px;
             padding: 28px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    #242424,
+                    #151515
+                );
+
+            border:
+                1px solid var(--bordure);
+
             border-radius: 20px;
-            background: rgba(255, 255, 255, 0.10);
         }
 
-        .resume h2,
-        .brief h2 {
-            margin-bottom: 20px;
+        .profil h2 {
+            margin-bottom: 22px;
+            color: var(--or-clair);
         }
 
-        .ligne {
-            display: flex;
-            justify-content: space-between;
-            gap: 20px;
-            padding: 14px 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+        .profil-ligne {
+            padding: 12px 0;
+
+            border-bottom:
+                1px solid rgba(255, 255, 255, 0.10);
         }
 
-        .ligne:last-child {
+        .profil-ligne:last-child {
             border-bottom: none;
         }
 
-        .deconnexion {
-            margin-top: 25px;
-            background: #dc2626;
+        .profil-ligne span {
+            display: block;
+
+            margin-bottom: 5px;
+
+            color: var(--gris);
+            font-size: 14px;
         }
 
-        .deconnexion:hover {
-            background: #b91c1c;
+        .profil-ligne strong {
+            color: white;
         }
 
-        footer {
-            padding: 25px;
-            text-align: center;
-            color: #cbd5e1;
+        .chargement {
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            color: var(--or-clair);
+            background: #080808;
+
+            font-size: 20px;
+            font-weight: 700;
         }
 
-        @media (max-width: 700px) {
+        @media (max-width: 760px) {
+
             nav {
                 flex-direction: column;
             }
 
-            nav div:last-child {
-                justify-content: center;
+            .logo {
+                font-size: 25px;
             }
 
-            .cartes {
+            .menu {
+                gap: 2px;
+            }
+
+            nav a,
+            .deconnexion {
+                padding: 7px;
+                font-size: 13px;
+            }
+
+            .dashboard {
+                padding-top: 35px;
+            }
+
+            .cartes,
+            .sections-secondaires {
                 grid-template-columns: 1fr;
             }
 
-            .ligne {
-                flex-direction: column;
-                gap: 6px;
+            .carte {
+                min-height: 175px;
+                padding: 24px 18px;
+            }
+
+            .carte h2 {
+                font-size: 23px;
+            }
+
+            .valeur {
+                font-size: 27px;
             }
         }
     </style>
-    <style>
-    /* Correction définitive des cartes du tableau de bord */
-
-    .dashboard .cartes .carte,
-    section.cartes article.carte {
-        background: linear-gradient(
-            145deg,
-            #232323,
-            #111111
-        ) !important;
-
-        color: #f2f2f2 !important;
-        border: 1px solid rgba(212, 175, 55, 0.55) !important;
-        border-radius: 18px !important;
-
-        box-shadow:
-            0 18px 45px rgba(0, 0, 0, 0.48),
-            0 0 18px rgba(212, 175, 55, 0.12) !important;
-    }
-
-    .dashboard .cartes .carte h2,
-    section.cartes article.carte h2 {
-        color: #f4d76b !important;
-    }
-
-    .dashboard .cartes .carte p,
-    section.cartes article.carte p {
-        color: #b8b8b8 !important;
-    }
-
-    .dashboard .cartes .carte .valeur,
-    section.cartes article.carte .valeur {
-        color: #d4af37 !important;
-        font-weight: 900 !important;
-    }
-
-    .dashboard .cartes .carte button,
-    section.cartes article.carte button {
-        color: #111111 !important;
-
-        background: linear-gradient(
-            135deg,
-            #f4d76b,
-            #d4af37,
-            #9d7515
-        ) !important;
-
-        border: 1px solid #d4af37 !important;
-    }
-</style>
-<style>
-    /* Dernière correction du tableau de bord */
-
-    body,
-    main.dashboard,
-    .dashboard {
-        background:
-            radial-gradient(
-                circle at top left,
-                rgba(212, 175, 55, 0.12),
-                transparent 30%
-            ),
-            linear-gradient(
-                135deg,
-                #080808,
-                #111111,
-                #181818
-            ) !important;
-    }
-
-    .logo {
-        color: #d4af37 !important;
-        text-shadow: 0 0 18px rgba(212, 175, 55, 0.25) !important;
-    }
-</style>
 </head>
 
 <body>
 
-    <nav>
-        <div class="logo">DIAWLAL</div>
+    <div
+        id="chargement"
+        class="chargement"
+    >
+        Chargement de DIAWLAL...
+    </div>
 
-        <div>
-            <a href="dashboard.html">Tableau de bord</a>
-            <a href="academy.html">Academy</a>
-            <a href="portefeuille.html">Portefeuille</a>
-            <a href="objectifs.html">Objectifs</a>
-            <a href="alertes.html">Alertes</a>
-            <a href="profil.html">Profil</a>
+
+    <nav>
+
+        <div class="logo">
+            DIAWLAL
         </div>
+
+        <div class="menu">
+
+            <a href="dashboard.html">
+                Tableau de bord
+            </a>
+
+            <a href="academy.html">
+                Academy
+            </a>
+
+            <a href="portefeuille.html">
+                Portefeuille
+            </a>
+
+            <a href="objectifs.html">
+                Objectifs
+            </a>
+
+            <a href="alertes.html">
+                Alertes
+            </a>
+
+            <a href="profil.html">
+                Profil
+            </a>
+
+            <button
+                class="deconnexion"
+                onclick="seDeconnecter()"
+            >
+                Déconnexion
+            </button>
+
+        </div>
+
     </nav>
+
 
     <main class="dashboard">
 
         <section class="entete">
-            <h1 id="bienvenue">Bienvenue sur DIAWLAL</h1>
-            <p>Comprendre. Analyser. Évoluer.</p>
+
+            <h1 id="bienvenue">
+                Bienvenue sur DIAWLAL
+            </h1>
+
+            <p>
+                Comprendre. Analyser. Évoluer.
+            </p>
+
         </section>
+
 
         <section class="cartes">
 
             <article class="carte">
-                <h2>Capital initial</h2>
-                <p class="valeur" id="capital">0 FCFA</p>
-                <p>Votre capital enregistré.</p>
+
+                <h2>
+                    Capital initial
+                </h2>
+
+                <div
+                    class="valeur"
+                    id="capital"
+                >
+                    0 FCFA
+                </div>
+
+                <p>
+                    Votre capital enregistré.
+                </p>
+
             </article>
 
+
             <article class="carte">
-                <h2>Revenus</h2>
-                <p class="valeur" id="revenus">0 FCFA</p>
-                <p>Total de vos revenus.</p>
+
+                <h2>
+                    Revenus
+                </h2>
+
+                <div
+                    class="valeur"
+                    id="revenus"
+                >
+                    0 FCFA
+                </div>
+
+                <p>
+                    Total de vos revenus.
+                </p>
+
             </article>
 
+
             <article class="carte">
-                <h2>Dépenses</h2>
-                <p class="valeur" id="depenses">0 FCFA</p>
-                <p>Total de vos dépenses.</p>
+
+                <h2>
+                    Dépenses
+                </h2>
+
+                <div
+                    class="valeur"
+                    id="depenses"
+                >
+                    0 FCFA
+                </div>
+
+                <p>
+                    Total de vos dépenses.
+                </p>
+
             </article>
 
-            <article class="carte">
-                <h2>Solde disponible</h2>
-                <p class="valeur" id="solde">0 FCFA</p>
-                <p>Capital après les revenus et les dépenses.</p>
 
-                <a href="portefeuille.html">
-                    <button>Ouvrir le portefeuille</button>
+            <article class="carte">
+
+                <h2>
+                    Solde disponible
+                </h2>
+
+                <div
+                    class="valeur"
+                    id="solde"
+                >
+                    0 FCFA
+                </div>
+
+                <p>
+                    Capital après les revenus et les dépenses.
+                </p>
+
+                <a
+                    href="portefeuille.html"
+                    class="bouton"
+                >
+                    Ouvrir le portefeuille
                 </a>
-            </article>
 
-            <article class="carte">
-                <h2>Progression Academy</h2>
-                <p class="valeur" id="progression">0 %</p>
-                <p>Votre progression dans les leçons.</p>
-
-                <a href="academy.html">
-                    <button>Continuer les leçons</button>
-                </a>
-            </article>
-
-            <article class="carte">
-                <h2>Objectifs</h2>
-                <p class="valeur" id="objectifs">0</p>
-                <p>Nombre d’objectifs financiers.</p>
-
-                <a href="objectifs.html">
-                    <button>Voir les objectifs</button>
-                </a>
-            </article>
-
-            <article class="carte">
-                <h2>Alertes non lues</h2>
-                <p class="valeur" id="alertes">0</p>
-                <p>Informations encore à consulter.</p>
-
-                <a href="alertes.html">
-                    <button>Voir les alertes</button>
-                </a>
-            </article>
-
-            <article class="carte">
-                <h2>Indice DIAWLAL</h2>
-                <p class="valeur" id="indice">0 / 100</p>
-                <p>Indice calculé selon votre situation.</p>
             </article>
 
         </section>
 
-        <section class="resume">
-            <h2>Résumé du profil</h2>
 
-            <div class="ligne">
-                <span>Adresse e-mail</span>
-                <strong id="email">Non renseignée</strong>
+        <section class="sections-secondaires">
+
+            <article class="carte petite-carte">
+
+                <h2>
+                    Progression Academy
+                </h2>
+
+                <div
+                    class="valeur"
+                    id="progressionAcademy"
+                >
+                    0 %
+                </div>
+
+                <p>
+                    Votre progression dans les leçons.
+                </p>
+
+                <a
+                    href="academy.html"
+                    class="bouton"
+                >
+                    Continuer les leçons
+                </a>
+
+            </article>
+
+
+            <article class="carte petite-carte">
+
+                <h2>
+                    Objectifs
+                </h2>
+
+                <div
+                    class="valeur"
+                    id="nombreObjectifs"
+                >
+                    0
+                </div>
+
+                <p>
+                    Nombre d'objectifs financiers.
+                </p>
+
+                <a
+                    href="objectifs.html"
+                    class="bouton"
+                >
+                    Voir les objectifs
+                </a>
+
+            </article>
+
+
+            <article class="carte petite-carte">
+
+                <h2>
+                    Alertes non lues
+                </h2>
+
+                <div
+                    class="valeur"
+                    id="nombreAlertes"
+                >
+                    0
+                </div>
+
+                <p>
+                    Informations encore à consulter.
+                </p>
+
+                <a
+                    href="alertes.html"
+                    class="bouton"
+                >
+                    Voir les alertes
+                </a>
+
+            </article>
+
+
+            <article class="carte petite-carte">
+
+                <h2>
+                    Indice DIAWLAL
+                </h2>
+
+                <div
+                    class="valeur"
+                    id="indiceDiawlal"
+                >
+                    0 / 100
+                </div>
+
+                <p>
+                    Indice calculé selon votre situation.
+                </p>
+
+            </article>
+
+        </section>
+
+
+        <section class="profil">
+
+            <h2>
+                Résumé du profil
+            </h2>
+
+            <div class="profil-ligne">
+
+                <span>
+                    Adresse e-mail
+                </span>
+
+                <strong id="profilEmail">
+                    Chargement...
+                </strong>
+
             </div>
 
-            <div class="ligne">
-                <span>Téléphone</span>
-                <strong id="telephone">Non renseigné</strong>
+
+            <div class="profil-ligne">
+
+                <span>
+                    Téléphone
+                </span>
+
+                <strong id="profilTelephone">
+                    Non renseigné
+                </strong>
+
             </div>
 
-            <div class="ligne">
-                <span>Objectif principal</span>
-                <strong id="objectifPrincipal">
+
+            <div class="profil-ligne">
+
+                <span>
+                    Objectif financier
+                </span>
+
+                <strong id="profilObjectif">
                     Aucun objectif renseigné
                 </strong>
+
             </div>
+
         </section>
-
-        <section class="brief">
-            <h2>Conseil du jour</h2>
-
-            <p id="conseil">
-                Gardez toujours une réserve avant d’investir.
-            </p>
-
-            <button onclick="nouveauConseil()">
-                Nouveau conseil
-            </button>
-        </section>
-
-        <button class="deconnexion" onclick="seDeconnecter()">
-            Se déconnecter
-        </button>
 
     </main>
 
-    <footer>
-        © 2026 DIAWLAL — Comprendre. Analyser. Évoluer.
-    </footer>
+
+    <!-- Bibliothèque Supabase -->
+    <script
+        src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"
+    ></script>
+
+    <!-- Notre connexion Supabase -->
+    <script src="supabase.js"></script>
+
 
     <script>
-       if (localStorage.getItem("diawlalConnecte") !== "oui") {
-    window.location.href = "connexion.html";
-} 
+
         function formaterMontant(montant) {
-            return Number(montant).toLocaleString("fr-FR") + " FCFA";
+
+            return (
+                Number(montant || 0)
+                    .toLocaleString("fr-FR")
+                + " FCFA"
+            );
+
         }
 
-        function lireOperations() {
-            return JSON.parse(
-                localStorage.getItem("diawlalOperations")
-            ) || [];
-        }
 
-        function lireObjectifs() {
-            return JSON.parse(
-                localStorage.getItem("diawlalObjectifs")
-            ) || [];
-        }
+        async function chargerTableauDeBord() {
 
-        function calculerFinances() {
-            const capital =
-                Number(localStorage.getItem("diawlalCapital")) || 0;
+            try {
 
-            const operations = lireOperations();
+                /*
+                =====================================
+                1. VÉRIFIER LA SESSION SUPABASE
+                =====================================
+                */
 
-            let revenus = 0;
-            let depenses = 0;
+                const {
+                    data: sessionData,
+                    error: sessionError
+                } =
+                    await window
+                        .diawlalSupabase
+                        .auth
+                        .getSession();
 
-            operations.forEach(function (operation) {
-                const montant = Number(operation.montant) || 0;
 
-                if (operation.type === "revenu") {
-                    revenus += montant;
+                if (
+                    sessionError ||
+                    !sessionData.session
+                ) {
+
+                    window.location.href =
+                        "connexion.html";
+
+                    return;
+
                 }
 
-                if (operation.type === "depense") {
-                    depenses += montant;
+
+                const utilisateur =
+                    sessionData.session.user;
+
+
+                /*
+                =====================================
+                2. AFFICHER LE NOM
+                =====================================
+                */
+
+                let nomUtilisateur =
+                    utilisateur
+                        .user_metadata
+                        ?.nom_complet;
+
+
+                /*
+                On essaie aussi de récupérer
+                le profil dans la base Supabase.
+                */
+
+                const {
+                    data: profil
+                } =
+                    await window
+                        .diawlalSupabase
+                        .from("profils")
+                        .select(
+                            "nom_complet, email, telephone, objectif_financier"
+                        )
+                        .eq(
+                            "id",
+                            utilisateur.id
+                        )
+                        .maybeSingle();
+
+
+                if (
+                    profil &&
+                    profil.nom_complet
+                ) {
+
+                    nomUtilisateur =
+                        profil.nom_complet;
+
                 }
-            });
 
-            return {
-                capital: capital,
-                revenus: revenus,
-                depenses: depenses,
-                solde: capital + revenus - depenses
-            };
-        }
 
-        function compterAlertesNonLues() {
-            const alertes = [
-                "diawlal_alerte1",
-                "diawlal_alerte2",
-                "diawlal_alerte3"
-            ];
+                if (!nomUtilisateur) {
 
-            return alertes.filter(function (cle) {
-                return localStorage.getItem(cle) !== "lue";
-            }).length;
-        }
+                    nomUtilisateur =
+                        "Utilisateur";
 
-        function calculerIndice(solde, progression, nombreObjectifs) {
-            let indice = 20;
+                }
 
-            if (solde >= 100000) {
-                indice += 15;
+
+                document
+                    .getElementById(
+                        "bienvenue"
+                    )
+                    .textContent =
+                    "Bonjour "
+                    + nomUtilisateur
+                    + " 👋";
+
+
+                /*
+                =====================================
+                3. PROFIL
+                =====================================
+                */
+
+                document
+                    .getElementById(
+                        "profilEmail"
+                    )
+                    .textContent =
+                    profil?.email
+                    ||
+                    utilisateur.email
+                    ||
+                    "Non renseigné";
+
+
+                document
+                    .getElementById(
+                        "profilTelephone"
+                    )
+                    .textContent =
+                    profil?.telephone
+                    ||
+                    "Non renseigné";
+
+
+                document
+                    .getElementById(
+                        "profilObjectif"
+                    )
+                    .textContent =
+                    profil?.objectif_financier
+                    ||
+                    "Aucun objectif renseigné";
+
+
+                /*
+                =====================================
+                4. PORTEFEUILLE
+                =====================================
+                Pour l'instant, on tente Supabase.
+                Si aucune donnée n'existe,
+                les valeurs restent à zéro.
+                =====================================
+                */
+
+                let capital = 0;
+                let revenus = 0;
+                let depenses = 0;
+
+
+                const {
+                    data: portefeuille
+                } =
+                    await window
+                        .diawlalSupabase
+                        .from("portefeuilles")
+                        .select(
+                            "capital_initial"
+                        )
+                        .eq(
+                            "user_id",
+                            utilisateur.id
+                        )
+                        .maybeSingle();
+
+
+                if (portefeuille) {
+
+                    capital =
+                        Number(
+                            portefeuille
+                                .capital_initial
+                        ) || 0;
+
+                }
+
+
+                const {
+                    data: operations
+                } =
+                    await window
+                        .diawlalSupabase
+                        .from("operations")
+                        .select(
+                            "type_operation, montant"
+                        )
+                        .eq(
+                            "user_id",
+                            utilisateur.id
+                        );
+
+
+                if (operations) {
+
+                    operations.forEach(
+                        function(operation) {
+
+                            const montant =
+                                Number(
+                                    operation.montant
+                                ) || 0;
+
+
+                            if (
+                                operation
+                                    .type_operation
+                                === "revenu"
+                            ) {
+
+                                revenus += montant;
+
+                            }
+
+
+                            if (
+                                operation
+                                    .type_operation
+                                === "depense"
+                            ) {
+
+                                depenses += montant;
+
+                            }
+
+                        }
+                    );
+
+                }
+
+
+                const solde =
+                    capital
+                    + revenus
+                    - depenses;
+
+
+                document
+                    .getElementById(
+                        "capital"
+                    )
+                    .textContent =
+                    formaterMontant(
+                        capital
+                    );
+
+
+                document
+                    .getElementById(
+                        "revenus"
+                    )
+                    .textContent =
+                    formaterMontant(
+                        revenus
+                    );
+
+
+                document
+                    .getElementById(
+                        "depenses"
+                    )
+                    .textContent =
+                    formaterMontant(
+                        depenses
+                    );
+
+
+                document
+                    .getElementById(
+                        "solde"
+                    )
+                    .textContent =
+                    formaterMontant(
+                        solde
+                    );
+
+
+                /*
+                =====================================
+                5. OBJECTIFS SUPABASE
+                =====================================
+                */
+
+                const {
+                    data: objectifs
+                } =
+                    await window
+                        .diawlalSupabase
+                        .from("objectifs")
+                        .select("id")
+                        .eq(
+                            "user_id",
+                            utilisateur.id
+                        );
+
+
+                const nombreObjectifs =
+                    objectifs
+                    ? objectifs.length
+                    : 0;
+
+
+                document
+                    .getElementById(
+                        "nombreObjectifs"
+                    )
+                    .textContent =
+                    nombreObjectifs;
+
+
+                /*
+                =====================================
+                6. PROGRESSION ACADEMY
+                =====================================
+                */
+
+                let progression = 0;
+
+
+                const {
+                    data: academy
+                } =
+                    await window
+                        .diawlalSupabase
+                        .from(
+                            "progression_academy"
+                        )
+                        .select(
+                            "progression"
+                        )
+                        .eq(
+                            "user_id",
+                            utilisateur.id
+                        )
+                        .maybeSingle();
+
+
+                if (academy) {
+
+                    progression =
+                        Number(
+                            academy.progression
+                        ) || 0;
+
+                }
+
+
+                document
+                    .getElementById(
+                        "progressionAcademy"
+                    )
+                    .textContent =
+                    progression + " %";
+
+
+                /*
+                =====================================
+                7. ALERTES
+                Pour l'instant les alertes sont
+                encore gérées localement.
+                =====================================
+                */
+
+                let alertesNonLues = 0;
+
+
+                for (
+                    let numero = 1;
+                    numero <= 3;
+                    numero++
+                ) {
+
+                    const valeur =
+                        localStorage.getItem(
+                            "diawlal_alerte"
+                            + numero
+                        );
+
+
+                    if (valeur !== "lue") {
+
+                        alertesNonLues++;
+
+                    }
+
+                }
+
+
+                document
+                    .getElementById(
+                        "nombreAlertes"
+                    )
+                    .textContent =
+                    alertesNonLues;
+
+
+                /*
+                =====================================
+                8. INDICE DIAWLAL
+                =====================================
+                */
+
+                let indice = 0;
+
+
+                if (capital > 0) {
+
+                    indice += 25;
+
+                }
+
+
+                if (revenus > 0) {
+
+                    indice += 20;
+
+                }
+
+
+                if (
+                    revenus >= depenses &&
+                    revenus > 0
+                ) {
+
+                    indice += 20;
+
+                }
+
+
+                if (nombreObjectifs > 0) {
+
+                    indice += 15;
+
+                }
+
+
+                indice +=
+                    Math.min(
+                        20,
+                        Math.round(
+                            progression / 5
+                        )
+                    );
+
+
+                indice =
+                    Math.min(
+                        100,
+                        indice
+                    );
+
+
+                document
+                    .getElementById(
+                        "indiceDiawlal"
+                    )
+                    .textContent =
+                    indice + " / 100";
+
+
+                /*
+                =====================================
+                9. ENLEVER LE CHARGEMENT
+                =====================================
+                */
+
+                document
+                    .getElementById(
+                        "chargement"
+                    )
+                    .style
+                    .display =
+                    "none";
+
             }
 
-            if (solde >= 500000) {
-                indice += 20;
+            catch (erreur) {
+
+                console.error(
+                    "Erreur DIAWLAL :",
+                    erreur
+                );
+
+
+                document
+                    .getElementById(
+                        "chargement"
+                    )
+                    .textContent =
+                    "Une erreur est survenue. Recharge la page.";
+
             }
 
-            if (solde >= 1000000) {
-                indice += 15;
-            }
-
-            indice += Math.round(progression * 0.2);
-
-            if (nombreObjectifs > 0) {
-                indice += 10;
-            }
-
-            return Math.min(indice, 100);
         }
 
-        function afficherTableauDeBord() {
-            const nom =
-                localStorage.getItem("diawlalNom") || "Utilisateur";
 
-            document.getElementById("bienvenue").textContent =
-                "Bonjour " + nom + " 👋";
+        /*
+        =========================================
+        DÉCONNEXION SUPABASE
+        =========================================
+        */
 
-            const finances = calculerFinances();
+        async function seDeconnecter() {
 
-            document.getElementById("capital").textContent =
-                formaterMontant(finances.capital);
+            await window
+                .diawlalSupabase
+                .auth
+                .signOut();
 
-            document.getElementById("revenus").textContent =
-                formaterMontant(finances.revenus);
 
-            document.getElementById("depenses").textContent =
-                formaterMontant(finances.depenses);
+            window.location.href =
+                "connexion.html";
 
-            document.getElementById("solde").textContent =
-                formaterMontant(finances.solde);
-
-            const progression =
-                Number(localStorage.getItem("diawlalProgression")) || 0;
-
-            document.getElementById("progression").textContent =
-                progression + " %";
-
-            const objectifs = lireObjectifs();
-
-            document.getElementById("objectifs").textContent =
-                objectifs.length;
-
-            document.getElementById("alertes").textContent =
-                compterAlertesNonLues();
-
-            document.getElementById("indice").textContent =
-                calculerIndice(
-                    finances.solde,
-                    progression,
-                    objectifs.length
-                ) + " / 100";
-
-            document.getElementById("email").textContent =
-                localStorage.getItem("diawlalEmail") ||
-                "Non renseignée";
-
-            document.getElementById("telephone").textContent =
-                localStorage.getItem("diawlalTelephone") ||
-                "Non renseigné";
-
-            document.getElementById("objectifPrincipal").textContent =
-                localStorage.getItem("diawlalObjectif") ||
-                "Aucun objectif renseigné";
         }
 
-        const conseils = [
-            "Gardez toujours une réserve avant d’investir.",
-            "Notez régulièrement vos revenus et vos dépenses.",
-            "Évitez de placer tout votre argent dans un seul projet.",
-            "Définissez des objectifs précis et réalistes.",
-            "Continuez à apprendre avant de prendre des risques."
-        ];
 
-        function nouveauConseil() {
-            const position =
-                Math.floor(Math.random() * conseils.length);
+        /*
+        =========================================
+        DÉMARRAGE
+        =========================================
+        */
 
-            document.getElementById("conseil").textContent =
-                conseils[position];
-        }
-        function seDeconnecter() {
-    localStorage.setItem("diawlalConnecte", "non");
-    window.location.href = "connexion.html";
-}
+        chargerTableauDeBord();
 
-        afficherTableauDeBord();
     </script>
-    
+
 </body>
+
 </html>

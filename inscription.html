@@ -3,191 +3,340 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
     <title>Inscription - DIAWLAL</title>
 
-    <link rel="stylesheet" href="style.css">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            min-height: 100vh;
+            padding: 30px 15px;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            font-family: Arial, sans-serif;
+            color: #f2f2f2;
+
+            background:
+                radial-gradient(
+                    circle at top left,
+                    rgba(212, 175, 55, 0.14),
+                    transparent 30%
+                ),
+                linear-gradient(
+                    135deg,
+                    #080808,
+                    #111111,
+                    #181818
+                );
+        }
+
+        .boite {
+            width: min(500px, 100%);
+            padding: 35px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    #232323,
+                    #111111
+                );
+
+            border: 1px solid rgba(212, 175, 55, 0.55);
+            border-radius: 22px;
+
+            box-shadow:
+                0 20px 50px rgba(0, 0, 0, 0.55);
+        }
+
+        .logo {
+            margin-bottom: 20px;
+
+            color: #d4af37;
+            text-align: center;
+
+            font-size: 32px;
+            font-weight: 900;
+            letter-spacing: 3px;
+        }
+
+        h1 {
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .description {
+            margin-bottom: 25px;
+
+            color: #b8b8b8;
+            text-align: center;
+            line-height: 1.6;
+        }
+
+        label {
+            display: block;
+            margin: 15px 0 7px;
+
+            color: #f4d76b;
+            font-weight: 700;
+        }
+
+        input {
+            width: 100%;
+            padding: 15px;
+
+            color: white;
+            background: #0d0d0d;
+
+            border: 1px solid rgba(212, 175, 55, 0.35);
+            border-radius: 10px;
+
+            font-size: 16px;
+            outline: none;
+        }
+
+        input:focus {
+            border-color: #d4af37;
+
+            box-shadow:
+                0 0 0 3px rgba(212, 175, 55, 0.12);
+        }
+
+        button {
+            width: 100%;
+            padding: 15px;
+            margin-top: 25px;
+
+            color: #111111;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #f4d76b,
+                    #d4af37,
+                    #9d7515
+                );
+
+            border: none;
+            border-radius: 10px;
+
+            font-size: 17px;
+            font-weight: 900;
+            cursor: pointer;
+        }
+
+        button:disabled {
+            opacity: 0.6;
+            cursor: wait;
+        }
+
+        .connexion {
+            margin-top: 22px;
+            text-align: center;
+            color: #b8b8b8;
+        }
+
+        .connexion a {
+            color: #f4d76b;
+            font-weight: 700;
+        }
+
+        #message {
+            display: none;
+
+            margin-top: 18px;
+            padding: 13px;
+
+            border-radius: 10px;
+
+            text-align: center;
+            line-height: 1.5;
+        }
+
+        .succes {
+            display: block !important;
+
+            color: #bbf7d0;
+            background: rgba(34, 197, 94, 0.14);
+            border: 1px solid rgba(34, 197, 94, 0.5);
+        }
+
+        .erreur {
+            display: block !important;
+
+            color: #fecaca;
+            background: rgba(239, 68, 68, 0.14);
+            border: 1px solid rgba(239, 68, 68, 0.5);
+        }
+    </style>
 </head>
 
 <body>
 
-    <nav>
+    <main class="boite">
+
         <div class="logo">DIAWLAL</div>
 
-        <div>
-            <a href="index.html">Accueil</a>
-            <a href="services.html">Services</a>
-            <a href="contact.html">Contact</a>
-            <a href="connexion.html">Connexion</a>
-        </div>
-    </nav>
+        <h1>Créer un compte</h1>
 
-    <section class="contact-section">
-
-        <div class="contact-box">
-
-            <h1>Créer un compte</h1>
-
-            <p>
-                Rejoignez DIAWLAL et commencez votre parcours.
-            </p>
-
-            <form id="formInscription">
-
-                <label for="nom">Nom complet</label>
-
-                <input
-                    type="text"
-                    id="nom"
-                    placeholder="Votre nom complet"
-                    required
-                >
-
-                <label for="email">Adresse e-mail</label>
-
-                <input
-                    type="email"
-                    id="email"
-                    placeholder="Votre e-mail"
-                    required
-                >
-
-                <label for="motdepasse">Mot de passe</label>
-
-                <input
-                    type="password"
-                    id="motdepasse"
-                    placeholder="Minimum 6 caractères"
-                    minlength="6"
-                    required
-                >
-
-                <label for="confirmation">
-                    Confirmer le mot de passe
-                </label>
-
-                <input
-                    type="password"
-                    id="confirmation"
-                    placeholder="Confirmez le mot de passe"
-                    minlength="6"
-                    required
-                >
-
-            <button type="button" onclick="creerCompte()">
-                    Créer mon compte
-                </button>
-
-            </form>
-
-            <p style="margin-top: 20px;">
-                Déjà inscrit ?
-                <a href="connexion.html">Se connecter</a>
-            </p>
-
-        </div>
-
-    </section>
-
-    <footer>
-        <p>
-            © 2026 DIAWLAL — Comprendre. Analyser. Évoluer.
+        <p class="description">
+            Commencez à gérer vos finances et vos objectifs.
         </p>
-    </footer>
-<script>
-    const formulaire = document.querySelector("form");
 
-    formulaire.addEventListener("submit", async function(event) {
-        event.preventDefault();
+        <form id="formInscription">
 
-        const nom = document.getElementById("nom").value.trim();
-        const email = document.getElementById("email").value.trim();
-        const motDePasse = document.getElementById("motDePasse").value;
+            <label for="nom">Nom complet</label>
 
-        const { error } = await window.diawlalSupabase.auth.signUp({
-            email: email,
-            password: motDePasse,
-            options: {
-                data: {
-                    nom_complet: nom
+            <input
+                type="text"
+                id="nom"
+                placeholder="Votre nom complet"
+                required
+            >
+
+            <label for="email">Adresse e-mail</label>
+
+            <input
+                type="email"
+                id="email"
+                placeholder="vous@exemple.com"
+                required
+            >
+
+            <label for="motDePasse">Mot de passe</label>
+
+            <input
+                type="password"
+                id="motDePasse"
+                placeholder="Au moins 6 caractères"
+                minlength="6"
+                required
+            >
+
+            <button
+                type="submit"
+                id="boutonInscription"
+            >
+                Créer mon compte
+            </button>
+
+        </form>
+
+        <div id="message"></div>
+
+        <p class="connexion">
+            Déjà inscrit ?
+            <a href="connexion.html">Se connecter</a>
+        </p>
+
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="supabase.js"></script>
+
+    <script>
+        const formulaire =
+            document.getElementById("formInscription");
+
+        const bouton =
+            document.getElementById("boutonInscription");
+
+        const message =
+            document.getElementById("message");
+
+        function afficherMessage(texte, type) {
+            message.textContent = texte;
+            message.className = type;
+        }
+
+        formulaire.addEventListener(
+            "submit",
+            async function(event) {
+                event.preventDefault();
+
+                if (!window.diawlalSupabase) {
+                    afficherMessage(
+                        "Erreur : la connexion à Supabase n'est pas chargée.",
+                        "erreur"
+                    );
+
+                    return;
                 }
-            }
-        });
 
-        if (error) {
-            alert(error.message);
-            return;
-        }
+                const nom =
+                    document
+                        .getElementById("nom")
+                        .value
+                        .trim();
 
-        alert("Compte créé. Vérifie ton e-mail pour confirmer ton inscription.");
-        window.location.href = "connexion.html";
-    });
-</script><script>
-    const formulaire = document.querySelector("form");
+                const email =
+                    document
+                        .getElementById("email")
+                        .value
+                        .trim();
 
-    formulaire.addEventListener("submit", async function(event) {
-        event.preventDefault();
+                const motDePasse =
+                    document
+                        .getElementById("motDePasse")
+                        .value;
 
-        const nom = document.getElementById("nom").value.trim();
-        const email = document.getElementById("email").value.trim();
-        const motDePasse = document.getElementById("motDePasse").value;
+                bouton.disabled = true;
+                bouton.textContent = "Création en cours...";
 
-        const { error } = await window.diawlalSupabase.auth.signUp({
-            email: email,
-            password: motDePasse,
-            options: {
-                data: {
-                    nom_complet: nom
+                const { data, error } =
+                    await window.diawlalSupabase.auth.signUp({
+                        email: email,
+                        password: motDePasse,
+
+                        options: {
+                            data: {
+                                nom_complet: nom
+                            },
+
+                            emailRedirectTo:
+                                window.location.origin +
+                                window.location.pathname
+                                    .replace(
+                                        "inscription.html",
+                                        "connexion.html"
+                                    )
+                        }
+                    });
+
+                bouton.disabled = false;
+                bouton.textContent = "Créer mon compte";
+
+                if (error) {
+                    afficherMessage(
+                        "Erreur : " + error.message,
+                        "erreur"
+                    );
+
+                    return;
                 }
+
+                afficherMessage(
+                    "Compte créé. Consulte ton e-mail pour confirmer ton inscription.",
+                    "succes"
+                );
+
+                formulaire.reset();
             }
-        });
-
-        if (error) {
-            alert(error.message);
-            return;
-        }
-
-        alert("Compte créé. Vérifie ton e-mail pour confirmer ton inscription.");
-        window.location.href = "connexion.html";
-    });
-</script>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="supabase.js"></script>    
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="supabase.js"></script>
-
-<script>
-    async function creerCompte() {
-        const nom = document.getElementById("nom").value.trim();
-        const email = document.getElementById("email").value.trim();
-        const motDePasse = document.getElementById("motDePasse").value;
-
-        if (nom === "" || email === "" || motDePasse === "") {
-            alert("Veuillez remplir tous les champs.");
-            return;
-        }
-
-        const { error } = await window.diawlalSupabase.auth.signUp({
-            email: email,
-            password: motDePasse,
-            options: {
-                data: {
-                    nom_complet: nom
-                }
-            }
-        });
-
-        if (error) {
-            alert("Erreur : " + error.message);
-            return;
-        }
-
-        alert("Compte créé. Vérifie ton e-mail pour confirmer l’inscription.");
-        window.location.href = "connexion.html";
-    }
-</script>
+        );
+    </script>
 
 </body>
-</html>
+
 </html>

@@ -3,104 +3,749 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
     <title>Profil - DIAWLAL</title>
-    <link rel="stylesheet" href="style.css">
+
+    <style>
+        :root {
+            --or: #d4af37;
+            --or-clair: #f4d76b;
+            --or-fonce: #9d7515;
+
+            --noir: #080808;
+            --noir-doux: #111111;
+
+            --blanc: #f2f2f2;
+            --gris: #b8b8b8;
+
+            --vert: #22c55e;
+            --rouge: #ef4444;
+
+            --bordure: rgba(212, 175, 55, 0.48);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            min-height: 100vh;
+
+            font-family: Arial, Helvetica, sans-serif;
+            color: var(--blanc);
+
+            background:
+                radial-gradient(
+                    circle at top left,
+                    rgba(212, 175, 55, 0.10),
+                    transparent 28%
+                ),
+                linear-gradient(
+                    135deg,
+                    #080808,
+                    #111111,
+                    #181818
+                );
+
+            background-attachment: fixed;
+        }
+
+        nav {
+            width: min(1200px, 95%);
+            margin: auto;
+            padding: 24px 10px;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+
+            border-bottom:
+                1px solid rgba(212, 175, 55, 0.18);
+        }
+
+        .logo {
+            color: var(--or);
+
+            font-size: 30px;
+            font-weight: 900;
+            letter-spacing: 2px;
+        }
+
+        .menu {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 5px;
+        }
+
+        nav a {
+            padding: 9px 10px;
+
+            color: white;
+
+            border-radius: 8px;
+
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 700;
+        }
+
+        nav a:hover {
+            color: var(--or-clair);
+            background: rgba(212, 175, 55, 0.10);
+        }
+
+        .container {
+            width: min(800px, 92%);
+            margin: auto;
+            padding: 50px 0 70px;
+        }
+
+        .entete {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .entete h1 {
+            margin-bottom: 10px;
+
+            font-size: clamp(38px, 6vw, 58px);
+        }
+
+        .entete p {
+            color: var(--gris);
+            font-size: 18px;
+        }
+
+        .carte {
+            padding: 30px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    #202020,
+                    #111111
+                );
+
+            border:
+                1px solid var(--bordure);
+
+            border-radius: 20px;
+        }
+
+        .carte h2 {
+            margin-bottom: 22px;
+            color: var(--or-clair);
+        }
+
+        label {
+            display: block;
+            margin: 16px 0 7px;
+
+            color: var(--or-clair);
+            font-weight: 700;
+        }
+
+        input,
+        textarea {
+            width: 100%;
+            padding: 14px;
+
+            color: white;
+            background: #0d0d0d;
+
+            border:
+                1px solid rgba(212, 175, 55, 0.35);
+
+            border-radius: 10px;
+
+            font-size: 16px;
+            outline: none;
+        }
+
+        textarea {
+            min-height: 110px;
+            resize: vertical;
+        }
+
+        input:focus,
+        textarea:focus {
+            border-color: var(--or);
+
+            box-shadow:
+                0 0 0 3px rgba(212, 175, 55, 0.12);
+        }
+
+        input[readonly] {
+            color: var(--gris);
+            cursor: not-allowed;
+        }
+
+        button {
+            width: 100%;
+            padding: 15px;
+            margin-top: 22px;
+
+            color: #111111;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    var(--or-clair),
+                    var(--or),
+                    var(--or-fonce)
+                );
+
+            border: none;
+            border-radius: 10px;
+
+            font-size: 16px;
+            font-weight: 900;
+
+            cursor: pointer;
+        }
+
+        button:disabled {
+            opacity: 0.6;
+            cursor: wait;
+        }
+
+        .message {
+            display: none;
+
+            margin-top: 16px;
+            padding: 13px;
+
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .succes {
+            display: block;
+
+            color: #bbf7d0;
+            background: rgba(34, 197, 94, 0.14);
+
+            border:
+                1px solid rgba(34, 197, 94, 0.45);
+        }
+
+        .erreur {
+            display: block;
+
+            color: #fecaca;
+            background: rgba(239, 68, 68, 0.14);
+
+            border:
+                1px solid rgba(239, 68, 68, 0.45);
+        }
+
+        .infos-compte {
+            margin-top: 25px;
+            padding: 20px;
+
+            background: #101010;
+
+            border:
+                1px solid rgba(212, 175, 55, 0.20);
+
+            border-radius: 14px;
+        }
+
+        .infos-compte p {
+            margin: 8px 0;
+            color: var(--gris);
+        }
+
+        .infos-compte strong {
+            color: white;
+        }
+
+        @media (max-width: 760px) {
+
+            nav {
+                flex-direction: column;
+            }
+
+            .carte {
+                padding: 22px;
+            }
+        }
+    </style>
 </head>
 
 <body>
 
     <nav>
-        <div class="logo">DIAWLAL</div>
 
-        <div>
-            <a href="dashboard.html">Tableau de bord</a>
-            <a href="academy.html">Academy</a>
-            <a href="portefeuille.html">Portefeuille</a>
-            <a href="alertes.html">Alertes</a>
-            <a href="profil.html">Profil</a>
+        <div class="logo">
+            DIAWLAL
         </div>
+
+        <div class="menu">
+
+            <a href="dashboard.html">
+                Tableau de bord
+            </a>
+
+            <a href="academy.html">
+                Academy
+            </a>
+
+            <a href="portefeuille.html">
+                Portefeuille
+            </a>
+
+            <a href="objectifs.html">
+                Objectifs
+            </a>
+
+            <a href="alertes.html">
+                Alertes
+            </a>
+
+            <a href="profil.html">
+                Profil
+            </a>
+
+        </div>
+
     </nav>
 
-    <section class="contact-section">
 
-        <div class="contact-box">
+    <main class="container">
 
-            <h1>Mon profil</h1>
+        <section class="entete">
 
-            <p>Modifiez vos informations personnelles.</p>
+            <h1>
+                Mon profil
+            </h1>
 
-            <form onsubmit="enregistrerProfil(event)">
+            <p>
+                Gérez les informations liées à votre compte DIAWLAL.
+            </p>
 
-                <label for="nom">Nom complet</label>
-                <input type="text" id="nom" required>
+        </section>
 
-                <label for="email">Adresse e-mail</label>
-                <input type="email" id="email" required>
 
-                <label for="telephone">Téléphone</label>
-                <input type="tel" id="telephone" placeholder="Votre numéro">
+        <section class="carte">
 
-                <label for="objectif">Objectif financier</label>
-                <textarea
-                    id="objectif"
-                    placeholder="Exemple : constituer une épargne, investir, créer une entreprise..."
-                ></textarea>
+            <h2>
+                Informations personnelles
+            </h2>
 
-                <button type="submit">Enregistrer le profil</button>
 
-            </form>
+            <label for="nomComplet">
+                Nom complet
+            </label>
 
-        </div>
+            <input
+                type="text"
+                id="nomComplet"
+                placeholder="Votre nom complet"
+            >
 
-    </section>
 
-    <footer>
-        <p>© 2026 DIAWLAL — Comprendre. Analyser. Évoluer.</p>
-    </footer>
+            <label for="email">
+                Adresse e-mail
+            </label>
+
+            <input
+                type="email"
+                id="email"
+                readonly
+            >
+
+
+            <label for="telephone">
+                Téléphone
+            </label>
+
+            <input
+                type="tel"
+                id="telephone"
+                placeholder="Exemple : +221 77 000 00 00"
+            >
+
+
+            <label for="objectifFinancier">
+                Votre objectif financier principal
+            </label>
+
+            <textarea
+                id="objectifFinancier"
+                placeholder="Exemple : constituer une épargne de sécurité, acheter une maison..."
+            ></textarea>
+
+
+            <button
+                id="boutonEnregistrer"
+                onclick="enregistrerProfil()"
+            >
+                Enregistrer les modifications
+            </button>
+
+
+            <div
+                id="messageProfil"
+                class="message"
+            ></div>
+
+
+            <div class="infos-compte">
+
+                <p>
+                    <strong>Compte connecté :</strong>
+                    <span id="compteConnecte">
+                        Chargement...
+                    </span>
+                </p>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <script
+        src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"
+    ></script>
+
+    <script src="supabase.js"></script>
+
 
     <script>
-        function chargerProfil() {
-            document.getElementById("nom").value =
-                localStorage.getItem("diawlalNom") || "";
 
-            document.getElementById("email").value =
-                localStorage.getItem("diawlalEmail") || "";
+        let utilisateurConnecte = null;
 
-            document.getElementById("telephone").value =
-                localStorage.getItem("diawlalTelephone") || "";
 
-            document.getElementById("objectif").value =
-                localStorage.getItem("diawlalObjectif") || "";
+        function afficherMessage(
+            texte,
+            type
+        ) {
+
+            const element =
+                document.getElementById(
+                    "messageProfil"
+                );
+
+            element.textContent = texte;
+
+            element.className =
+                "message " + type;
+
         }
 
-        function enregistrerProfil(event) {
-            event.preventDefault();
 
-            localStorage.setItem(
-                "diawlalNom",
-                document.getElementById("nom").value
-            );
+        async function verifierSession() {
 
-            localStorage.setItem(
-                "diawlalEmail",
-                document.getElementById("email").value
-            );
+            const {
+                data,
+                error
+            } =
+                await window
+                    .diawlalSupabase
+                    .auth
+                    .getSession();
 
-            localStorage.setItem(
-                "diawlalTelephone",
-                document.getElementById("telephone").value
-            );
 
-            localStorage.setItem(
-                "diawlalObjectif",
-                document.getElementById("objectif").value
-            );
+            if (
+                error ||
+                !data.session
+            ) {
 
-            alert("Profil enregistré avec succès.");
+                window.location.href =
+                    "connexion.html";
+
+                return false;
+
+            }
+
+
+            utilisateurConnecte =
+                data.session.user;
+
+
+            document
+                .getElementById(
+                    "compteConnecte"
+                )
+                .textContent =
+                utilisateurConnecte.email
+                || "Compte DIAWLAL";
+
+
+            return true;
+
         }
 
-        chargerProfil();
+
+        async function chargerProfil() {
+
+            const {
+                data,
+                error
+            } =
+                await window
+                    .diawlalSupabase
+                    .from("profils")
+                    .select(
+                        "nom_complet, email, telephone, objectif_financier"
+                    )
+                    .eq(
+                        "id",
+                        utilisateurConnecte.id
+                    )
+                    .maybeSingle();
+
+
+            if (error) {
+
+                console.error(error);
+
+                afficherMessage(
+                    "Erreur lors du chargement du profil.",
+                    "erreur"
+                );
+
+                return;
+
+            }
+
+
+            const nom =
+                data?.nom_complet
+                ||
+                utilisateurConnecte
+                    .user_metadata
+                    ?.nom_complet
+                ||
+                "";
+
+
+            const email =
+                data?.email
+                ||
+                utilisateurConnecte.email
+                ||
+                "";
+
+
+            const telephone =
+                data?.telephone
+                || "";
+
+
+            const objectif =
+                data?.objectif_financier
+                || "";
+
+
+            document
+                .getElementById(
+                    "nomComplet"
+                )
+                .value =
+                nom;
+
+
+            document
+                .getElementById(
+                    "email"
+                )
+                .value =
+                email;
+
+
+            document
+                .getElementById(
+                    "telephone"
+                )
+                .value =
+                telephone;
+
+
+            document
+                .getElementById(
+                    "objectifFinancier"
+                )
+                .value =
+                objectif;
+
+        }
+
+
+        async function enregistrerProfil() {
+
+            const nom =
+                document
+                    .getElementById(
+                        "nomComplet"
+                    )
+                    .value
+                    .trim();
+
+
+            const telephone =
+                document
+                    .getElementById(
+                        "telephone"
+                    )
+                    .value
+                    .trim();
+
+
+            const objectif =
+                document
+                    .getElementById(
+                        "objectifFinancier"
+                    )
+                    .value
+                    .trim();
+
+
+            if (nom === "") {
+
+                afficherMessage(
+                    "Le nom complet est obligatoire.",
+                    "erreur"
+                );
+
+                return;
+
+            }
+
+
+            const bouton =
+                document.getElementById(
+                    "boutonEnregistrer"
+                );
+
+
+            bouton.disabled = true;
+
+            bouton.textContent =
+                "Enregistrement...";
+
+
+            const {
+                error: profilError
+            } =
+                await window
+                    .diawlalSupabase
+                    .from("profils")
+                    .upsert(
+                        {
+                            id:
+                                utilisateurConnecte.id,
+
+                            nom_complet:
+                                nom,
+
+                            email:
+                                utilisateurConnecte.email,
+
+                            telephone:
+                                telephone || null,
+
+                            objectif_financier:
+                                objectif || null
+                        },
+                        {
+                            onConflict:
+                                "id"
+                        }
+                    );
+
+
+            if (profilError) {
+
+                bouton.disabled = false;
+
+                bouton.textContent =
+                    "Enregistrer les modifications";
+
+
+                afficherMessage(
+                    "Erreur : "
+                    + profilError.message,
+                    "erreur"
+                );
+
+                return;
+
+            }
+
+
+            const {
+                error: authError
+            } =
+                await window
+                    .diawlalSupabase
+                    .auth
+                    .updateUser(
+                        {
+                            data: {
+                                nom_complet:
+                                    nom
+                            }
+                        }
+                    );
+
+
+            bouton.disabled = false;
+
+            bouton.textContent =
+                "Enregistrer les modifications";
+
+
+            if (authError) {
+
+                console.error(
+                    authError
+                );
+
+            }
+
+
+            afficherMessage(
+                "Profil enregistré avec succès.",
+                "succes"
+            );
+
+        }
+
+
+        async function demarrer() {
+
+            const sessionValide =
+                await verifierSession();
+
+
+            if (!sessionValide) {
+
+                return;
+
+            }
+
+
+            await chargerProfil();
+
+        }
+
+
+        demarrer();
+
     </script>
 
 </body>

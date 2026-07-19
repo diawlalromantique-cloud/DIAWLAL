@@ -3,41 +3,275 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
     <title>Alertes - DIAWLAL</title>
-    <link rel="stylesheet" href="style.css">
 
     <style>
-        .alertes-page {
-            width: min(900px, 92%);
-            margin: 0 auto;
-            padding: 50px 0;
+        :root {
+            --or: #d4af37;
+            --or-clair: #f4d76b;
+            --or-fonce: #9d7515;
+
+            --noir: #080808;
+            --noir-doux: #111111;
+
+            --blanc: #f2f2f2;
+            --gris: #b8b8b8;
+
+            --vert: #22c55e;
+            --rouge: #ef4444;
+            --orange: #f59e0b;
+
+            --bordure: rgba(212, 175, 55, 0.48);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            min-height: 100vh;
+
+            font-family: Arial, Helvetica, sans-serif;
+            color: var(--blanc);
+
+            background:
+                radial-gradient(
+                    circle at top left,
+                    rgba(212, 175, 55, 0.10),
+                    transparent 28%
+                ),
+                linear-gradient(
+                    135deg,
+                    #080808,
+                    #111111,
+                    #181818
+                );
+
+            background-attachment: fixed;
+        }
+
+        nav {
+            width: min(1200px, 95%);
+            margin: auto;
+            padding: 24px 10px;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+
+            border-bottom:
+                1px solid rgba(212, 175, 55, 0.18);
+        }
+
+        .logo {
+            color: var(--or);
+
+            font-size: 30px;
+            font-weight: 900;
+            letter-spacing: 2px;
+        }
+
+        .menu {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 5px;
+        }
+
+        nav a {
+            padding: 9px 10px;
+
+            color: white;
+
+            border-radius: 8px;
+
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 700;
+        }
+
+        nav a:hover {
+            color: var(--or-clair);
+            background: rgba(212, 175, 55, 0.10);
+        }
+
+        .container {
+            width: min(950px, 92%);
+            margin: auto;
+            padding: 50px 0 70px;
+        }
+
+        .entete {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .entete h1 {
+            margin-bottom: 10px;
+
+            font-size: clamp(38px, 6vw, 58px);
+        }
+
+        .entete p {
+            color: var(--gris);
+            font-size: 18px;
+        }
+
+        .resume {
+            margin-bottom: 25px;
+            padding: 22px;
+
+            text-align: center;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    #202020,
+                    #111111
+                );
+
+            border:
+                1px solid var(--bordure);
+
+            border-radius: 18px;
+        }
+
+        .resume strong {
+            color: var(--or-clair);
+            font-size: 24px;
+        }
+
+        .liste-alertes {
+            display: grid;
+            gap: 18px;
         }
 
         .alerte {
-            background: white;
-            color: #1f2937;
             padding: 24px;
-            border-radius: 16px;
-            margin-bottom: 18px;
-            border-left: 7px solid #f59e0b;
-        }
 
-        .alerte h2 {
-            color: #1e3a5f;
-            margin-bottom: 10px;
-        }
+            background:
+                linear-gradient(
+                    145deg,
+                    #202020,
+                    #111111
+                );
 
-        .alerte.importante {
-            border-left-color: #dc2626;
-        }
+            border:
+                1px solid var(--bordure);
 
-        .alerte.conseil {
-            border-left-color: #2563eb;
+            border-radius: 18px;
+
+            transition: 0.25s;
         }
 
         .alerte.lue {
             opacity: 0.55;
+        }
+
+        .alerte-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+
+            margin-bottom: 14px;
+        }
+
+        .alerte h2 {
+            color: var(--or-clair);
+            font-size: 23px;
+        }
+
+        .badge {
+            padding: 6px 10px;
+
+            border-radius: 999px;
+
+            font-size: 12px;
+            font-weight: 900;
+        }
+
+        .badge-info {
+            color: #dbeafe;
+            background: rgba(59, 130, 246, 0.20);
+        }
+
+        .badge-attention {
+            color: #fef3c7;
+            background: rgba(245, 158, 11, 0.20);
+        }
+
+        .badge-succes {
+            color: #dcfce7;
+            background: rgba(34, 197, 94, 0.20);
+        }
+
+        .alerte p {
+            margin-bottom: 18px;
+
+            color: var(--gris);
+            line-height: 1.6;
+        }
+
+        .bouton {
+            width: 100%;
+            padding: 13px;
+
+            color: #111111;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    var(--or-clair),
+                    var(--or),
+                    var(--or-fonce)
+                );
+
+            border: none;
+            border-radius: 10px;
+
+            font-size: 15px;
+            font-weight: 900;
+
+            cursor: pointer;
+        }
+
+        .bouton-secondaire {
+            margin-top: 20px;
+
+            color: white;
+            background: #252525;
+
+            border:
+                1px solid rgba(212, 175, 55, 0.35);
+        }
+
+        .chargement {
+            padding: 30px;
+            text-align: center;
+            color: var(--gris);
+        }
+
+        @media (max-width: 760px) {
+
+            nav {
+                flex-direction: column;
+            }
+
+            .alerte-header {
+                align-items: flex-start;
+                flex-direction: column;
+            }
         }
     </style>
 </head>
@@ -45,79 +279,756 @@
 <body>
 
     <nav>
-        <div class="logo">DIAWLAL</div>
 
-        <div>
-            <a href="dashboard.html">Tableau de bord</a>
-            <a href="academy.html">Academy</a>
-            <a href="portefeuille.html">Portefeuille</a>
-            <a href="alertes.html">Alertes</a>
-            <a href="profil.html">Profil</a>
+        <div class="logo">
+            DIAWLAL
         </div>
+
+        <div class="menu">
+
+            <a href="dashboard.html">
+                Tableau de bord
+            </a>
+
+            <a href="academy.html">
+                Academy
+            </a>
+
+            <a href="portefeuille.html">
+                Portefeuille
+            </a>
+
+            <a href="objectifs.html">
+                Objectifs
+            </a>
+
+            <a href="alertes.html">
+                Alertes
+            </a>
+
+            <a href="profil.html">
+                Profil
+            </a>
+
+        </div>
+
     </nav>
 
-    <main class="alertes-page">
 
-        <h1>Mes alertes</h1>
+    <main class="container">
 
-        <div class="alerte importante" id="alerte1">
-            <h2>Réserve de sécurité</h2>
+        <section class="entete">
+
+            <h1>
+                Mes alertes
+            </h1>
+
             <p>
-                Avant d’investir, assurez-vous de disposer d’une réserve
-                pour les dépenses imprévues.
+                DIAWLAL analyse votre situation pour vous aider à rester attentif à vos finances.
             </p>
-            <button onclick="marquerLue('alerte1')">
-                Marquer comme lue
-            </button>
-        </div>
 
-        <div class="alerte conseil" id="alerte2">
-            <h2>Academy</h2>
-            <p>
-                Continuez vos leçons afin d’améliorer votre progression
-                financière.
-            </p>
-            <button onclick="marquerLue('alerte2')">
-                Marquer comme lue
-            </button>
-        </div>
+        </section>
 
-        <div class="alerte" id="alerte3">
-            <h2>Portefeuille</h2>
-            <p>
-                Pensez à enregistrer régulièrement vos revenus et vos dépenses.
-            </p>
-            <button onclick="marquerLue('alerte3')">
-                Marquer comme lue
-            </button>
-        </div>
+
+        <section class="resume">
+
+            Alertes non lues :
+
+            <strong id="nombreNonLues">
+                0
+            </strong>
+
+        </section>
+
+
+        <section
+            id="listeAlertes"
+            class="liste-alertes"
+        >
+
+            <div class="chargement">
+                Analyse de votre situation...
+            </div>
+
+        </section>
+
+
+        <button
+            class="bouton bouton-secondaire"
+            onclick="toutMarquerCommeLu()"
+        >
+            Tout marquer comme lu
+        </button>
 
     </main>
 
-    <footer>
-        <p>© 2026 DIAWLAL — Comprendre. Analyser. Évoluer.</p>
-    </footer>
+
+    <script
+        src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"
+    ></script>
+
+    <script src="supabase.js"></script>
+
 
     <script>
-        function chargerAlertes() {
-            ["alerte1", "alerte2", "alerte3"].forEach(id => {
-                if (
-                    localStorage.getItem("diawlal_" + id) === "lue"
-                ) {
-                    document.getElementById(id).classList.add("lue");
+
+        let utilisateurConnecte = null;
+
+        let alertes = [];
+
+
+        function formaterMontant(montant) {
+
+            return (
+                Number(montant || 0)
+                    .toLocaleString("fr-FR")
+                + " FCFA"
+            );
+
+        }
+
+
+        async function verifierSession() {
+
+            const {
+                data,
+                error
+            } =
+                await window
+                    .diawlalSupabase
+                    .auth
+                    .getSession();
+
+
+            if (
+                error ||
+                !data.session
+            ) {
+
+                window.location.href =
+                    "connexion.html";
+
+                return false;
+
+            }
+
+
+            utilisateurConnecte =
+                data.session.user;
+
+
+            return true;
+
+        }
+
+
+        async function analyserSituation() {
+
+            let capital = 0;
+
+            let revenus = 0;
+
+            let depenses = 0;
+
+            let nombreObjectifs = 0;
+
+            let progression = 0;
+
+
+            /*
+            ================================
+            CAPITAL
+            ================================
+            */
+
+            const {
+                data: portefeuille
+            } =
+                await window
+                    .diawlalSupabase
+                    .from("portefeuilles")
+                    .select("capital_initial")
+                    .eq(
+                        "user_id",
+                        utilisateurConnecte.id
+                    )
+                    .maybeSingle();
+
+
+            if (portefeuille) {
+
+                capital =
+                    Number(
+                        portefeuille.capital_initial
+                    ) || 0;
+
+            }
+
+
+            /*
+            ================================
+            OPÉRATIONS
+            ================================
+            */
+
+            const {
+                data: operations
+            } =
+                await window
+                    .diawlalSupabase
+                    .from("operations")
+                    .select(
+                        "type_operation, montant"
+                    )
+                    .eq(
+                        "user_id",
+                        utilisateurConnecte.id
+                    );
+
+
+            if (operations) {
+
+                operations.forEach(
+                    function(operation) {
+
+                        const montant =
+                            Number(
+                                operation.montant
+                            ) || 0;
+
+
+                        if (
+                            operation.type_operation
+                            === "revenu"
+                        ) {
+
+                            revenus += montant;
+
+                        }
+
+
+                        if (
+                            operation.type_operation
+                            === "depense"
+                        ) {
+
+                            depenses += montant;
+
+                        }
+
+                    }
+                );
+
+            }
+
+
+            /*
+            ================================
+            OBJECTIFS
+            ================================
+            */
+
+            const {
+                data: objectifs
+            } =
+                await window
+                    .diawlalSupabase
+                    .from("objectifs")
+                    .select("id")
+                    .eq(
+                        "user_id",
+                        utilisateurConnecte.id
+                    );
+
+
+            nombreObjectifs =
+                objectifs
+                ? objectifs.length
+                : 0;
+
+
+            /*
+            ================================
+            ACADEMY
+            ================================
+            */
+
+            const {
+                data: academy
+            } =
+                await window
+                    .diawlalSupabase
+                    .from(
+                        "progression_academy"
+                    )
+                    .select("progression")
+                    .eq(
+                        "user_id",
+                        utilisateurConnecte.id
+                    )
+                    .maybeSingle();
+
+
+            if (academy) {
+
+                progression =
+                    Number(
+                        academy.progression
+                    ) || 0;
+
+            }
+
+
+            const solde =
+                capital
+                + revenus
+                - depenses;
+
+
+            /*
+            ================================
+            ALERTE 1 : SITUATION FINANCIÈRE
+            ================================
+            */
+
+            let messageFinance = "";
+
+            let typeFinance = "info";
+
+
+            if (solde < 0) {
+
+                messageFinance =
+                    "Votre solde est négatif de "
+                    + formaterMontant(
+                        Math.abs(solde)
+                    )
+                    + ". Réduisez vos dépenses ou augmentez vos revenus.";
+
+                typeFinance =
+                    "attention";
+
+            }
+
+            else if (
+                depenses > revenus
+                &&
+                depenses > 0
+            ) {
+
+                messageFinance =
+                    "Vos dépenses sont actuellement supérieures à vos revenus. Votre solde reste à "
+                    + formaterMontant(solde)
+                    + ", mais surveillez cette tendance.";
+
+                typeFinance =
+                    "attention";
+
+            }
+
+            else if (
+                revenus > 0
+                ||
+                capital > 0
+            ) {
+
+                messageFinance =
+                    "Votre solde disponible est de "
+                    + formaterMontant(solde)
+                    + ". Continuez à suivre régulièrement vos revenus et vos dépenses.";
+
+                typeFinance =
+                    "succes";
+
+            }
+
+            else {
+
+                messageFinance =
+                    "Votre portefeuille est encore vide. Ajoutez votre capital, vos revenus et vos dépenses pour recevoir une meilleure analyse.";
+
+                typeFinance =
+                    "info";
+
+            }
+
+
+            /*
+            ================================
+            ALERTE 2 : OBJECTIFS
+            ================================
+            */
+
+            let messageObjectif = "";
+
+            let typeObjectif = "info";
+
+
+            if (nombreObjectifs === 0) {
+
+                messageObjectif =
+                    "Vous n'avez encore créé aucun objectif financier. Définir un objectif peut vous aider à mieux organiser votre épargne.";
+
+                typeObjectif =
+                    "attention";
+
+            }
+
+            else {
+
+                messageObjectif =
+                    "Vous suivez actuellement "
+                    + nombreObjectifs
+                    + (
+                        nombreObjectifs > 1
+                        ? " objectifs financiers."
+                        : " objectif financier."
+                    )
+                    + " Pensez à mettre à jour régulièrement votre épargne.";
+
+                typeObjectif =
+                    "succes";
+
+            }
+
+
+            /*
+            ================================
+            ALERTE 3 : ACADEMY
+            ================================
+            */
+
+            let messageAcademy = "";
+
+            let typeAcademy = "info";
+
+
+            if (progression >= 100) {
+
+                messageAcademy =
+                    "Bravo ! Vous avez terminé 100 % des leçons disponibles dans DIAWLAL Academy.";
+
+                typeAcademy =
+                    "succes";
+
+            }
+
+            else if (progression > 0) {
+
+                messageAcademy =
+                    "Votre progression Academy est de "
+                    + progression
+                    + " %. Continuez votre apprentissage pour renforcer vos connaissances financières.";
+
+                typeAcademy =
+                    "info";
+
+            }
+
+            else {
+
+                messageAcademy =
+                    "Vous n'avez pas encore commencé les leçons DIAWLAL Academy. Une première leçon peut déjà vous aider à mieux comprendre votre budget.";
+
+                typeAcademy =
+                    "attention";
+
+            }
+
+
+            alertes = [
+
+                {
+                    id: 1,
+
+                    titre:
+                        "Situation financière",
+
+                    message:
+                        messageFinance,
+
+                    type:
+                        typeFinance
+                },
+
+                {
+                    id: 2,
+
+                    titre:
+                        "Objectifs financiers",
+
+                    message:
+                        messageObjectif,
+
+                    type:
+                        typeObjectif
+                },
+
+                {
+                    id: 3,
+
+                    titre:
+                        "DIAWLAL Academy",
+
+                    message:
+                        messageAcademy,
+
+                    type:
+                        typeAcademy
                 }
-            });
+
+            ];
+
+
+            afficherAlertes();
+
         }
 
-        function marquerLue(id) {
-            localStorage.setItem("diawlal_" + id, "lue");
 
-            document.getElementById(id).classList.add("lue");
+        function obtenirBadge(type) {
 
-            alert("Alerte marquée comme lue.");
+            if (type === "attention") {
+
+                return {
+                    classe:
+                        "badge-attention",
+
+                    texte:
+                        "À surveiller"
+                };
+
+            }
+
+
+            if (type === "succes") {
+
+                return {
+                    classe:
+                        "badge-succes",
+
+                    texte:
+                        "Bon progrès"
+                };
+
+            }
+
+
+            return {
+                classe:
+                    "badge-info",
+
+                texte:
+                    "Information"
+            };
+
         }
 
-        chargerAlertes();
+
+        function afficherAlertes() {
+
+            const conteneur =
+                document.getElementById(
+                    "listeAlertes"
+                );
+
+
+            conteneur.innerHTML = "";
+
+
+            alertes.forEach(
+                function(alerte) {
+
+                    const cle =
+                        "diawlal_alerte"
+                        + alerte.id;
+
+
+                    const estLue =
+                        localStorage.getItem(
+                            cle
+                        ) === "lue";
+
+
+                    const badge =
+                        obtenirBadge(
+                            alerte.type
+                        );
+
+
+                    const element =
+                        document.createElement(
+                            "article"
+                        );
+
+
+                    element.className =
+                        "alerte"
+                        + (
+                            estLue
+                            ? " lue"
+                            : ""
+                        );
+
+
+                    element.innerHTML =
+                        `
+                        <div class="alerte-header">
+
+                            <h2>
+                                ${alerte.titre}
+                            </h2>
+
+                            <span
+                                class="badge ${badge.classe}"
+                            >
+                                ${badge.texte}
+                            </span>
+
+                        </div>
+
+                        <p>
+                            ${alerte.message}
+                        </p>
+
+                        <button
+                            class="bouton"
+                            onclick="basculerLecture(${alerte.id})"
+                        >
+                            ${
+                                estLue
+                                ? "Marquer comme non lue"
+                                : "Marquer comme lue"
+                            }
+                        </button>
+                        `;
+
+
+                    conteneur.appendChild(
+                        element
+                    );
+
+                }
+            );
+
+
+            actualiserCompteur();
+
+        }
+
+
+        function basculerLecture(id) {
+
+            const cle =
+                "diawlal_alerte"
+                + id;
+
+
+            const estLue =
+                localStorage.getItem(
+                    cle
+                ) === "lue";
+
+
+            if (estLue) {
+
+                localStorage.removeItem(
+                    cle
+                );
+
+            }
+
+            else {
+
+                localStorage.setItem(
+                    cle,
+                    "lue"
+                );
+
+            }
+
+
+            afficherAlertes();
+
+        }
+
+
+        function toutMarquerCommeLu() {
+
+            for (
+                let numero = 1;
+                numero <= 3;
+                numero++
+            ) {
+
+                localStorage.setItem(
+                    "diawlal_alerte"
+                    + numero,
+                    "lue"
+                );
+
+            }
+
+
+            afficherAlertes();
+
+        }
+
+
+        function actualiserCompteur() {
+
+            let nonLues = 0;
+
+
+            for (
+                let numero = 1;
+                numero <= 3;
+                numero++
+            ) {
+
+                if (
+                    localStorage.getItem(
+                        "diawlal_alerte"
+                        + numero
+                    ) !== "lue"
+                ) {
+
+                    nonLues++;
+
+                }
+
+            }
+
+
+            document
+                .getElementById(
+                    "nombreNonLues"
+                )
+                .textContent =
+                nonLues;
+
+        }
+
+
+        async function demarrer() {
+
+            const sessionValide =
+                await verifierSession();
+
+
+            if (!sessionValide) {
+
+                return;
+
+            }
+
+
+            await analyserSituation();
+
+        }
+
+
+        demarrer();
+
     </script>
 
 </body>

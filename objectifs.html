@@ -19,26 +19,19 @@
 
             --noir: #080808;
             --noir-doux: #111111;
-            --carte: #1f1f1f;
 
             --blanc: #f2f2f2;
             --gris: #b8b8b8;
 
-            --vert: #22c55e;
             --rouge: #ef4444;
 
-            --bordure: rgba(212, 175, 55, 0.45);
-            --ombre: 0 18px 45px rgba(0, 0, 0, 0.48);
+            --bordure: rgba(212, 175, 55, 0.48);
         }
 
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-        }
-
-        html {
-            scroll-behavior: smooth;
         }
 
         body {
@@ -50,8 +43,8 @@
             background:
                 radial-gradient(
                     circle at top left,
-                    rgba(212, 175, 55, 0.12),
-                    transparent 30%
+                    rgba(212, 175, 55, 0.10),
+                    transparent 28%
                 ),
                 linear-gradient(
                     135deg,
@@ -64,8 +57,8 @@
         }
 
         nav {
-            width: min(1150px, 94%);
-            margin: 0 auto;
+            width: min(1200px, 95%);
+            margin: auto;
             padding: 24px 10px;
 
             display: flex;
@@ -73,7 +66,8 @@
             align-items: center;
             gap: 20px;
 
-            border-bottom: 1px solid rgba(212, 175, 55, 0.18);
+            border-bottom:
+                1px solid rgba(212, 175, 55, 0.18);
         }
 
         .logo {
@@ -81,44 +75,38 @@
 
             font-size: 30px;
             font-weight: 900;
-            letter-spacing: 3px;
-
-            text-shadow:
-                0 0 18px rgba(212, 175, 55, 0.24);
+            letter-spacing: 2px;
         }
 
-        nav div:last-child {
+        .menu {
             display: flex;
-            flex-wrap: wrap;
+            align-items: center;
             justify-content: center;
-            gap: 8px;
+            flex-wrap: wrap;
+            gap: 5px;
         }
 
         nav a {
-            padding: 9px 11px;
+            padding: 9px 10px;
 
             color: white;
-            text-decoration: none;
-            font-weight: 700;
 
             border-radius: 8px;
 
-            transition:
-                color 0.25s ease,
-                background 0.25s ease,
-                transform 0.25s ease;
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 700;
         }
 
         nav a:hover {
             color: var(--or-clair);
-            background: rgba(212, 175, 55, 0.1);
-            transform: translateY(-2px);
+            background: rgba(212, 175, 55, 0.10);
         }
 
         .container {
             width: min(1050px, 92%);
-            margin: 0 auto;
-            padding: 45px 0 70px;
+            margin: auto;
+            padding: 50px 0 70px;
         }
 
         .entete {
@@ -129,89 +117,58 @@
         .entete h1 {
             margin-bottom: 10px;
 
-            font-size: clamp(38px, 6vw, 54px);
-            line-height: 1.1;
+            font-size: clamp(38px, 6vw, 58px);
         }
 
         .entete p {
             color: var(--gris);
             font-size: 18px;
-            line-height: 1.6;
         }
 
-        .bloc,
-        .objectif,
-        .message-vide {
-            position: relative;
-            overflow: hidden;
-
-            color: var(--blanc);
+        .bloc {
+            margin-bottom: 28px;
+            padding: 28px;
 
             background:
                 linear-gradient(
                     145deg,
-                    #232323,
+                    #202020,
                     #111111
                 );
 
-            border: 1px solid var(--bordure);
+            border:
+                1px solid var(--bordure);
+
             border-radius: 20px;
-
-            box-shadow: var(--ombre);
         }
 
-        .bloc::before,
-        .objectif::before,
-        .message-vide::before {
-            content: "";
-
-            position: absolute;
-            top: 0;
-            left: 0;
-
-            width: 100%;
-            height: 3px;
-
-            background:
-                linear-gradient(
-                    90deg,
-                    transparent,
-                    var(--or),
-                    transparent
-                );
-        }
-
-        .bloc {
-            padding: 28px;
-        }
-
-        .bloc h2,
-        .objectif h2 {
+        .bloc h2 {
             margin-bottom: 20px;
             color: var(--or-clair);
         }
 
+        label {
+            display: block;
+            margin: 14px 0 7px;
+
+            color: var(--or-clair);
+            font-weight: 700;
+        }
+
         input {
             width: 100%;
-            padding: 15px;
-            margin-bottom: 15px;
+            padding: 14px;
 
-            color: var(--blanc);
+            color: white;
             background: #0d0d0d;
 
-            border: 1px solid rgba(212, 175, 55, 0.32);
+            border:
+                1px solid rgba(212, 175, 55, 0.35);
+
             border-radius: 10px;
 
             font-size: 16px;
             outline: none;
-
-            transition:
-                border-color 0.2s ease,
-                box-shadow 0.2s ease;
-        }
-
-        input::placeholder {
-            color: #777777;
         }
 
         input:focus {
@@ -222,8 +179,20 @@
         }
 
         button {
+            padding: 14px 18px;
+
+            border: none;
+            border-radius: 10px;
+
+            font-size: 16px;
+            font-weight: 900;
+
+            cursor: pointer;
+        }
+
+        .bouton-principal {
             width: 100%;
-            padding: 15px;
+            margin-top: 20px;
 
             color: #111111;
 
@@ -234,86 +203,87 @@
                     var(--or),
                     var(--or-fonce)
                 );
-
-            border: 1px solid rgba(244, 215, 107, 0.7);
-            border-radius: 10px;
-
-            font-size: 17px;
-            font-weight: 800;
-            cursor: pointer;
-
-            box-shadow:
-                0 10px 28px rgba(212, 175, 55, 0.22);
-
-            transition:
-                transform 0.25s ease,
-                filter 0.25s ease,
-                box-shadow 0.25s ease;
         }
 
-        button:hover {
-            transform: translateY(-2px);
-            filter: brightness(1.08);
-
-            box-shadow:
-                0 14px 34px rgba(212, 175, 55, 0.32);
-        }
-
-        .liste {
+        .liste-objectifs {
             display: grid;
-            grid-template-columns: repeat(2, minmax(0, 1fr));
-            gap: 20px;
+            grid-template-columns:
+                repeat(2, minmax(0, 1fr));
 
-            margin-top: 25px;
+            gap: 20px;
         }
 
         .objectif {
             padding: 24px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    #202020,
+                    #111111
+                );
+
+            border:
+                1px solid var(--bordure);
+
+            border-radius: 18px;
         }
 
-        .montants {
+        .objectif h3 {
+            margin-bottom: 18px;
+
+            color: var(--or-clair);
+            font-size: 25px;
+        }
+
+        .infos {
             display: flex;
             justify-content: space-between;
             gap: 15px;
+            flex-wrap: wrap;
 
-            margin: 15px 0;
+            margin-bottom: 15px;
+        }
 
+        .infos span {
             color: var(--gris);
         }
 
-        .montants strong {
-            color: var(--or-clair);
+        .infos strong {
+            color: white;
         }
 
         .barre {
             width: 100%;
-            height: 18px;
-            margin: 15px 0;
+            height: 14px;
+
+            margin: 18px 0 12px;
 
             overflow: hidden;
 
             background: #0d0d0d;
 
-            border: 1px solid rgba(212, 175, 55, 0.25);
-            border-radius: 20px;
+            border:
+                1px solid rgba(212, 175, 55, 0.30);
+
+            border-radius: 999px;
         }
 
-        .progression {
+        .barre-interieure {
             height: 100%;
 
             background:
                 linear-gradient(
                     90deg,
-                    var(--or-fonce),
-                    var(--or),
-                    var(--or-clair)
+                    var(--or-clair),
+                    var(--or)
                 );
 
-            transition: width 0.3s ease;
+            border-radius: 999px;
         }
 
         .pourcentage {
-            margin-bottom: 15px;
+            margin-bottom: 18px;
 
             color: var(--or-clair);
 
@@ -321,46 +291,82 @@
             font-weight: 900;
         }
 
-        .boutons {
-            display: flex;
+        .actions {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
             gap: 10px;
-
-            margin-top: 15px;
         }
 
-        .supprimer {
-            color: white;
+        .ajouter {
+            color: #111111;
 
             background:
                 linear-gradient(
                     135deg,
-                    #ef4444,
-                    #991b1b
+                    var(--or-clair),
+                    var(--or)
                 );
-
-            border-color: rgba(239, 68, 68, 0.55);
         }
 
-        .message-vide {
-            margin-top: 25px;
+        .supprimer {
+            color: white;
+            background: #be123c;
+        }
+
+        .message {
+            display: none;
+
+            margin-top: 16px;
+            padding: 13px;
+
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .succes {
+            display: block;
+
+            color: #bbf7d0;
+            background: rgba(34, 197, 94, 0.14);
+
+            border:
+                1px solid rgba(34, 197, 94, 0.45);
+        }
+
+        .erreur {
+            display: block;
+
+            color: #fecaca;
+            background: rgba(239, 68, 68, 0.14);
+
+            border:
+                1px solid rgba(239, 68, 68, 0.45);
+        }
+
+        .vide {
             padding: 30px;
 
             color: var(--gris);
             text-align: center;
+
+            border:
+                1px dashed rgba(212, 175, 55, 0.30);
+
+            border-radius: 14px;
         }
 
-        @media (max-width: 700px) {
+        @media (max-width: 760px) {
+
             nav {
                 flex-direction: column;
             }
 
-            .liste {
+            .liste-objectifs {
                 grid-template-columns: 1fr;
             }
 
-            .montants,
-            .boutons {
-                flex-direction: column;
+            .actions {
+                grid-template-columns: 1fr;
             }
         }
     </style>
@@ -369,33 +375,66 @@
 <body>
 
     <nav>
+
         <div class="logo">
             DIAWLAL
         </div>
 
-        <div>
-            <a href="dashboard.html">Tableau de bord</a>
-            <a href="academy.html">Academy</a>
-            <a href="portefeuille.html">Portefeuille</a>
-            <a href="objectifs.html">Objectifs</a>
-            <a href="alertes.html">Alertes</a>
-            <a href="profil.html">Profil</a>
+        <div class="menu">
+
+            <a href="dashboard.html">
+                Tableau de bord
+            </a>
+
+            <a href="academy.html">
+                Academy
+            </a>
+
+            <a href="portefeuille.html">
+                Portefeuille
+            </a>
+
+            <a href="objectifs.html">
+                Objectifs
+            </a>
+
+            <a href="alertes.html">
+                Alertes
+            </a>
+
+            <a href="profil.html">
+                Profil
+            </a>
+
         </div>
+
     </nav>
+
 
     <main class="container">
 
         <section class="entete">
-            <h1>Mes objectifs</h1>
+
+            <h1>
+                Mes objectifs
+            </h1>
 
             <p>
                 Créez et suivez vos objectifs financiers.
             </p>
+
         </section>
+
 
         <section class="bloc">
 
-            <h2>Créer un objectif</h2>
+            <h2>
+                Créer un objectif
+            </h2>
+
+            <label for="nomObjectif">
+                Nom de l'objectif
+            </label>
 
             <input
                 type="text"
@@ -403,283 +442,624 @@
                 placeholder="Exemple : Acheter une voiture"
             >
 
+
+            <label for="montantCible">
+                Montant cible en FCFA
+            </label>
+
             <input
                 type="number"
-                id="montantObjectif"
-                placeholder="Montant cible en FCFA"
+                id="montantCible"
                 min="1"
+                placeholder="Exemple : 2000000"
             >
+
+
+            <label for="montantActuel">
+                Montant déjà économisé
+            </label>
 
             <input
                 type="number"
                 id="montantActuel"
-                placeholder="Montant déjà économisé"
                 min="0"
+                placeholder="Exemple : 50000"
             >
 
+
             <button
-                type="button"
-                onclick="ajouterObjectif()"
+                class="bouton-principal"
+                id="boutonCreation"
+                onclick="creerObjectif()"
             >
                 Créer l'objectif
             </button>
 
+            <div
+                id="messageCreation"
+                class="message"
+            ></div>
+
         </section>
 
-        <section
-            id="listeObjectifs"
-            class="liste"
-        ></section>
 
-        <div
-            id="messageVide"
-            class="message-vide"
-        >
-            Aucun objectif enregistré.
-        </div>
+        <section>
+
+            <div
+                id="listeObjectifs"
+                class="liste-objectifs"
+            >
+                <p class="vide">
+                    Chargement...
+                </p>
+            </div>
+
+        </section>
 
     </main>
 
+
+    <script
+        src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"
+    ></script>
+
+    <script src="supabase.js"></script>
+
+
     <script>
-        let objectifs =
-            JSON.parse(
-                localStorage.getItem("diawlalObjectifs")
-            ) || [];
+
+        let utilisateurConnecte = null;
+
 
         function formaterMontant(montant) {
+
             return (
-                Number(montant).toLocaleString("fr-FR") +
-                " FCFA"
+                Number(montant || 0)
+                    .toLocaleString("fr-FR")
+                + " FCFA"
             );
+
         }
 
-        function sauvegarderObjectifs() {
-            localStorage.setItem(
-                "diawlalObjectifs",
-                JSON.stringify(objectifs)
-            );
+
+        function afficherMessage(
+            id,
+            texte,
+            type
+        ) {
+
+            const element =
+                document.getElementById(id);
+
+            element.textContent = texte;
+            element.className =
+                "message " + type;
+
         }
 
-        function ajouterObjectif() {
-            const nom =
-                document
-                    .getElementById("nomObjectif")
-                    .value
-                    .trim();
 
-            const montantCible =
-                Number(
-                    document
-                        .getElementById("montantObjectif")
-                        .value
-                );
+        async function verifierSession() {
 
-            const montantActuel =
-                Number(
-                    document
-                        .getElementById("montantActuel")
-                        .value
-                );
+            const {
+                data,
+                error
+            } =
+                await window
+                    .diawlalSupabase
+                    .auth
+                    .getSession();
+
 
             if (
-                nom === "" ||
-                montantCible <= 0 ||
-                montantActuel < 0 ||
-                isNaN(montantCible) ||
-                isNaN(montantActuel)
+                error ||
+                !data.session
             ) {
-                alert(
-                    "Veuillez remplir correctement tous les champs."
-                );
 
-                return;
+                window.location.href =
+                    "connexion.html";
+
+                return false;
+
             }
 
-            const nouvelObjectif = {
-                id: Date.now(),
-                nom: nom,
-                montantCible: montantCible,
-                montantActuel: montantActuel
-            };
 
-            objectifs.push(nouvelObjectif);
+            utilisateurConnecte =
+                data.session.user;
 
-            sauvegarderObjectifs();
+            return true;
 
-            document
-                .getElementById("nomObjectif")
-                .value = "";
-
-            document
-                .getElementById("montantObjectif")
-                .value = "";
-
-            document
-                .getElementById("montantActuel")
-                .value = "";
-
-            afficherObjectifs();
         }
 
-        function supprimerObjectif(id) {
-            const confirmation =
-                confirm(
-                    "Voulez-vous supprimer cet objectif ?"
-                );
 
-            if (!confirmation) {
-                return;
-            }
+        async function chargerObjectifs() {
 
-            objectifs =
-                objectifs.filter(
-                    function(objectif) {
-                        return objectif.id !== id;
-                    }
-                );
-
-            sauvegarderObjectifs();
-
-            afficherObjectifs();
-        }
-
-        function ajouterEpargne(id) {
-            const montant =
-                Number(
-                    prompt(
-                        "Combien souhaitez-vous ajouter ?"
+            const {
+                data,
+                error
+            } =
+                await window
+                    .diawlalSupabase
+                    .from("objectifs")
+                    .select(
+                        "id, nom, montant_cible, montant_actuel, created_at"
                     )
-                );
+                    .eq(
+                        "user_id",
+                        utilisateurConnecte.id
+                    )
+                    .order(
+                        "created_at",
+                        {
+                            ascending: false
+                        }
+                    );
 
-            if (
-                montant <= 0 ||
-                isNaN(montant)
-            ) {
-                return;
+
+            if (error) {
+
+                console.error(error);
+
+                return [];
+
             }
 
-            const objectif =
-                objectifs.find(
-                    function(objectif) {
-                        return objectif.id === id;
-                    }
-                );
 
-            if (!objectif) {
-                return;
-            }
+            return data || [];
 
-            objectif.montantActuel += montant;
-
-            sauvegarderObjectifs();
-
-            afficherObjectifs();
         }
 
-        function afficherObjectifs() {
-            const liste =
+
+        function afficherObjectifs(
+            objectifs
+        ) {
+
+            const conteneur =
                 document.getElementById(
                     "listeObjectifs"
                 );
 
-            const messageVide =
-                document.getElementById(
-                    "messageVide"
-                );
 
-            liste.innerHTML = "";
+            if (
+                !objectifs ||
+                objectifs.length === 0
+            ) {
 
-            if (objectifs.length === 0) {
-                messageVide.style.display = "block";
+                conteneur.innerHTML =
+                    `
+                    <p class="vide">
+                        Aucun objectif enregistré.
+                    </p>
+                    `;
+
                 return;
+
             }
 
-            messageVide.style.display = "none";
+
+            conteneur.innerHTML = "";
+
 
             objectifs.forEach(
                 function(objectif) {
-                    let pourcentage =
-                        Math.round(
-                            (
-                                objectif.montantActuel /
-                                objectif.montantCible
-                            ) * 100
-                        );
+
+                    const cible =
+                        Number(
+                            objectif.montant_cible
+                        ) || 0;
+
+
+                    const actuel =
+                        Number(
+                            objectif.montant_actuel
+                        ) || 0;
+
+
+                    let pourcentage = 0;
+
+
+                    if (cible > 0) {
+
+                        pourcentage =
+                            Math.round(
+                                (
+                                    actuel
+                                    / cible
+                                )
+                                * 100
+                            );
+
+                    }
+
 
                     pourcentage =
                         Math.min(
-                            pourcentage,
-                            100
+                            100,
+                            Math.max(
+                                0,
+                                pourcentage
+                            )
                         );
 
-                    const carte =
+
+                    const element =
                         document.createElement(
                             "article"
                         );
 
-                    carte.className =
+
+                    element.className =
                         "objectif";
 
-                    carte.innerHTML = `
-                        <h2>
-                            ${objectif.nom}
-                        </h2>
 
-                        <div class="montants">
+                    element.innerHTML =
+                        `
+                        <h3>
+                            ${objectif.nom}
+                        </h3>
+
+                        <div class="infos">
+
                             <span>
                                 Économisé :
                                 <strong>
-                                    ${formaterMontant(
-                                        objectif.montantActuel
-                                    )}
+                                    ${formaterMontant(actuel)}
                                 </strong>
                             </span>
 
                             <span>
                                 Objectif :
                                 <strong>
-                                    ${formaterMontant(
-                                        objectif.montantCible
-                                    )}
+                                    ${formaterMontant(cible)}
                                 </strong>
                             </span>
+
                         </div>
 
                         <div class="barre">
+
                             <div
-                                class="progression"
+                                class="barre-interieure"
                                 style="width: ${pourcentage}%"
                             ></div>
+
                         </div>
 
-                        <p class="pourcentage">
+                        <div class="pourcentage">
                             ${pourcentage} %
-                        </p>
+                        </div>
 
-                        <div class="boutons">
+                        <div class="actions">
+
                             <button
-                                type="button"
-                                onclick="ajouterEpargne(${objectif.id})"
+                                class="ajouter"
+                                onclick="ajouterEpargne('${objectif.id}', ${actuel})"
                             >
                                 Ajouter de l'épargne
                             </button>
 
                             <button
-                                type="button"
                                 class="supprimer"
-                                onclick="supprimerObjectif(${objectif.id})"
+                                onclick="supprimerObjectif('${objectif.id}')"
                             >
                                 Supprimer
                             </button>
-                        </div>
-                    `;
 
-                    liste.appendChild(carte);
+                        </div>
+                        `;
+
+
+                    conteneur.appendChild(
+                        element
+                    );
+
                 }
             );
+
         }
 
-        afficherObjectifs();
+
+        async function actualiserObjectifs() {
+
+            const objectifs =
+                await chargerObjectifs();
+
+
+            afficherObjectifs(
+                objectifs
+            );
+
+        }
+
+
+        async function creerObjectif() {
+
+            const nom =
+                document
+                    .getElementById(
+                        "nomObjectif"
+                    )
+                    .value
+                    .trim();
+
+
+            const montantCible =
+                Number(
+                    document
+                        .getElementById(
+                            "montantCible"
+                        )
+                        .value
+                );
+
+
+            const montantActuel =
+                Number(
+                    document
+                        .getElementById(
+                            "montantActuel"
+                        )
+                        .value
+                    || 0
+                );
+
+
+            if (
+                nom === ""
+                ||
+                Number.isNaN(
+                    montantCible
+                )
+                ||
+                montantCible <= 0
+                ||
+                Number.isNaN(
+                    montantActuel
+                )
+                ||
+                montantActuel < 0
+            ) {
+
+                afficherMessage(
+                    "messageCreation",
+                    "Remplis correctement tous les champs.",
+                    "erreur"
+                );
+
+                return;
+
+            }
+
+
+            const bouton =
+                document.getElementById(
+                    "boutonCreation"
+                );
+
+
+            bouton.disabled = true;
+            bouton.textContent =
+                "Création...";
+
+
+            const {
+                error
+            } =
+                await window
+                    .diawlalSupabase
+                    .from("objectifs")
+                    .insert(
+                        {
+                            user_id:
+                                utilisateurConnecte.id,
+
+                            nom:
+                                nom,
+
+                            montant_cible:
+                                montantCible,
+
+                            montant_actuel:
+                                montantActuel
+                        }
+                    );
+
+
+            bouton.disabled = false;
+            bouton.textContent =
+                "Créer l'objectif";
+
+
+            if (error) {
+
+                afficherMessage(
+                    "messageCreation",
+                    "Erreur : "
+                    + error.message,
+                    "erreur"
+                );
+
+                return;
+
+            }
+
+
+            document
+                .getElementById(
+                    "nomObjectif"
+                )
+                .value = "";
+
+
+            document
+                .getElementById(
+                    "montantCible"
+                )
+                .value = "";
+
+
+            document
+                .getElementById(
+                    "montantActuel"
+                )
+                .value = "";
+
+
+            afficherMessage(
+                "messageCreation",
+                "Objectif créé.",
+                "succes"
+            );
+
+
+            await actualiserObjectifs();
+
+        }
+
+
+        async function ajouterEpargne(
+            idObjectif,
+            montantActuel
+        ) {
+
+            const valeur =
+                prompt(
+                    "Combien souhaitez-vous ajouter ?"
+                );
+
+
+            if (valeur === null) {
+
+                return;
+
+            }
+
+
+            const ajout =
+                Number(valeur);
+
+
+            if (
+                Number.isNaN(ajout)
+                ||
+                ajout <= 0
+            ) {
+
+                alert(
+                    "Entre un montant valide."
+                );
+
+                return;
+
+            }
+
+
+            const nouveauMontant =
+                Number(montantActuel)
+                + ajout;
+
+
+            const {
+                error
+            } =
+                await window
+                    .diawlalSupabase
+                    .from("objectifs")
+                    .update(
+                        {
+                            montant_actuel:
+                                nouveauMontant
+                        }
+                    )
+                    .eq(
+                        "id",
+                        idObjectif
+                    );
+
+
+            if (error) {
+
+                alert(
+                    "Erreur : "
+                    + error.message
+                );
+
+                return;
+
+            }
+
+
+            await actualiserObjectifs();
+
+        }
+
+
+        async function supprimerObjectif(
+            idObjectif
+        ) {
+
+            const confirmation =
+                confirm(
+                    "Supprimer cet objectif ?"
+                );
+
+
+            if (!confirmation) {
+
+                return;
+
+            }
+
+
+            const {
+                error
+            } =
+                await window
+                    .diawlalSupabase
+                    .from("objectifs")
+                    .delete()
+                    .eq(
+                        "id",
+                        idObjectif
+                    );
+
+
+            if (error) {
+
+                alert(
+                    "Erreur : "
+                    + error.message
+                );
+
+                return;
+
+            }
+
+
+            await actualiserObjectifs();
+
+        }
+
+
+        async function demarrer() {
+
+            const sessionValide =
+                await verifierSession();
+
+
+            if (!sessionValide) {
+
+                return;
+
+            }
+
+
+            await actualiserObjectifs();
+
+        }
+
+
+        demarrer();
+
     </script>
 
 </body>

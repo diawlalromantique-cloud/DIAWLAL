@@ -1,38 +1,881 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Academy - DIAWLAL</title>
-<style>
-:root{--or:#d4af37;--orc:#f4d76b;--orf:#9d7515;--txt:#f2f2f2;--muted:#b8b8b8}
-*{box-sizing:border-box;margin:0;padding:0}body{min-height:100vh;font-family:Arial,sans-serif;color:var(--txt);background:radial-gradient(circle at top left,rgba(212,175,55,.12),transparent 30%),linear-gradient(135deg,#080808,#111,#181818)}
-nav{width:min(1150px,94%);margin:auto;padding:24px 10px;display:flex;justify-content:space-between;align-items:center;gap:20px;border-bottom:1px solid rgba(212,175,55,.18)}
-.logo{color:var(--or);font-size:30px;font-weight:900;letter-spacing:3px}nav div:last-child{display:flex;flex-wrap:wrap;gap:8px}nav a{color:white;text-decoration:none;font-weight:700;padding:9px 11px;border-radius:8px}nav a:hover{color:var(--orc);background:rgba(212,175,55,.1)}
-.container{width:min(1100px,92%);margin:auto;padding:45px 0 70px}.entete{text-align:center;margin-bottom:30px}.entete h1{font-size:clamp(38px,6vw,54px);margin-bottom:10px}.entete p{color:var(--muted);font-size:18px;line-height:1.6}
-.progression-box,.lecon{position:relative;overflow:hidden;background:linear-gradient(145deg,#232323,#111);border:1px solid rgba(212,175,55,.45);border-radius:20px;box-shadow:0 18px 45px rgba(0,0,0,.48)}
-.progression-box{margin:25px 0;padding:24px}.progression-box h2,.lecon h2{color:var(--orc);margin-bottom:12px}
-.barre{width:100%;height:18px;overflow:hidden;background:#0d0d0d;border:1px solid rgba(212,175,55,.25);border-radius:20px}.barre-interieure{height:100%;width:0;background:linear-gradient(90deg,var(--orf),var(--or),var(--orc));transition:width .3s}
-#progressionTexte{display:block;margin-top:10px;color:var(--orc);font-weight:900}.lecons{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}.lecon{padding:26px}.lecon::before{content:"";position:absolute;top:0;left:0;width:100%;height:3px;background:linear-gradient(90deg,transparent,var(--or),transparent)}
-.lecon p{color:var(--muted);line-height:1.65;margin-bottom:16px}.lecon button{width:100%;padding:14px;color:#111;background:linear-gradient(135deg,var(--orc),var(--or),var(--orf));border:1px solid rgba(244,215,107,.7);border-radius:10px;font-size:16px;font-weight:800;cursor:pointer}.lecon.terminee{border-color:rgba(34,197,94,.7)}.lecon.terminee button{color:white;background:linear-gradient(135deg,#22c55e,#15803d)}
-@media(max-width:700px){nav{flex-direction:column}.lecons{grid-template-columns:1fr}}
-</style>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Academy - DIAWLAL</title>
+
+    <style>
+        :root {
+            --or: #d4af37;
+            --or-clair: #f4d76b;
+            --or-fonce: #9d7515;
+
+            --noir: #080808;
+            --noir-doux: #111111;
+
+            --blanc: #f2f2f2;
+            --gris: #b8b8b8;
+
+            --vert: #22c55e;
+
+            --bordure: rgba(212, 175, 55, 0.48);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            min-height: 100vh;
+
+            font-family: Arial, Helvetica, sans-serif;
+            color: var(--blanc);
+
+            background:
+                radial-gradient(
+                    circle at top left,
+                    rgba(212, 175, 55, 0.10),
+                    transparent 28%
+                ),
+                linear-gradient(
+                    135deg,
+                    #080808,
+                    #111111,
+                    #181818
+                );
+
+            background-attachment: fixed;
+        }
+
+        nav {
+            width: min(1200px, 95%);
+            margin: auto;
+            padding: 24px 10px;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+
+            border-bottom:
+                1px solid rgba(212, 175, 55, 0.18);
+        }
+
+        .logo {
+            color: var(--or);
+
+            font-size: 30px;
+            font-weight: 900;
+            letter-spacing: 2px;
+        }
+
+        .menu {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 5px;
+        }
+
+        nav a {
+            padding: 9px 10px;
+
+            color: white;
+
+            border-radius: 8px;
+
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 700;
+        }
+
+        nav a:hover {
+            color: var(--or-clair);
+            background: rgba(212, 175, 55, 0.10);
+        }
+
+        .container {
+            width: min(1050px, 92%);
+            margin: auto;
+            padding: 50px 0 70px;
+        }
+
+        .entete {
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .entete h1 {
+            margin-bottom: 10px;
+
+            font-size: clamp(38px, 6vw, 58px);
+        }
+
+        .entete p {
+            color: var(--gris);
+            font-size: 18px;
+        }
+
+        .progression-box {
+            margin-bottom: 28px;
+            padding: 28px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    #202020,
+                    #111111
+                );
+
+            border:
+                1px solid var(--bordure);
+
+            border-radius: 20px;
+        }
+
+        .progression-box h2 {
+            margin-bottom: 18px;
+            color: var(--or-clair);
+        }
+
+        .barre {
+            width: 100%;
+            height: 16px;
+
+            overflow: hidden;
+
+            background: #0d0d0d;
+
+            border:
+                1px solid rgba(212, 175, 55, 0.30);
+
+            border-radius: 999px;
+        }
+
+        .barre-interieure {
+            width: 0%;
+            height: 100%;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    var(--or-clair),
+                    var(--or)
+                );
+
+            border-radius: 999px;
+
+            transition: width 0.3s ease;
+        }
+
+        #progressionTexte {
+            display: block;
+            margin-top: 12px;
+
+            color: var(--or-clair);
+            font-weight: 900;
+        }
+
+        .lecons {
+            display: grid;
+            grid-template-columns:
+                repeat(2, minmax(0, 1fr));
+
+            gap: 20px;
+        }
+
+        .lecon {
+            padding: 24px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    #202020,
+                    #111111
+                );
+
+            border:
+                1px solid var(--bordure);
+
+            border-radius: 18px;
+        }
+
+        .lecon h2 {
+            margin-bottom: 14px;
+
+            color: var(--or-clair);
+            font-size: 24px;
+        }
+
+        .lecon p {
+            margin-bottom: 20px;
+
+            color: var(--gris);
+            line-height: 1.6;
+        }
+
+        .lecon button {
+            width: 100%;
+            padding: 14px;
+
+            color: #111111;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    var(--or-clair),
+                    var(--or),
+                    var(--or-fonce)
+                );
+
+            border: none;
+            border-radius: 10px;
+
+            font-size: 16px;
+            font-weight: 900;
+            cursor: pointer;
+        }
+
+        .lecon.terminee {
+            border-color:
+                rgba(34, 197, 94, 0.65);
+        }
+
+        .lecon.terminee button {
+            color: white;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #22c55e,
+                    #15803d
+                );
+        }
+
+        .message {
+            display: none;
+
+            margin-top: 16px;
+            padding: 13px;
+
+            text-align: center;
+
+            border-radius: 10px;
+        }
+
+        .succes {
+            display: block;
+
+            color: #bbf7d0;
+            background: rgba(34, 197, 94, 0.14);
+
+            border:
+                1px solid rgba(34, 197, 94, 0.45);
+        }
+
+        .erreur {
+            display: block;
+
+            color: #fecaca;
+            background: rgba(239, 68, 68, 0.14);
+
+            border:
+                1px solid rgba(239, 68, 68, 0.45);
+        }
+
+        @media (max-width: 760px) {
+
+            nav {
+                flex-direction: column;
+            }
+
+            .lecons {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
+
 <body>
-<nav><div class="logo">DIAWLAL</div><div><a href="dashboard.html">Tableau de bord</a><a href="academy.html">Academy</a><a href="portefeuille.html">Portefeuille</a><a href="objectifs.html">Objectifs</a><a href="alertes.html">Alertes</a><a href="profil.html">Profil</a></div></nav>
-<main class="container">
-<section class="entete"><h1>DIAWLAL Academy</h1><p>Apprenez les bases essentielles pour mieux gérer votre argent et faire évoluer vos projets.</p></section>
-<section class="progression-box"><h2>Votre progression</h2><div class="barre"><div id="barreProgression" class="barre-interieure"></div></div><span id="progressionTexte">0 % terminé</span></section>
-<section class="lecons">
-<article class="lecon" id="carteLecon1"><h2>Leçon 1 — Comprendre son budget</h2><p>Identifiez vos revenus, vos dépenses fixes et vos dépenses variables.</p><button onclick="basculerLecon(1)">Marquer comme terminée</button></article>
-<article class="lecon" id="carteLecon2"><h2>Leçon 2 — Épargner efficacement</h2><p>Fixez un objectif d’épargne réaliste et progressez régulièrement.</p><button onclick="basculerLecon(2)">Marquer comme terminée</button></article>
-<article class="lecon" id="carteLecon3"><h2>Leçon 3 — Gérer ses dépenses</h2><p>Réduisez les dépenses inutiles tout en protégeant vos besoins essentiels.</p><button onclick="basculerLecon(3)">Marquer comme terminée</button></article>
-<article class="lecon" id="carteLecon4"><h2>Leçon 4 — Préparer un projet</h2><p>Transformez une idée en objectif financier mesurable.</p><button onclick="basculerLecon(4)">Marquer comme terminée</button></article>
-</section>
-</main>
-<script>
-function finie(n){return localStorage.getItem("diawlalLecon"+n)==="oui"}
-function basculerLecon(n){localStorage.setItem("diawlalLecon"+n,finie(n)?"non":"oui");afficherProgression()}
-function afficherProgression(){let t=0;for(let n=1;n<=4;n++){const c=document.getElementById("carteLecon"+n),b=c.querySelector("button");if(finie(n)){t++;c.classList.add("terminee");b.textContent="Leçon terminée ✓"}else{c.classList.remove("terminee");b.textContent="Marquer comme terminée"}}const p=Math.round(t/4*100);barreProgression.style.width=p+"%";progressionTexte.textContent=p+" % terminé";localStorage.setItem("diawlalProgression",p)}
-afficherProgression();
-</script>
-</body></html>
+
+    <nav>
+
+        <div class="logo">
+            DIAWLAL
+        </div>
+
+        <div class="menu">
+
+            <a href="dashboard.html">
+                Tableau de bord
+            </a>
+
+            <a href="academy.html">
+                Academy
+            </a>
+
+            <a href="portefeuille.html">
+                Portefeuille
+            </a>
+
+            <a href="objectifs.html">
+                Objectifs
+            </a>
+
+            <a href="alertes.html">
+                Alertes
+            </a>
+
+            <a href="profil.html">
+                Profil
+            </a>
+
+        </div>
+
+    </nav>
+
+
+    <main class="container">
+
+        <section class="entete">
+
+            <h1>
+                DIAWLAL Academy
+            </h1>
+
+            <p>
+                Apprenez les bases essentielles pour mieux gérer votre argent.
+            </p>
+
+        </section>
+
+
+        <section class="progression-box">
+
+            <h2>
+                Votre progression
+            </h2>
+
+            <div class="barre">
+
+                <div
+                    id="barreProgression"
+                    class="barre-interieure"
+                ></div>
+
+            </div>
+
+            <span id="progressionTexte">
+                0 % terminé
+            </span>
+
+            <div
+                id="messageAcademy"
+                class="message"
+            ></div>
+
+        </section>
+
+
+        <section class="lecons">
+
+            <article
+                class="lecon"
+                id="carteLecon1"
+            >
+
+                <h2>
+                    Leçon 1 — Comprendre son budget
+                </h2>
+
+                <p>
+                    Identifiez vos revenus, vos dépenses fixes et vos dépenses variables.
+                </p>
+
+                <button
+                    onclick="basculerLecon(1)"
+                >
+                    Marquer comme terminée
+                </button>
+
+            </article>
+
+
+            <article
+                class="lecon"
+                id="carteLecon2"
+            >
+
+                <h2>
+                    Leçon 2 — Épargner efficacement
+                </h2>
+
+                <p>
+                    Fixez un objectif d’épargne réaliste et progressez régulièrement.
+                </p>
+
+                <button
+                    onclick="basculerLecon(2)"
+                >
+                    Marquer comme terminée
+                </button>
+
+            </article>
+
+
+            <article
+                class="lecon"
+                id="carteLecon3"
+            >
+
+                <h2>
+                    Leçon 3 — Gérer ses dépenses
+                </h2>
+
+                <p>
+                    Réduisez les dépenses inutiles tout en protégeant vos besoins essentiels.
+                </p>
+
+                <button
+                    onclick="basculerLecon(3)"
+                >
+                    Marquer comme terminée
+                </button>
+
+            </article>
+
+
+            <article
+                class="lecon"
+                id="carteLecon4"
+            >
+
+                <h2>
+                    Leçon 4 — Préparer un projet
+                </h2>
+
+                <p>
+                    Transformez une idée en objectif financier mesurable.
+                </p>
+
+                <button
+                    onclick="basculerLecon(4)"
+                >
+                    Marquer comme terminée
+                </button>
+
+            </article>
+
+        </section>
+
+    </main>
+
+
+    <script
+        src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"
+    ></script>
+
+    <script src="supabase.js"></script>
+
+
+    <script>
+
+        let utilisateurConnecte = null;
+
+        let progressionAcademy = {
+            lecon_1_terminee: false,
+            lecon_2_terminee: false,
+            lecon_3_terminee: false,
+            lecon_4_terminee: false,
+            progression: 0
+        };
+
+
+        function afficherMessage(
+            texte,
+            type
+        ) {
+
+            const element =
+                document.getElementById(
+                    "messageAcademy"
+                );
+
+            element.textContent = texte;
+
+            element.className =
+                "message " + type;
+
+        }
+
+
+        async function verifierSession() {
+
+            const {
+                data,
+                error
+            } =
+                await window
+                    .diawlalSupabase
+                    .auth
+                    .getSession();
+
+
+            if (
+                error ||
+                !data.session
+            ) {
+
+                window.location.href =
+                    "connexion.html";
+
+                return false;
+
+            }
+
+
+            utilisateurConnecte =
+                data.session.user;
+
+            return true;
+
+        }
+
+
+        async function chargerProgression() {
+
+            const {
+                data,
+                error
+            } =
+                await window
+                    .diawlalSupabase
+                    .from(
+                        "progression_academy"
+                    )
+                    .select(
+                        "lecon_1_terminee, lecon_2_terminee, lecon_3_terminee, lecon_4_terminee, progression"
+                    )
+                    .eq(
+                        "user_id",
+                        utilisateurConnecte.id
+                    )
+                    .maybeSingle();
+
+
+            if (error) {
+
+                console.error(error);
+
+                afficherMessage(
+                    "Erreur lors du chargement de la progression.",
+                    "erreur"
+                );
+
+                return;
+
+            }
+
+
+            if (data) {
+
+                progressionAcademy = data;
+
+            }
+            else {
+
+                const {
+                    error: creationError
+                } =
+                    await window
+                        .diawlalSupabase
+                        .from(
+                            "progression_academy"
+                        )
+                        .insert(
+                            {
+                                user_id:
+                                    utilisateurConnecte.id
+                            }
+                        );
+
+
+                if (creationError) {
+
+                    console.error(
+                        creationError
+                    );
+
+                }
+
+            }
+
+
+            afficherProgression();
+
+        }
+
+
+        function afficherProgression() {
+
+            let terminees = 0;
+
+
+            for (
+                let numero = 1;
+                numero <= 4;
+                numero++
+            ) {
+
+                const cle =
+                    "lecon_"
+                    + numero
+                    + "_terminee";
+
+
+                const estTerminee =
+                    progressionAcademy[
+                        cle
+                    ] === true;
+
+
+                const carte =
+                    document.getElementById(
+                        "carteLecon"
+                        + numero
+                    );
+
+
+                const bouton =
+                    carte.querySelector(
+                        "button"
+                    );
+
+
+                if (estTerminee) {
+
+                    terminees++;
+
+                    carte.classList.add(
+                        "terminee"
+                    );
+
+                    bouton.textContent =
+                        "Leçon terminée ✓";
+
+                }
+                else {
+
+                    carte.classList.remove(
+                        "terminee"
+                    );
+
+                    bouton.textContent =
+                        "Marquer comme terminée";
+
+                }
+
+            }
+
+
+            const pourcentage =
+                Math.round(
+                    (
+                        terminees / 4
+                    ) * 100
+                );
+
+
+            progressionAcademy.progression =
+                pourcentage;
+
+
+            document
+                .getElementById(
+                    "barreProgression"
+                )
+                .style
+                .width =
+                pourcentage + "%";
+
+
+            document
+                .getElementById(
+                    "progressionTexte"
+                )
+                .textContent =
+                pourcentage
+                + " % terminé";
+
+        }
+
+
+        async function basculerLecon(
+            numero
+        ) {
+
+            const cle =
+                "lecon_"
+                + numero
+                + "_terminee";
+
+
+            progressionAcademy[
+                cle
+            ] =
+                !progressionAcademy[
+                    cle
+                ];
+
+
+            let terminees = 0;
+
+
+            for (
+                let i = 1;
+                i <= 4;
+                i++
+            ) {
+
+                const cleLecon =
+                    "lecon_"
+                    + i
+                    + "_terminee";
+
+
+                if (
+                    progressionAcademy[
+                        cleLecon
+                    ] === true
+                ) {
+
+                    terminees++;
+
+                }
+
+            }
+
+
+            const pourcentage =
+                Math.round(
+                    (
+                        terminees / 4
+                    ) * 100
+                );
+
+
+            progressionAcademy.progression =
+                pourcentage;
+
+
+            const miseAJour = {
+                user_id:
+                    utilisateurConnecte.id,
+
+                lecon_1_terminee:
+                    progressionAcademy
+                        .lecon_1_terminee,
+
+                lecon_2_terminee:
+                    progressionAcademy
+                        .lecon_2_terminee,
+
+                lecon_3_terminee:
+                    progressionAcademy
+                        .lecon_3_terminee,
+
+                lecon_4_terminee:
+                    progressionAcademy
+                        .lecon_4_terminee,
+
+                progression:
+                    pourcentage
+            };
+
+
+            const {
+                error
+            } =
+                await window
+                    .diawlalSupabase
+                    .from(
+                        "progression_academy"
+                    )
+                    .upsert(
+                        miseAJour,
+                        {
+                            onConflict:
+                                "user_id"
+                        }
+                    );
+
+
+            if (error) {
+
+                progressionAcademy[
+                    cle
+                ] =
+                    !progressionAcademy[
+                        cle
+                    ];
+
+
+                afficherMessage(
+                    "Erreur : "
+                    + error.message,
+                    "erreur"
+                );
+
+
+                afficherProgression();
+
+                return;
+
+            }
+
+
+            afficherProgression();
+
+
+            afficherMessage(
+                "Progression enregistrée.",
+                "succes"
+            );
+
+        }
+
+
+        async function demarrer() {
+
+            const sessionValide =
+                await verifierSession();
+
+
+            if (!sessionValide) {
+
+                return;
+
+            }
+
+
+            await chargerProgression();
+
+        }
+
+
+        demarrer();
+
+    </script>
+
+</body>
+
+</html>
