@@ -16,15 +16,8 @@
             --or: #d4af37;
             --or-clair: #f4d76b;
             --or-fonce: #9d7515;
-
-            --noir: #080808;
-            --noir-doux: #111111;
-
             --blanc: #f2f2f2;
             --gris: #b8b8b8;
-
-            --rouge: #ef4444;
-
             --bordure: rgba(212, 175, 55, 0.48);
         }
 
@@ -36,7 +29,6 @@
 
         body {
             min-height: 100vh;
-
             font-family: Arial, Helvetica, sans-serif;
             color: var(--blanc);
 
@@ -72,7 +64,6 @@
 
         .logo {
             color: var(--or);
-
             font-size: 30px;
             font-weight: 900;
             letter-spacing: 2px;
@@ -86,19 +77,26 @@
             gap: 5px;
         }
 
-        nav a {
+        nav a,
+        .deconnexion {
             padding: 9px 10px;
 
             color: white;
+            background: transparent;
 
+            border: none;
             border-radius: 8px;
 
             text-decoration: none;
             font-size: 15px;
             font-weight: 700;
+
+            cursor: pointer;
+            transition: 0.25s;
         }
 
-        nav a:hover {
+        nav a:hover,
+        .deconnexion:hover {
             color: var(--or-clair);
             background: rgba(212, 175, 55, 0.10);
         }
@@ -116,7 +114,6 @@
 
         .entete h1 {
             margin-bottom: 10px;
-
             font-size: clamp(38px, 6vw, 58px);
         }
 
@@ -136,9 +133,7 @@
                     #111111
                 );
 
-            border:
-                1px solid var(--bordure);
-
+            border: 1px solid var(--bordure);
             border-radius: 20px;
         }
 
@@ -162,9 +157,7 @@
             color: white;
             background: #0d0d0d;
 
-            border:
-                1px solid rgba(212, 175, 55, 0.35);
-
+            border: 1px solid rgba(212, 175, 55, 0.35);
             border-radius: 10px;
 
             font-size: 16px;
@@ -205,6 +198,11 @@
                 );
         }
 
+        .bouton-principal:disabled {
+            opacity: 0.6;
+            cursor: wait;
+        }
+
         .liste-objectifs {
             display: grid;
             grid-template-columns:
@@ -223,15 +221,12 @@
                     #111111
                 );
 
-            border:
-                1px solid var(--bordure);
-
+            border: 1px solid var(--bordure);
             border-radius: 18px;
         }
 
         .objectif h3 {
             margin-bottom: 18px;
-
             color: var(--or-clair);
             font-size: 25px;
         }
@@ -258,14 +253,11 @@
             height: 14px;
 
             margin: 18px 0 12px;
-
             overflow: hidden;
 
             background: #0d0d0d;
 
-            border:
-                1px solid rgba(212, 175, 55, 0.30);
-
+            border: 1px solid rgba(212, 175, 55, 0.30);
             border-radius: 999px;
         }
 
@@ -329,8 +321,7 @@
             color: #bbf7d0;
             background: rgba(34, 197, 94, 0.14);
 
-            border:
-                1px solid rgba(34, 197, 94, 0.45);
+            border: 1px solid rgba(34, 197, 94, 0.45);
         }
 
         .erreur {
@@ -339,8 +330,7 @@
             color: #fecaca;
             background: rgba(239, 68, 68, 0.14);
 
-            border:
-                1px solid rgba(239, 68, 68, 0.45);
+            border: 1px solid rgba(239, 68, 68, 0.45);
         }
 
         .vide {
@@ -349,14 +339,11 @@
             color: var(--gris);
             text-align: center;
 
-            border:
-                1px dashed rgba(212, 175, 55, 0.30);
-
+            border: 1px dashed rgba(212, 175, 55, 0.30);
             border-radius: 14px;
         }
 
         @media (max-width: 760px) {
-
             nav {
                 flex-direction: column;
             }
@@ -382,29 +369,19 @@
 
         <div class="menu">
 
-            <a href="dashboard.html">
-                Tableau de bord
-            </a>
+            <a href="dashboard.html">Tableau de bord</a>
+            <a href="academy.html">Academy</a>
+            <a href="portefeuille.html">Portefeuille</a>
+            <a href="objectifs.html">Objectifs</a>
+            <a href="alertes.html">Alertes</a>
+            <a href="profil.html">Profil</a>
 
-            <a href="academy.html">
-                Academy
-            </a>
-
-            <a href="portefeuille.html">
-                Portefeuille
-            </a>
-
-            <a href="objectifs.html">
-                Objectifs
-            </a>
-
-            <a href="alertes.html">
-                Alertes
-            </a>
-
-            <a href="profil.html">
-                Profil
-            </a>
+            <button
+                class="deconnexion"
+                onclick="seDeconnecter()"
+            >
+                Déconnexion
+            </button>
 
         </div>
 
@@ -499,10 +476,7 @@
     </main>
 
 
-    <script
-        src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"
-    ></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="supabase.js"></script>
 
 
@@ -522,11 +496,7 @@
         }
 
 
-        function afficherMessage(
-            id,
-            texte,
-            type
-        ) {
+        function afficherMessage(id, texte, type) {
 
             const element =
                 document.getElementById(id);
@@ -609,9 +579,7 @@
         }
 
 
-        function afficherObjectifs(
-            objectifs
-        ) {
+        function afficherObjectifs(objectifs) {
 
             const conteneur =
                 document.getElementById(
@@ -806,15 +774,11 @@
             if (
                 nom === ""
                 ||
-                Number.isNaN(
-                    montantCible
-                )
+                Number.isNaN(montantCible)
                 ||
                 montantCible <= 0
                 ||
-                Number.isNaN(
-                    montantActuel
-                )
+                Number.isNaN(montantActuel)
                 ||
                 montantActuel < 0
             ) {
@@ -1036,6 +1000,20 @@
 
 
             await actualiserObjectifs();
+
+        }
+
+
+        async function seDeconnecter() {
+
+            await window
+                .diawlalSupabase
+                .auth
+                .signOut();
+
+
+            window.location.href =
+                "connexion.html";
 
         }
 
