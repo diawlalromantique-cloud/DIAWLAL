@@ -3,80 +3,207 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
     <title>Contact - DIAWLAL</title>
+
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
     <nav>
-        <div class="logo">DIAWLAL</div>
 
-        <div>
-            <a href="index.html">Accueil</a>
-            <a href="services.html">Services</a>
-            <a href="contact.html">Contact</a>
+        <div class="logo">
+            DIAWLAL
         </div>
+
+        <div class="menu">
+
+            <a href="index.html">
+                Accueil
+            </a>
+
+            <a href="services.html">
+                Services
+            </a>
+
+            <a href="contact.html">
+                Contact
+            </a>
+
+            <a href="connexion.html">
+                Connexion
+            </a>
+
+        </div>
+
     </nav>
 
-    <section class="contact-section">
 
-        <div class="contact-box">
+    <main class="container">
 
-            <h1>Contactez DIAWLAL</h1>
+        <section class="page-title">
+
+            <h1>
+                Contactez DIAWLAL
+            </h1>
 
             <p>
-                Une question, une idée ou une proposition ?
+                Une question, une remarque
+                ou une suggestion ?
                 Envoyez-nous votre message.
             </p>
 
-            <form onsubmit="envoyerMessage(event)">
+        </section>
 
-                <label for="nom">Nom</label>
+
+        <section class="contact-infos">
+
+            <article class="contact-box">
+
+                <div class="icone">
+                    💬
+                </div>
+
+                <h3>
+                    Assistance
+                </h3>
+
+                <p>
+                    Une question concernant
+                    l’utilisation de DIAWLAL ?
+                    Contactez-nous.
+                </p>
+
+            </article>
+
+
+            <article class="contact-box">
+
+                <div class="icone">
+                    💡
+                </div>
+
+                <h3>
+                    Suggestions
+                </h3>
+
+                <p>
+                    Vos idées peuvent nous aider
+                    à améliorer progressivement
+                    la plateforme.
+                </p>
+
+            </article>
+
+
+            <article class="contact-box">
+
+                <div class="icone">
+                    🤝
+                </div>
+
+                <h3>
+                    Collaboration
+                </h3>
+
+                <p>
+                    Pour une proposition
+                    ou une collaboration,
+                    utilisez le formulaire.
+                </p>
+
+            </article>
+
+        </section>
+
+
+        <section class="form-card">
+
+            <h2>
+                Envoyer un message
+            </h2>
+
+            <form
+                action="mailto:"
+                method="post"
+                enctype="text/plain"
+            >
+
+                <label for="nom">
+                    Nom
+                </label>
+
                 <input
                     type="text"
                     id="nom"
+                    name="nom"
                     placeholder="Votre nom"
                     required
                 >
 
-                <label for="email">Email</label>
+
+                <label for="email">
+                    Adresse e-mail
+                </label>
+
                 <input
                     type="email"
                     id="email"
-                    placeholder="Votre adresse email"
+                    name="email"
+                    placeholder="Votre adresse e-mail"
                     required
                 >
 
-                <label for="message">Message</label>
+
+                <label for="sujet">
+                    Sujet
+                </label>
+
+                <input
+                    type="text"
+                    id="sujet"
+                    name="sujet"
+                    placeholder="Sujet de votre message"
+                    required
+                >
+
+
+                <label for="message">
+                    Message
+                </label>
+
                 <textarea
                     id="message"
-                    placeholder="Écrivez votre message"
+                    name="message"
+                    placeholder="Écrivez votre message..."
                     required
                 ></textarea>
 
-                <button type="submit">Envoyer</button>
+
+                <button
+                    type="submit"
+                    class="btn btn-principal"
+                >
+                    Envoyer le message
+                </button>
 
             </form>
 
-        </div>
+        </section>
 
-    </section>
+    </main>
+
 
     <footer>
-        <p>© 2026 DIAWLAL - Tous droits réservés</p>
+        © 2026 DIAWLAL —
+        Comprendre. Analyser. Évoluer.
     </footer>
-
-    <script>
-        function envoyerMessage(event) {
-            event.preventDefault();
-
-            alert("Merci ! Votre message a bien été envoyé.");
-
-            document.querySelector("form").reset();
-        }
-    </script>
 
 </body>
 
