@@ -3,12 +3,13 @@
 
 <head>
     <meta charset="UTF-8">
+
     <meta
         name="viewport"
         content="width=device-width, initial-scale=1.0"
     >
 
-    <title>Connexion - DIAWLAL</title>
+    <title>Nouveau mot de passe - DIAWLAL</title>
 
     <style>
         :root {
@@ -83,7 +84,7 @@
         h1 {
             margin-bottom: 10px;
             text-align: center;
-            font-size: 34px;
+            font-size: 32px;
         }
 
         .sous-titre {
@@ -128,16 +129,6 @@
         button {
             width: 100%;
             padding: 15px;
-
-            border: none;
-            border-radius: 10px;
-
-            font-size: 16px;
-            font-weight: 900;
-            cursor: pointer;
-        }
-
-        .connexion {
             margin-top: 22px;
 
             color: #111111;
@@ -149,25 +140,18 @@
                     var(--or),
                     var(--or-fonce)
                 );
+
+            border: none;
+            border-radius: 10px;
+
+            font-size: 16px;
+            font-weight: 900;
+            cursor: pointer;
         }
 
         button:disabled {
             opacity: 0.6;
             cursor: wait;
-        }
-
-        .mot-oublie {
-            display: block;
-            margin-top: 15px;
-
-            color: var(--or-clair);
-            background: transparent;
-
-            text-align: center;
-            text-decoration: underline;
-
-            font-size: 14px;
-            font-weight: 700;
         }
 
         .message {
@@ -202,20 +186,14 @@
                 1px solid rgba(239, 68, 68, 0.45);
         }
 
-        .liens {
-            margin-top: 25px;
-            text-align: center;
-        }
+        .retour {
+            display: block;
+            margin-top: 22px;
 
-        .liens p {
-            margin-top: 12px;
-            color: var(--gris);
-        }
-
-        .liens a {
             color: var(--or-clair);
-            font-weight: 700;
+            text-align: center;
             text-decoration: none;
+            font-weight: 700;
         }
     </style>
 </head>
@@ -229,76 +207,57 @@
         </div>
 
         <h1>
-            Connexion
+            Nouveau mot de passe
         </h1>
 
         <p class="sous-titre">
-            Accédez à votre espace financier personnel.
+            Choisissez un nouveau mot de passe sécurisé.
         </p>
 
-        <form id="formConnexion">
+        <form id="formMotDePasse">
 
-            <label for="email">
-                Adresse e-mail
-            </label>
-
-            <input
-                type="email"
-                id="email"
-                placeholder="Votre adresse e-mail"
-                required
-            >
-
-            <label for="motDePasse">
-                Mot de passe
+            <label for="nouveauMotDePasse">
+                Nouveau mot de passe
             </label>
 
             <input
                 type="password"
-                id="motDePasse"
-                placeholder="Votre mot de passe"
+                id="nouveauMotDePasse"
+                minlength="6"
+                required
+            >
+
+            <label for="confirmationMotDePasse">
+                Confirmer le mot de passe
+            </label>
+
+            <input
+                type="password"
+                id="confirmationMotDePasse"
+                minlength="6"
                 required
             >
 
             <button
                 type="submit"
-                class="connexion"
-                id="boutonConnexion"
+                id="boutonEnregistrer"
             >
-                Se connecter
+                Enregistrer le nouveau mot de passe
             </button>
 
         </form>
-
-        <button
-            type="button"
-            class="mot-oublie"
-            id="boutonMotOublie"
-        >
-            Mot de passe oublié ?
-        </button>
 
         <div
             id="message"
             class="message"
         ></div>
 
-        <div class="liens">
-
-            <p>
-                Pas encore de compte ?
-                <a href="inscription.html">
-                    Créer un compte
-                </a>
-            </p>
-
-            <p>
-                <a href="index.html">
-                    Retour à l’accueil
-                </a>
-            </p>
-
-        </div>
+        <a
+            href="connexion.html"
+            class="retour"
+        >
+            Retour à la connexion
+        </a>
 
     </main>
 
@@ -308,21 +267,95 @@
 
     <script>
         const formulaire =
-            document.getElementById("formConnexion");
+            document.getElementById(
+                "formMotDePasse"
+            );
 
-        const boutonConnexion =
-            document.getElementById("boutonConnexion");
-
-        const boutonMotOublie =
-            document.getElementById("boutonMotOublie");
+        const bouton =
+            document.getElementById(
+                "boutonEnregistrer"
+            );
 
         const message =
-            document.getElementById("message");
+            document.getElementById(
+                "message"
+            );
 
 
-        function afficherMessage(texte, type) {
+        function afficherMessage(
+            texte,
+            type
+        ) {
             message.textContent = texte;
-            message.className = "message " + type;
+            message.className =
+                "message " + type;
+        }
+
+
+        async function preparerSession() {
+            const parametres =
+                new URLSearchParams(
+                    window.location.search
+                );
+
+            const code =
+                parametres.get("code");
+
+
+            if (code) {
+                const {
+                    error
+                } =
+                    await window
+                        .diawlalSupabase
+                        .auth
+                        .exchangeCodeForSession(
+                            code
+                        );
+
+
+                if (error) {
+                    afficherMessage(
+                        "Lien invalide ou expiré. Demande un nouveau lien.",
+                        "erreur"
+                    );
+
+                    return false;
+                }
+
+
+                window.history.replaceState(
+                    {},
+                    document.title,
+                    window.location.pathname
+                );
+            }
+
+
+            const {
+                data,
+                error
+            } =
+                await window
+                    .diawlalSupabase
+                    .auth
+                    .getSession();
+
+
+            if (
+                error ||
+                !data.session
+            ) {
+                afficherMessage(
+                    "Session de récupération absente. Demande un nouveau lien.",
+                    "erreur"
+                );
+
+                return false;
+            }
+
+
+            return true;
         }
 
 
@@ -331,129 +364,110 @@
             async function (event) {
                 event.preventDefault();
 
-                const email =
-                    document
-                        .getElementById("email")
-                        .value
-                        .trim();
 
-                const motDePasse =
+                const sessionValide =
+                    await preparerSession();
+
+
+                if (!sessionValide) {
+                    return;
+                }
+
+
+                const nouveauMotDePasse =
                     document
-                        .getElementById("motDePasse")
+                        .getElementById(
+                            "nouveauMotDePasse"
+                        )
                         .value;
 
-                boutonConnexion.disabled = true;
-                boutonConnexion.textContent =
-                    "Connexion...";
+
+                const confirmation =
+                    document
+                        .getElementById(
+                            "confirmationMotDePasse"
+                        )
+                        .value;
+
+
+                if (
+                    nouveauMotDePasse.length < 6
+                ) {
+                    afficherMessage(
+                        "Le mot de passe doit contenir au moins 6 caractères.",
+                        "erreur"
+                    );
+
+                    return;
+                }
+
+
+                if (
+                    nouveauMotDePasse
+                    !== confirmation
+                ) {
+                    afficherMessage(
+                        "Les deux mots de passe ne correspondent pas.",
+                        "erreur"
+                    );
+
+                    return;
+                }
+
+
+                bouton.disabled = true;
+
+                bouton.textContent =
+                    "Enregistrement...";
+
 
                 const {
-                    data,
                     error
                 } =
                     await window
                         .diawlalSupabase
                         .auth
-                        .signInWithPassword({
-                            email: email,
-                            password: motDePasse
+                        .updateUser({
+                            password:
+                                nouveauMotDePasse
                         });
 
-                boutonConnexion.disabled = false;
-                boutonConnexion.textContent =
-                    "Se connecter";
+
+                bouton.disabled = false;
+
+                bouton.textContent =
+                    "Enregistrer le nouveau mot de passe";
+
 
                 if (error) {
                     afficherMessage(
-                        "Erreur : " + error.message,
+                        "Erreur : "
+                        + error.message,
                         "erreur"
                     );
 
                     return;
                 }
 
-                if (!data.session) {
-                    afficherMessage(
-                        "La connexion n’a pas pu être établie.",
-                        "erreur"
-                    );
-
-                    return;
-                }
 
                 afficherMessage(
-                    "Connexion réussie.",
+                    "Mot de passe modifié avec succès.",
                     "succes"
                 );
 
-                setTimeout(function () {
-                    window.location.href =
-                        "dashboard.html";
-                }, 600);
-            }
-        );
 
-
-        boutonMotOublie.addEventListener(
-            "click",
-            async function () {
-                const email =
-                    document
-                        .getElementById("email")
-                        .value
-                        .trim();
-
-                if (email === "") {
-                    afficherMessage(
-                        "Entre d’abord ton adresse e-mail.",
-                        "erreur"
-                    );
-
-                    return;
-                }
-
-                boutonMotOublie.disabled = true;
-                boutonMotOublie.textContent =
-                    "Envoi en cours...";
-
-                const urlRedirection =
-                    new URL(
-                        "nouveau-mot-de-passe.html",
-                        window.location.href
-                    ).href;
-
-                const {
-                    error
-                } =
-                    await window
-                        .diawlalSupabase
-                        .auth
-                        .resetPasswordForEmail(
-                            email,
-                            {
-                                redirectTo:
-                                    urlRedirection
-                            }
-                        );
-
-                boutonMotOublie.disabled = false;
-                boutonMotOublie.textContent =
-                    "Mot de passe oublié ?";
-
-                if (error) {
-                    afficherMessage(
-                        "Erreur : " + error.message,
-                        "erreur"
-                    );
-
-                    return;
-                }
-
-                afficherMessage(
-                    "Un lien de récupération a été envoyé par e-mail.",
-                    "succes"
+                setTimeout(
+                    function () {
+                        window.location.href =
+                            "connexion.html";
+                    },
+                    1200
                 );
             }
         );
+
+
+        preparerSession();
     </script>
 
 </body>
