@@ -12,6 +12,36 @@
     <title>Contact - DIAWLAL</title>
 
     <link rel="stylesheet" href="style.css">
+
+    <style>
+        .message-formulaire {
+            display: none;
+            margin-top: 16px;
+            padding: 13px;
+            border-radius: 10px;
+            text-align: center;
+            line-height: 1.5;
+        }
+
+        .message-formulaire.succes {
+            display: block;
+            color: #bbf7d0;
+            background: rgba(34, 197, 94, 0.14);
+            border: 1px solid rgba(34, 197, 94, 0.45);
+        }
+
+        .message-formulaire.erreur {
+            display: block;
+            color: #fecaca;
+            background: rgba(239, 68, 68, 0.14);
+            border: 1px solid rgba(239, 68, 68, 0.45);
+        }
+
+        #boutonEnvoyer:disabled {
+            opacity: 0.6;
+            cursor: wait;
+        }
+    </style>
 </head>
 
 <body>
@@ -54,8 +84,7 @@
             </h1>
 
             <p>
-                Une question, une remarque
-                ou une suggestion ?
+                Une question, une remarque ou une suggestion ?
                 Envoyez-nous votre message.
             </p>
 
@@ -129,11 +158,7 @@
                 Envoyer un message
             </h2>
 
-            <form
-                action="mailto:"
-                method="post"
-                enctype="text/plain"
-            >
+            <form id="formContact">
 
                 <label for="nom">
                     Nom
@@ -142,7 +167,6 @@
                 <input
                     type="text"
                     id="nom"
-                    name="nom"
                     placeholder="Votre nom"
                     required
                 >
@@ -155,7 +179,6 @@
                 <input
                     type="email"
                     id="email"
-                    name="email"
                     placeholder="Votre adresse e-mail"
                     required
                 >
@@ -168,19 +191,17 @@
                 <input
                     type="text"
                     id="sujet"
-                    name="sujet"
                     placeholder="Sujet de votre message"
                     required
                 >
 
 
-                <label for="message">
+                <label for="messageContact">
                     Message
                 </label>
 
                 <textarea
-                    id="message"
-                    name="message"
+                    id="messageContact"
                     placeholder="Écrivez votre message..."
                     required
                 ></textarea>
@@ -189,11 +210,18 @@
                 <button
                     type="submit"
                     class="btn btn-principal"
+                    id="boutonEnvoyer"
                 >
                     Envoyer le message
                 </button>
 
             </form>
+
+
+            <div
+                id="messageFormulaire"
+                class="message-formulaire"
+            ></div>
 
         </section>
 
@@ -204,6 +232,117 @@
         © 2026 DIAWLAL —
         Comprendre. Analyser. Évoluer.
     </footer>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="supabase.js"></script>
+
+    <script>
+        const formulaire =
+            document.getElementById("formContact");
+
+        const bouton =
+            document.getElementById("boutonEnvoyer");
+
+        const zoneMessage =
+            document.getElementById("messageFormulaire");
+
+
+        function afficherMessage(texte, type) {
+            zoneMessage.textContent = texte;
+            zoneMessage.className =
+                "message-formulaire " + type;
+        }
+
+
+        formulaire.addEventListener(
+            "submit",
+            async function (event) {
+                event.preventDefault();
+
+                const nom =
+                    document
+                        .getElementById("nom")
+                        .value
+                        .trim();
+
+                const email =
+                    document
+                        .getElementById("email")
+                        .value
+                        .trim();
+
+                const sujet =
+                    document
+                        .getElementById("sujet")
+                        .value
+                        .trim();
+
+                const message =
+                    document
+                        .getElementById("messageContact")
+                        .value
+                        .trim();
+
+
+                if (
+                    nom === "" ||
+                    email === "" ||
+                    sujet === "" ||
+                    message === ""
+                ) {
+                    afficherMessage(
+                        "Remplis correctement tous les champs.",
+                        "erreur"
+                    );
+
+                    return;
+                }
+
+
+                bouton.disabled = true;
+                bouton.textContent =
+                    "Envoi en cours...";
+
+
+                const {
+                    error
+                } =
+                    await window
+                        .diawlalSupabase
+                        .from("messages_contact")
+                        .insert({
+                            nom: nom,
+                            email: email,
+                            sujet: sujet,
+                            message: message
+                        });
+
+
+                bouton.disabled = false;
+                bouton.textContent =
+                    "Envoyer le message";
+
+
+                if (error) {
+                    afficherMessage(
+                        "Erreur : " + error.message,
+                        "erreur"
+                    );
+
+                    return;
+                }
+
+
+                formulaire.reset();
+
+                afficherMessage(
+                    "Votre message a été envoyé avec succès.",
+                    "succes"
+                );
+            }
+        );
+    </script>
 
 </body>
 
