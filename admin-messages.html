@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Administration des messages - DIAWLAL</title>
+
+    <style>
+        :root {
+            --or: #d4af37;
+            --or-clair: #f4d76b;
+            --gris: #b8b8b8;
+            --bordure: rgba(212, 175, 55, 0.45);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            min-height: 100vh;
+
+            color: white;
+            font-family: Arial, Helvetica, sans-serif;
+
+            background:
+                radial-gradient(
+                    circle at top left,
+                    rgba(212, 175, 55, 0.12),
+                    transparent 30%
+                ),
+                linear-gradient(
+                    135deg,
+                    #080808,
+                    #111111,
+                    #181818
+                );
+
+            background-attachment: fixed;
+        }
+
+        nav {
+            width: min(1200px, 94%);
+            margin: auto;
+            padding: 22px 10px;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+
+            border-bottom:
+                1px solid rgba(212, 175, 55, 0.18);
+        }
+
+        .logo {
+            color: var(--or);
+
+            font-size: 30px;
+            font-weight: 900;
+            letter-spacing: 3px;
+        }
+
+        .menu {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .menu a,
+        .deconnexion {
+            padding: 10px 12px;
+
+            color: white;
+            background: transparent;
+
+            border: none;
+            border-radius: 9px;
+
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 700;
+
+            cursor: pointer;
+        }
+
+        .menu a:hover,
+        .deconnexion:hover {
+            color: var(--or-clair);
+            background: rgba(212, 175, 55, 0.10);
+        }
+
+        .container {
+            width: min(1050px, 92%);
+            margin: auto;
+            padding: 55px 0 80px;
+        }
+
+        .entete {
+            margin-bottom: 32px;
+            text-align: center;
+        }
+
+        .entete h1 {
+            margin-bottom: 12px;
+
+            font-size: clamp(36px, 6vw, 58px);
+        }
+
+        .entete p {
+            color: var(--gris);
+            font-size: 18px;
+        }
+
+        .resume {
+            margin-bottom: 25px;
+            padding: 20px;
+
+            text-align: center;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    #202020,
+                    #101010
+                );
+
+            border: 1px solid var(--bordure);
+            border-radius: 16px;
+        }
+
+        .resume strong {
+            color: var(--or-clair);
+            font-size: 25px;
+        }
+
+        .liste {
+            display: grid;
+            gap: 18px;
+        }
+
+        .message {
+            padding: 24px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    #202020,
+                    #101010
+                );
+
+            border: 1px solid var(--bordure);
+            border-radius: 18px;
+        }
+
+        .message-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 15px;
+
+            margin-bottom: 15px;
+        }
+
+        .message h2 {
+            margin-bottom: 6px;
+
+            color: var(--or-clair);
+            font-size: 23px;
+        }
+
+        .email {
+            color: var(--gris);
+            font-size: 14px;
+        }
+
+        .date {
+            color: var(--gris);
+            font-size: 14px;
+            white-space: nowrap;
+        }
+
+        .sujet {
+            margin-bottom: 12px;
+            font-weight: 900;
+        }
+
+        .contenu {
+            color: #dedede;
+            line-height: 1.7;
+            white-space: pre-wrap;
+        }
+
+        .vide,
+        .chargement,
+        .erreur {
+            padding: 30px;
+
+            text-align: center;
+            color: var(--gris);
+
+            border: 1px dashed rgba(212, 175, 55, 0.35);
+            border-radius: 16px;
+        }
+
+        .erreur {
+            color: #fecaca;
+            border-color: rgba(239, 68, 68, 0.45);
+        }
+
+        @media (max-width: 760px) {
+            nav {
+                flex-direction: column;
+            }
+
+            .message-header {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+
+        <div class="logo">
+            DIAWLAL ADMIN
+        </div>
+
+        <div class="menu">
+
+            <a href="dashboard.html">
+                Tableau de bord
+            </a>
+
+            <a href="index.html">
+                Accueil
+            </a>
+
+            <button
+                class="deconnexion"
+                onclick="seDeconnecter()"
+            >
+                Déconnexion
+            </button>
+
+        </div>
+
+    </nav>
+
+
+    <main class="container">
+
+        <section class="entete">
+
+            <h1>
+                Messages reçus
+            </h1>
+
+            <p>
+                Consultez les messages envoyés depuis le formulaire de contact.
+            </p>
+
+        </section>
+
+
+        <section class="resume">
+
+            Nombre de messages :
+
+            <strong id="nombreMessages">
+                0
+            </strong>
+
+        </section>
+
+
+        <section
+            id="listeMessages"
+            class="liste"
+        >
+
+            <div class="chargement">
+                Chargement des messages...
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="supabase.js"></script>
+
+    <script>
+        const EMAIL_ADMIN =
+            "diawlalromantique@gmail.com";
+
+
+        function protegerTexte(texte) {
+            const element =
+                document.createElement("div");
+
+            element.textContent =
+                texte || "";
+
+            return element.innerHTML;
+        }
+
+
+        async function verifierAdministrateur() {
+            const {
+                data,
+                error
+            } =
+                await window
+                    .diawlalSupabase
+                    .auth
+                    .getSession();
+
+
+            if (
+                error ||
+                !data.session
+            ) {
+                window.location.href =
+                    "connexion.html";
+
+                return false;
+            }
+
+
+            const emailUtilisateur =
+                data.session.user.email;
+
+
+            if (
+                emailUtilisateur
+                !== EMAIL_ADMIN
+            ) {
+                alert(
+                    "Accès réservé à l’administrateur."
+                );
+
+                window.location.href =
+                    "dashboard.html";
+
+                return false;
+            }
+
+
+            return true;
+        }
+
+
+        async function chargerMessages() {
+            const liste =
+                document.getElementById(
+                    "listeMessages"
+                );
+
+
+            const {
+                data,
+                error
+            } =
+                await window
+                    .diawlalSupabase
+                    .from("messages_contact")
+                    .select(
+                        "id, nom, email, sujet, message, created_at"
+                    )
+                    .order(
+                        "created_at",
+                        {
+                            ascending: false
+                        }
+                    );
+
+
+            if (error) {
+                liste.innerHTML =
+                    `
+                    <div class="erreur">
+                        Erreur : ${protegerTexte(error.message)}
+                    </div>
+                    `;
+
+                return;
+            }
+
+
+            const messages =
+                data || [];
+
+
+            document
+                .getElementById(
+                    "nombreMessages"
+                )
+                .textContent =
+                messages.length;
+
+
+            if (
+                messages.length === 0
+            ) {
+                liste.innerHTML =
+                    `
+                    <div class="vide">
+                        Aucun message reçu.
+                    </div>
+                    `;
+
+                return;
+            }
+
+
+            liste.innerHTML = "";
+
+
+            messages.forEach(
+                function (message) {
+                    const date =
+                        new Date(
+                            message.created_at
+                        )
+                        .toLocaleString(
+                            "fr-FR"
+                        );
+
+
+                    const article =
+                        document.createElement(
+                            "article"
+                        );
+
+
+                    article.className =
+                        "message";
+
+
+                    article.innerHTML =
+                        `
+                        <div class="message-header">
+
+                            <div>
+
+                                <h2>
+                                    ${protegerTexte(message.nom)}
+                                </h2>
+
+                                <div class="email">
+                                    ${protegerTexte(message.email)}
+                                </div>
+
+                            </div>
+
+                            <div class="date">
+                                ${protegerTexte(date)}
+                            </div>
+
+                        </div>
+
+                        <div class="sujet">
+                            Sujet :
+                            ${protegerTexte(message.sujet)}
+                        </div>
+
+                        <div class="contenu">
+                            ${protegerTexte(message.message)}
+                        </div>
+                        `;
+
+
+                    liste.appendChild(
+                        article
+                    );
+                }
+            );
+        }
+
+
+        async function seDeconnecter() {
+            await window
+                .diawlalSupabase
+                .auth
+                .signOut();
+
+
+            window.location.href =
+                "connexion.html";
+        }
+
+
+        async function demarrer() {
+            const adminValide =
+                await verifierAdministrateur();
+
+
+            if (!adminValide) {
+                return;
+            }
+
+
+            await chargerMessages();
+        }
+
+
+        demarrer();
+    </script>
+
+</body>
+
+</html>
