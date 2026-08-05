@@ -15,7 +15,10 @@
         :root {
             --or: #d4af37;
             --or-clair: #f4d76b;
+            --or-fonce: #9d7515;
             --gris: #b8b8b8;
+            --vert: #22c55e;
+            --rouge: #ef4444;
             --bordure: rgba(212, 175, 55, 0.45);
         }
 
@@ -64,7 +67,7 @@
         .logo {
             color: var(--or);
 
-            font-size: 30px;
+            font-size: 29px;
             font-weight: 900;
             letter-spacing: 3px;
         }
@@ -73,7 +76,7 @@
             display: flex;
             align-items: center;
             flex-wrap: wrap;
-            gap: 8px;
+            gap: 7px;
         }
 
         .menu a,
@@ -100,13 +103,13 @@
         }
 
         .container {
-            width: min(1050px, 92%);
+            width: min(1100px, 92%);
             margin: auto;
-            padding: 55px 0 80px;
+            padding: 50px 0 80px;
         }
 
         .entete {
-            margin-bottom: 32px;
+            margin-bottom: 30px;
             text-align: center;
         }
 
@@ -121,9 +124,17 @@
             font-size: 18px;
         }
 
-        .resume {
-            margin-bottom: 25px;
-            padding: 20px;
+        .statistiques {
+            display: grid;
+            grid-template-columns:
+                repeat(3, minmax(0, 1fr));
+
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .stat {
+            padding: 22px;
 
             text-align: center;
 
@@ -138,9 +149,86 @@
             border-radius: 16px;
         }
 
-        .resume strong {
+        .stat span {
+            display: block;
+
+            margin-bottom: 8px;
+
+            color: var(--gris);
+            font-size: 14px;
+        }
+
+        .stat strong {
             color: var(--or-clair);
-            font-size: 25px;
+            font-size: 29px;
+        }
+
+        .outils {
+            margin-bottom: 25px;
+            padding: 20px;
+
+            display: grid;
+            grid-template-columns:
+                1fr 220px auto;
+
+            gap: 12px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    #202020,
+                    #101010
+                );
+
+            border: 1px solid var(--bordure);
+            border-radius: 16px;
+        }
+
+        input,
+        select {
+            width: 100%;
+            padding: 13px;
+
+            color: white;
+            background: #0d0d0d;
+
+            border:
+                1px solid rgba(212, 175, 55, 0.35);
+
+            border-radius: 10px;
+
+            font-size: 15px;
+            outline: none;
+        }
+
+        input:focus,
+        select:focus {
+            border-color: var(--or);
+        }
+
+        select option {
+            color: white;
+            background: #111111;
+        }
+
+        .actualiser {
+            padding: 13px 18px;
+
+            color: #111111;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    var(--or-clair),
+                    var(--or),
+                    var(--or-fonce)
+                );
+
+            border: none;
+            border-radius: 10px;
+
+            font-weight: 900;
+            cursor: pointer;
         }
 
         .liste {
@@ -149,6 +237,8 @@
         }
 
         .message {
+            position: relative;
+
             padding: 24px;
 
             background:
@@ -160,6 +250,19 @@
 
             border: 1px solid var(--bordure);
             border-radius: 18px;
+
+            transition: 0.25s;
+        }
+
+        .message.non-lu {
+            border-color: var(--or-clair);
+
+            box-shadow:
+                0 0 0 2px rgba(212, 175, 55, 0.08);
+        }
+
+        .message.lu {
+            opacity: 0.78;
         }
 
         .message-header {
@@ -185,45 +288,136 @@
 
         .date {
             color: var(--gris);
-            font-size: 14px;
+            font-size: 13px;
             white-space: nowrap;
+        }
+
+        .badge {
+            display: inline-block;
+
+            margin-top: 10px;
+            padding: 5px 9px;
+
+            border-radius: 999px;
+
+            font-size: 12px;
+            font-weight: 900;
+        }
+
+        .badge-non-lu {
+            color: #111111;
+            background: var(--or-clair);
+        }
+
+        .badge-lu {
+            color: #bbf7d0;
+            background: rgba(34, 197, 94, 0.18);
+
+            border:
+                1px solid rgba(34, 197, 94, 0.35);
         }
 
         .sujet {
             margin-bottom: 12px;
+
+            color: white;
             font-weight: 900;
         }
 
         .contenu {
+            margin-bottom: 20px;
+
             color: #dedede;
             line-height: 1.7;
             white-space: pre-wrap;
         }
 
+        .actions {
+            display: grid;
+            grid-template-columns:
+                repeat(3, minmax(0, 1fr));
+
+            gap: 10px;
+        }
+
+        .bouton {
+            padding: 12px;
+
+            border: none;
+            border-radius: 9px;
+
+            font-weight: 900;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+        }
+
+        .bouton-lire {
+            color: #111111;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    var(--or-clair),
+                    var(--or)
+                );
+        }
+
+        .bouton-repondre {
+            color: white;
+            background: #166534;
+        }
+
+        .bouton-supprimer {
+            color: white;
+            background: #991b1b;
+        }
+
+        .bouton:disabled {
+            opacity: 0.55;
+            cursor: wait;
+        }
+
         .vide,
         .chargement,
         .erreur {
-            padding: 30px;
+            padding: 32px;
 
             text-align: center;
             color: var(--gris);
 
-            border: 1px dashed rgba(212, 175, 55, 0.35);
+            border:
+                1px dashed rgba(212, 175, 55, 0.35);
+
             border-radius: 16px;
         }
 
         .erreur {
             color: #fecaca;
-            border-color: rgba(239, 68, 68, 0.45);
+
+            border-color:
+                rgba(239, 68, 68, 0.45);
         }
 
-        @media (max-width: 760px) {
+        @media (max-width: 800px) {
             nav {
                 flex-direction: column;
             }
 
+            .statistiques {
+                grid-template-columns: 1fr;
+            }
+
+            .outils {
+                grid-template-columns: 1fr;
+            }
+
             .message-header {
                 flex-direction: column;
+            }
+
+            .actions {
+                grid-template-columns: 1fr;
             }
         }
     </style>
@@ -268,19 +462,85 @@
             </h1>
 
             <p>
-                Consultez les messages envoyés depuis le formulaire de contact.
+                Consultez et gérez les messages envoyés à DIAWLAL.
             </p>
 
         </section>
 
 
-        <section class="resume">
+        <section class="statistiques">
 
-            Nombre de messages :
+            <article class="stat">
 
-            <strong id="nombreMessages">
-                0
-            </strong>
+                <span>
+                    Total
+                </span>
+
+                <strong id="totalMessages">
+                    0
+                </strong>
+
+            </article>
+
+
+            <article class="stat">
+
+                <span>
+                    Non lus
+                </span>
+
+                <strong id="messagesNonLus">
+                    0
+                </strong>
+
+            </article>
+
+
+            <article class="stat">
+
+                <span>
+                    Lus
+                </span>
+
+                <strong id="messagesLus">
+                    0
+                </strong>
+
+            </article>
+
+        </section>
+
+
+        <section class="outils">
+
+            <input
+                type="search"
+                id="recherche"
+                placeholder="Rechercher un nom, e-mail, sujet ou message..."
+            >
+
+            <select id="filtre">
+
+                <option value="tous">
+                    Tous les messages
+                </option>
+
+                <option value="non-lus">
+                    Messages non lus
+                </option>
+
+                <option value="lus">
+                    Messages lus
+                </option>
+
+            </select>
+
+            <button
+                class="actualiser"
+                onclick="chargerMessages()"
+            >
+                Actualiser
+            </button>
 
         </section>
 
@@ -305,6 +565,8 @@
     <script>
         const EMAIL_ADMIN =
             "diawlalromantique@gmail.com";
+
+        let tousLesMessages = [];
 
 
         function protegerTexte(texte) {
@@ -363,11 +625,51 @@
         }
 
 
+        function actualiserStatistiques() {
+            const total =
+                tousLesMessages.length;
+
+            const nonLus =
+                tousLesMessages.filter(
+                    function (message) {
+                        return message.lu !== true;
+                    }
+                ).length;
+
+            const lus =
+                total - nonLus;
+
+
+            document
+                .getElementById("totalMessages")
+                .textContent =
+                total;
+
+            document
+                .getElementById("messagesNonLus")
+                .textContent =
+                nonLus;
+
+            document
+                .getElementById("messagesLus")
+                .textContent =
+                lus;
+        }
+
+
         async function chargerMessages() {
             const liste =
                 document.getElementById(
                     "listeMessages"
                 );
+
+
+            liste.innerHTML =
+                `
+                <div class="chargement">
+                    Chargement des messages...
+                </div>
+                `;
 
 
             const {
@@ -378,7 +680,7 @@
                     .diawlalSupabase
                     .from("messages_contact")
                     .select(
-                        "id, nom, email, sujet, message, created_at"
+                        "id, nom, email, sujet, message, lu, created_at"
                     )
                     .order(
                         "created_at",
@@ -392,7 +694,8 @@
                 liste.innerHTML =
                     `
                     <div class="erreur">
-                        Erreur : ${protegerTexte(error.message)}
+                        Erreur :
+                        ${protegerTexte(error.message)}
                     </div>
                     `;
 
@@ -400,16 +703,85 @@
             }
 
 
-            const messages =
+            tousLesMessages =
                 data || [];
 
 
-            document
-                .getElementById(
-                    "nombreMessages"
-                )
-                .textContent =
-                messages.length;
+            actualiserStatistiques();
+            filtrerMessages();
+        }
+
+
+        function filtrerMessages() {
+            const recherche =
+                document
+                    .getElementById("recherche")
+                    .value
+                    .trim()
+                    .toLowerCase();
+
+            const filtre =
+                document
+                    .getElementById("filtre")
+                    .value;
+
+
+            const messagesFiltres =
+                tousLesMessages.filter(
+                    function (message) {
+                        const correspondRecherche =
+                            (
+                                message.nom
+                                + " "
+                                + message.email
+                                + " "
+                                + message.sujet
+                                + " "
+                                + message.message
+                            )
+                            .toLowerCase()
+                            .includes(recherche);
+
+
+                        let correspondFiltre = true;
+
+
+                        if (
+                            filtre === "non-lus"
+                        ) {
+                            correspondFiltre =
+                                message.lu !== true;
+                        }
+
+
+                        if (
+                            filtre === "lus"
+                        ) {
+                            correspondFiltre =
+                                message.lu === true;
+                        }
+
+
+                        return (
+                            correspondRecherche
+                            &&
+                            correspondFiltre
+                        );
+                    }
+                );
+
+
+            afficherMessages(
+                messagesFiltres
+            );
+        }
+
+
+        function afficherMessages(messages) {
+            const liste =
+                document.getElementById(
+                    "listeMessages"
+                );
 
 
             if (
@@ -418,7 +790,7 @@
                 liste.innerHTML =
                     `
                     <div class="vide">
-                        Aucun message reçu.
+                        Aucun message trouvé.
                     </div>
                     `;
 
@@ -440,6 +812,10 @@
                         );
 
 
+                    const estLu =
+                        message.lu === true;
+
+
                     const article =
                         document.createElement(
                             "article"
@@ -447,7 +823,30 @@
 
 
                     article.className =
-                        "message";
+                        "message "
+                        + (
+                            estLu
+                            ? "lu"
+                            : "non-lu"
+                        );
+
+
+                    const sujetEmail =
+                        encodeURIComponent(
+                            "Réponse DIAWLAL : "
+                            + message.sujet
+                        );
+
+
+                    const corpsEmail =
+                        encodeURIComponent(
+                            "Bonjour "
+                            + message.nom
+                            + ",\n\n"
+                            + "Merci pour votre message concernant : "
+                            + message.sujet
+                            + ".\n\n"
+                        );
 
 
                     article.innerHTML =
@@ -463,6 +862,20 @@
                                 <div class="email">
                                     ${protegerTexte(message.email)}
                                 </div>
+
+                                <span
+                                    class="badge ${
+                                        estLu
+                                        ? "badge-lu"
+                                        : "badge-non-lu"
+                                    }"
+                                >
+                                    ${
+                                        estLu
+                                        ? "Lu"
+                                        : "Nouveau"
+                                    }
+                                </span>
 
                             </div>
 
@@ -480,6 +893,40 @@
                         <div class="contenu">
                             ${protegerTexte(message.message)}
                         </div>
+
+                        <div class="actions">
+
+                            <button
+                                class="bouton bouton-lire"
+                                onclick="basculerLecture(
+                                    '${message.id}',
+                                    ${estLu}
+                                )"
+                            >
+                                ${
+                                    estLu
+                                    ? "Marquer non lu"
+                                    : "Marquer comme lu"
+                                }
+                            </button>
+
+                            <a
+                                class="bouton bouton-repondre"
+                                href="mailto:${protegerTexte(message.email)}?subject=${sujetEmail}&body=${corpsEmail}"
+                            >
+                                Répondre
+                            </a>
+
+                            <button
+                                class="bouton bouton-supprimer"
+                                onclick="supprimerMessage(
+                                    '${message.id}'
+                                )"
+                            >
+                                Supprimer
+                            </button>
+
+                        </div>
                         `;
 
 
@@ -488,6 +935,81 @@
                     );
                 }
             );
+        }
+
+
+        async function basculerLecture(
+            idMessage,
+            estActuellementLu
+        ) {
+            const {
+                error
+            } =
+                await window
+                    .diawlalSupabase
+                    .from("messages_contact")
+                    .update({
+                        lu:
+                            !estActuellementLu
+                    })
+                    .eq(
+                        "id",
+                        idMessage
+                    );
+
+
+            if (error) {
+                alert(
+                    "Erreur : "
+                    + error.message
+                );
+
+                return;
+            }
+
+
+            await chargerMessages();
+        }
+
+
+        async function supprimerMessage(
+            idMessage
+        ) {
+            const confirmation =
+                confirm(
+                    "Supprimer définitivement ce message ?"
+                );
+
+
+            if (!confirmation) {
+                return;
+            }
+
+
+            const {
+                error
+            } =
+                await window
+                    .diawlalSupabase
+                    .from("messages_contact")
+                    .delete()
+                    .eq(
+                        "id",
+                        idMessage
+                    );
+
+
+            if (error) {
+                alert(
+                    "Erreur : "
+                    + error.message
+                );
+
+                return;
+            }
+
+
+            await chargerMessages();
         }
 
 
@@ -501,6 +1023,22 @@
             window.location.href =
                 "connexion.html";
         }
+
+
+        document
+            .getElementById("recherche")
+            .addEventListener(
+                "input",
+                filtrerMessages
+            );
+
+
+        document
+            .getElementById("filtre")
+            .addEventListener(
+                "change",
+                filtrerMessages
+            );
 
 
         async function demarrer() {
