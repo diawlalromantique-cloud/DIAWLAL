@@ -373,11 +373,6 @@
             background: #991b1b;
         }
 
-        .bouton:disabled {
-            opacity: 0.55;
-            cursor: wait;
-        }
-
         .vide,
         .chargement,
         .erreur {
@@ -602,12 +597,8 @@
             }
 
 
-            const emailUtilisateur =
-                data.session.user.email;
-
-
             if (
-                emailUtilisateur
+                data.session.user.email
                 !== EMAIL_ADMIN
             ) {
                 alert(
@@ -729,7 +720,7 @@
             const messagesFiltres =
                 tousLesMessages.filter(
                     function (message) {
-                        const correspondRecherche =
+                        const texteComplet =
                             (
                                 message.nom
                                 + " "
@@ -739,8 +730,13 @@
                                 + " "
                                 + message.message
                             )
-                            .toLowerCase()
-                            .includes(recherche);
+                            .toLowerCase();
+
+
+                        const correspondRecherche =
+                            texteComplet.includes(
+                                recherche
+                            );
 
 
                         let correspondFiltre = true;
@@ -816,18 +812,9 @@
                         message.lu === true;
 
 
-                    const article =
-                        document.createElement(
-                            "article"
-                        );
-
-
-                    article.className =
-                        "message "
-                        + (
-                            estLu
-                            ? "lu"
-                            : "non-lu"
+                    const adresseEmail =
+                        encodeURIComponent(
+                            message.email
                         );
 
 
@@ -846,6 +833,28 @@
                             + "Merci pour votre message concernant : "
                             + message.sujet
                             + ".\n\n"
+                        );
+
+
+                    const lienGmail =
+                        "https://mail.google.com/mail/?view=cm&fs=1"
+                        + "&to=" + adresseEmail
+                        + "&su=" + sujetEmail
+                        + "&body=" + corpsEmail;
+
+
+                    const article =
+                        document.createElement(
+                            "article"
+                        );
+
+
+                    article.className =
+                        "message "
+                        + (
+                            estLu
+                            ? "lu"
+                            : "non-lu"
                         );
 
 
@@ -912,9 +921,11 @@
 
                             <a
                                 class="bouton bouton-repondre"
-                                href="mailto:${protegerTexte(message.email)}?subject=${sujetEmail}&body=${corpsEmail}"
+                                href="${lienGmail}"
+                                target="_blank"
+                                rel="noopener"
                             >
-                                Répondre
+                                Répondre avec Gmail
                             </a>
 
                             <button
