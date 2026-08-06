@@ -1229,6 +1229,52 @@
         chargerTableauDeBord();
 
     </script>
+    <script>
+async function ajouterLienAdministration() {
+    const { data, error } =
+        await window.diawlalSupabase.auth.getUser();
+
+    if (error || !data.user) {
+        return;
+    }
+
+    if (
+        data.user.email
+        !== "diawlalromantique@gmail.com"
+    ) {
+        return;
+    }
+
+    const menu =
+        document.querySelector(".menu");
+
+    if (
+        !menu ||
+        document.getElementById("lienAdministration")
+    ) {
+        return;
+    }
+
+    const lien =
+        document.createElement("a");
+
+    lien.id =
+        "lienAdministration";
+
+    lien.href =
+        "admin-messages.html";
+
+    lien.textContent =
+        "Administration";
+
+    menu.insertBefore(
+        lien,
+        menu.querySelector(".deconnexion")
+    );
+}
+
+ajouterLienAdministration();
+</script>
 
 </body>
 
