@@ -3,7 +3,6 @@
 
 <head>
     <meta charset="UTF-8">
-
     <meta
         name="viewport"
         content="width=device-width, initial-scale=1.0"
@@ -16,17 +15,8 @@
             --or: #d4af37;
             --or-clair: #f4d76b;
             --or-fonce: #9d7515;
-
-            --noir: #080808;
-            --noir-doux: #111111;
-            --carte: #191919;
-
             --blanc: #f2f2f2;
             --gris: #b8b8b8;
-
-            --vert: #22c55e;
-            --rouge: #ef4444;
-
             --bordure: rgba(212, 175, 55, 0.48);
         }
 
@@ -36,13 +26,8 @@
             padding: 0;
         }
 
-        html {
-            scroll-behavior: smooth;
-        }
-
         body {
             min-height: 100vh;
-
             font-family: Arial, Helvetica, sans-serif;
             color: var(--blanc);
 
@@ -78,7 +63,6 @@
 
         .logo {
             color: var(--or);
-
             font-size: 30px;
             font-weight: 900;
             letter-spacing: 2px;
@@ -92,7 +76,7 @@
             gap: 5px;
         }
 
-        nav a,
+        .menu a,
         .deconnexion {
             padding: 9px 10px;
 
@@ -105,15 +89,18 @@
             text-decoration: none;
             font-size: 15px;
             font-weight: 700;
-            cursor: pointer;
 
-            transition: 0.25s;
+            cursor: pointer;
         }
 
-        nav a:hover,
+        .menu a:hover,
         .deconnexion:hover {
             color: var(--or-clair);
             background: rgba(212, 175, 55, 0.10);
+        }
+
+        #lienAdministration {
+            color: var(--or-clair);
         }
 
         .dashboard {
@@ -129,9 +116,7 @@
 
         .entete h1 {
             margin-bottom: 12px;
-
             font-size: clamp(38px, 6vw, 60px);
-            line-height: 1.1;
         }
 
         .entete p {
@@ -139,7 +124,8 @@
             font-size: 18px;
         }
 
-        .cartes {
+        .cartes,
+        .sections-secondaires {
             display: grid;
             grid-template-columns:
                 repeat(2, minmax(0, 1fr));
@@ -147,11 +133,12 @@
             gap: 20px;
         }
 
-        .carte {
-            position: relative;
-            overflow: hidden;
+        .sections-secondaires {
+            margin-top: 25px;
+        }
 
-            min-height: 200px;
+        .carte {
+            min-height: 190px;
             padding: 30px;
 
             display: flex;
@@ -172,44 +159,19 @@
                 1px solid var(--bordure);
 
             border-radius: 20px;
-
-            box-shadow:
-                0 18px 40px
-                rgba(0, 0, 0, 0.40);
-        }
-
-        .carte::before {
-            content: "";
-
-            position: absolute;
-            top: 0;
-            left: 0;
-
-            width: 100%;
-            height: 2px;
-
-            background:
-                linear-gradient(
-                    90deg,
-                    transparent,
-                    var(--or),
-                    transparent
-                );
         }
 
         .carte h2 {
             margin-bottom: 18px;
-
             color: var(--or-clair);
-            font-size: 28px;
+            font-size: 27px;
         }
 
         .valeur {
             margin-bottom: 14px;
 
             color: var(--or-clair);
-
-            font-size: clamp(27px, 4vw, 34px);
+            font-size: 31px;
             font-weight: 900;
         }
 
@@ -221,11 +183,11 @@
         .bouton {
             width: 100%;
             margin-top: 20px;
-            padding: 14px 18px;
+            padding: 14px;
 
             display: block;
 
-            color: #111111;
+            color: #111;
 
             background:
                 linear-gradient(
@@ -235,29 +197,10 @@
                     var(--or-fonce)
                 );
 
-            border: none;
             border-radius: 10px;
 
             text-decoration: none;
-            text-align: center;
-
             font-weight: 900;
-
-            cursor: pointer;
-        }
-
-        .sections-secondaires {
-            margin-top: 25px;
-
-            display: grid;
-            grid-template-columns:
-                repeat(2, minmax(0, 1fr));
-
-            gap: 20px;
-        }
-
-        .petite-carte {
-            min-height: 180px;
         }
 
         .profil {
@@ -286,7 +229,7 @@
             padding: 12px 0;
 
             border-bottom:
-                1px solid rgba(255, 255, 255, 0.10);
+                1px solid rgba(255,255,255,0.10);
         }
 
         .profil-ligne:last-child {
@@ -302,10 +245,6 @@
             font-size: 14px;
         }
 
-        .profil-ligne strong {
-            color: white;
-        }
-
         .chargement {
             position: fixed;
             inset: 0;
@@ -315,35 +254,16 @@
             justify-content: center;
             align-items: center;
 
-            color: var(--or-clair);
             background: #080808;
+            color: var(--or-clair);
 
-            font-size: 20px;
+            font-size: 19px;
             font-weight: 700;
         }
 
         @media (max-width: 760px) {
-
             nav {
                 flex-direction: column;
-            }
-
-            .logo {
-                font-size: 25px;
-            }
-
-            .menu {
-                gap: 2px;
-            }
-
-            nav a,
-            .deconnexion {
-                padding: 7px;
-                font-size: 13px;
-            }
-
-            .dashboard {
-                padding-top: 35px;
             }
 
             .cartes,
@@ -352,16 +272,7 @@
             }
 
             .carte {
-                min-height: 175px;
-                padding: 24px 18px;
-            }
-
-            .carte h2 {
-                font-size: 23px;
-            }
-
-            .valeur {
-                font-size: 27px;
+                min-height: 170px;
             }
         }
     </style>
@@ -409,6 +320,18 @@
                 Profil
             </a>
 
+            <a href="parametres.html">
+                Paramètres
+            </a>
+
+            <a
+                href="admin-messages.html"
+                id="lienAdministration"
+                style="display:none;"
+            >
+                Administration
+            </a>
+
             <button
                 class="deconnexion"
                 onclick="seDeconnecter()"
@@ -439,10 +362,7 @@
         <section class="cartes">
 
             <article class="carte">
-
-                <h2>
-                    Capital initial
-                </h2>
+                <h2>Capital initial</h2>
 
                 <div
                     class="valeur"
@@ -450,19 +370,11 @@
                 >
                     0 FCFA
                 </div>
-
-                <p>
-                    Votre capital enregistré.
-                </p>
-
             </article>
 
 
             <article class="carte">
-
-                <h2>
-                    Revenus
-                </h2>
+                <h2>Revenus</h2>
 
                 <div
                     class="valeur"
@@ -470,19 +382,11 @@
                 >
                     0 FCFA
                 </div>
-
-                <p>
-                    Total de vos revenus.
-                </p>
-
             </article>
 
 
             <article class="carte">
-
-                <h2>
-                    Dépenses
-                </h2>
+                <h2>Dépenses</h2>
 
                 <div
                     class="valeur"
@@ -490,11 +394,6 @@
                 >
                     0 FCFA
                 </div>
-
-                <p>
-                    Total de vos dépenses.
-                </p>
-
             </article>
 
 
@@ -511,10 +410,6 @@
                     0 FCFA
                 </div>
 
-                <p>
-                    Capital après les revenus et les dépenses.
-                </p>
-
                 <a
                     href="portefeuille.html"
                     class="bouton"
@@ -529,7 +424,7 @@
 
         <section class="sections-secondaires">
 
-            <article class="carte petite-carte">
+            <article class="carte">
 
                 <h2>
                     Progression Academy
@@ -542,10 +437,6 @@
                     0 %
                 </div>
 
-                <p>
-                    Votre progression dans les leçons.
-                </p>
-
                 <a
                     href="academy.html"
                     class="bouton"
@@ -556,7 +447,7 @@
             </article>
 
 
-            <article class="carte petite-carte">
+            <article class="carte">
 
                 <h2>
                     Objectifs
@@ -569,10 +460,6 @@
                     0
                 </div>
 
-                <p>
-                    Nombre d'objectifs financiers.
-                </p>
-
                 <a
                     href="objectifs.html"
                     class="bouton"
@@ -583,7 +470,7 @@
             </article>
 
 
-            <article class="carte petite-carte">
+            <article class="carte">
 
                 <h2>
                     Alertes non lues
@@ -596,10 +483,6 @@
                     0
                 </div>
 
-                <p>
-                    Informations encore à consulter.
-                </p>
-
                 <a
                     href="alertes.html"
                     class="bouton"
@@ -610,7 +493,7 @@
             </article>
 
 
-            <article class="carte petite-carte">
+            <article class="carte">
 
                 <h2>
                     Indice DIAWLAL
@@ -622,10 +505,6 @@
                 >
                     0 / 100
                 </div>
-
-                <p>
-                    Indice calculé selon votre situation.
-                </p>
 
             </article>
 
@@ -681,38 +560,21 @@
     </main>
 
 
-    <!-- Bibliothèque Supabase -->
-    <script
-        src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"
-    ></script>
-
-    <!-- Notre connexion Supabase -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="supabase.js"></script>
 
-
     <script>
-
         function formaterMontant(montant) {
-
             return (
                 Number(montant || 0)
                     .toLocaleString("fr-FR")
                 + " FCFA"
             );
-
         }
 
 
         async function chargerTableauDeBord() {
-
             try {
-
-                /*
-                =====================================
-                1. VÉRIFIER LA SESSION SUPABASE
-                =====================================
-                */
-
                 const {
                     data: sessionData,
                     error: sessionError
@@ -727,35 +589,16 @@
                     sessionError ||
                     !sessionData.session
                 ) {
-
                     window.location.href =
                         "connexion.html";
 
                     return;
-
                 }
 
 
                 const utilisateur =
                     sessionData.session.user;
 
-
-                /*
-                =====================================
-                2. AFFICHER LE NOM
-                =====================================
-                */
-
-                let nomUtilisateur =
-                    utilisateur
-                        .user_metadata
-                        ?.nom_complet;
-
-
-                /*
-                On essaie aussi de récupérer
-                le profil dans la base Supabase.
-                */
 
                 const {
                     data: profil
@@ -764,7 +607,7 @@
                         .diawlalSupabase
                         .from("profils")
                         .select(
-                            "nom_complet, email, telephone, objectif_financier"
+                            "nom_complet, email, telephone, objectif_financier, role"
                         )
                         .eq(
                             "id",
@@ -773,23 +616,14 @@
                         .maybeSingle();
 
 
-                if (
-                    profil &&
-                    profil.nom_complet
-                ) {
-
-                    nomUtilisateur =
-                        profil.nom_complet;
-
-                }
-
-
-                if (!nomUtilisateur) {
-
-                    nomUtilisateur =
-                        "Utilisateur";
-
-                }
+                const nom =
+                    profil?.nom_complet
+                    ||
+                    utilisateur
+                        .user_metadata
+                        ?.nom_complet
+                    ||
+                    "Utilisateur";
 
 
                 document
@@ -798,15 +632,9 @@
                     )
                     .textContent =
                     "Bonjour "
-                    + nomUtilisateur
+                    + nom
                     + " 👋";
 
-
-                /*
-                =====================================
-                3. PROFIL
-                =====================================
-                */
 
                 document
                     .getElementById(
@@ -841,13 +669,34 @@
 
 
                 /*
-                =====================================
-                4. PORTEFEUILLE
-                =====================================
-                Pour l'instant, on tente Supabase.
-                Si aucune donnée n'existe,
-                les valeurs restent à zéro.
-                =====================================
+                ADMINISTRATION
+                */
+
+                const {
+                    data: estAdmin,
+                    error: adminError
+                } =
+                    await window
+                        .diawlalSupabase
+                        .rpc("est_admin");
+
+
+                if (
+                    !adminError &&
+                    estAdmin === true
+                ) {
+                    document
+                        .getElementById(
+                            "lienAdministration"
+                        )
+                        .style
+                        .display =
+                        "inline-block";
+                }
+
+
+                /*
+                PORTEFEUILLE
                 */
 
                 let capital = 0;
@@ -872,13 +721,11 @@
 
 
                 if (portefeuille) {
-
                     capital =
                         Number(
                             portefeuille
                                 .capital_initial
                         ) || 0;
-
                 }
 
 
@@ -898,10 +745,8 @@
 
 
                 if (operations) {
-
                     operations.forEach(
-                        function(operation) {
-
+                        function (operation) {
                             const montant =
                                 Number(
                                     operation.montant
@@ -913,9 +758,7 @@
                                     .type_operation
                                 === "revenu"
                             ) {
-
                                 revenus += montant;
-
                             }
 
 
@@ -924,14 +767,10 @@
                                     .type_operation
                                 === "depense"
                             ) {
-
                                 depenses += montant;
-
                             }
-
                         }
                     );
-
                 }
 
 
@@ -982,9 +821,7 @@
 
 
                 /*
-                =====================================
-                5. OBJECTIFS SUPABASE
-                =====================================
+                OBJECTIFS
                 */
 
                 const {
@@ -1015,9 +852,7 @@
 
 
                 /*
-                =====================================
-                6. PROGRESSION ACADEMY
-                =====================================
+                ACADEMY
                 */
 
                 let progression = 0;
@@ -1031,9 +866,7 @@
                         .from(
                             "progression_academy"
                         )
-                        .select(
-                            "progression"
-                        )
+                        .select("progression")
                         .eq(
                             "user_id",
                             utilisateur.id
@@ -1042,12 +875,10 @@
 
 
                 if (academy) {
-
                     progression =
                         Number(
                             academy.progression
                         ) || 0;
-
                 }
 
 
@@ -1060,11 +891,7 @@
 
 
                 /*
-                =====================================
-                7. ALERTES
-                Pour l'instant les alertes sont
-                encore gérées localement.
-                =====================================
+                ALERTES
                 */
 
                 let alertesNonLues = 0;
@@ -1075,20 +902,14 @@
                     numero <= 3;
                     numero++
                 ) {
-
-                    const valeur =
+                    if (
                         localStorage.getItem(
                             "diawlal_alerte"
                             + numero
-                        );
-
-
-                    if (valeur !== "lue") {
-
+                        ) !== "lue"
+                    ) {
                         alertesNonLues++;
-
                     }
-
                 }
 
 
@@ -1101,25 +922,19 @@
 
 
                 /*
-                =====================================
-                8. INDICE DIAWLAL
-                =====================================
+                INDICE
                 */
 
                 let indice = 0;
 
 
                 if (capital > 0) {
-
                     indice += 25;
-
                 }
 
 
                 if (revenus > 0) {
-
                     indice += 20;
-
                 }
 
 
@@ -1127,16 +942,12 @@
                     revenus >= depenses &&
                     revenus > 0
                 ) {
-
                     indice += 20;
-
                 }
 
 
                 if (nombreObjectifs > 0) {
-
                     indice += 15;
-
                 }
 
 
@@ -1164,12 +975,6 @@
                     indice + " / 100";
 
 
-                /*
-                =====================================
-                9. ENLEVER LE CHARGEMENT
-                =====================================
-                */
-
                 document
                     .getElementById(
                         "chargement"
@@ -1177,104 +982,37 @@
                     .style
                     .display =
                     "none";
-
             }
 
             catch (erreur) {
-
                 console.error(
                     "Erreur DIAWLAL :",
                     erreur
                 );
-
 
                 document
                     .getElementById(
                         "chargement"
                     )
                     .textContent =
-                    "Une erreur est survenue. Recharge la page.";
-
+                    "Une erreur est survenue. Rechargez la page.";
             }
-
         }
 
 
-        /*
-        =========================================
-        DÉCONNEXION SUPABASE
-        =========================================
-        */
-
         async function seDeconnecter() {
-
             await window
                 .diawlalSupabase
                 .auth
                 .signOut();
 
-
             window.location.href =
                 "connexion.html";
-
         }
 
 
-        /*
-        =========================================
-        DÉMARRAGE
-        =========================================
-        */
-
         chargerTableauDeBord();
-
     </script>
-    <script>
-async function ajouterLienAdministration() {
-    const { data, error } =
-        await window.diawlalSupabase.auth.getUser();
-
-    if (error || !data.user) {
-        return;
-    }
-
-    if (
-        data.user.email
-        !== "diawlalromantique@gmail.com"
-    ) {
-        return;
-    }
-
-    const menu =
-        document.querySelector(".menu");
-
-    if (
-        !menu ||
-        document.getElementById("lienAdministration")
-    ) {
-        return;
-    }
-
-    const lien =
-        document.createElement("a");
-
-    lien.id =
-        "lienAdministration";
-
-    lien.href =
-        "admin-messages.html";
-
-    lien.textContent =
-        "Administration";
-
-    menu.insertBefore(
-        lien,
-        menu.querySelector(".deconnexion")
-    );
-}
-
-ajouterLienAdministration();
-</script>
 
 </body>
 

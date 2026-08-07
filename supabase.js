@@ -136,3 +136,40 @@ document.addEventListener(
         menu.appendChild(bouton);
     }
 );
+document.addEventListener("DOMContentLoaded", async function () {
+    const page =
+        window.location.pathname.split("/").pop();
+
+    if (page !== "dashboard.html") {
+        return;
+    }
+
+    const { data } =
+        await window.diawlalSupabase.auth.getSession();
+
+    const email =
+        data.session?.user?.email;
+
+    if (email !== "diawlalromantique@gmail.com") {
+        return;
+    }
+
+    const menu =
+        document.querySelector(".menu");
+
+    if (!menu || document.getElementById("lienAdmin")) {
+        return;
+    }
+
+    const lienAdmin =
+        document.createElement("a");
+
+    lienAdmin.id = "lienAdmin";
+    lienAdmin.href = "admin-messages.html";
+    lienAdmin.textContent = "Administration";
+
+    menu.insertBefore(
+        lienAdmin,
+        menu.lastElementChild
+    );
+});

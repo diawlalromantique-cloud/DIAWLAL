@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Paramètres - DIAWLAL</title>
+
+    <style>
+        :root {
+            --or: #d4af37;
+            --or-clair: #f4d76b;
+            --or-fonce: #9d7515;
+            --gris: #b8b8b8;
+            --rouge: #dc2626;
+            --bordure: rgba(212, 175, 55, 0.45);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            min-height: 100vh;
+
+            color: white;
+            font-family: Arial, Helvetica, sans-serif;
+
+            background:
+                radial-gradient(
+                    circle at top left,
+                    rgba(212, 175, 55, 0.12),
+                    transparent 30%
+                ),
+                linear-gradient(
+                    135deg,
+                    #080808,
+                    #111111,
+                    #181818
+                );
+
+            background-attachment: fixed;
+        }
+
+        nav {
+            width: min(1200px, 94%);
+            margin: auto;
+            padding: 22px 10px;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+
+            border-bottom:
+                1px solid rgba(212, 175, 55, 0.18);
+        }
+
+        .logo {
+            color: var(--or);
+
+            font-size: 30px;
+            font-weight: 900;
+            letter-spacing: 3px;
+        }
+
+        .menu {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+
+        .menu a,
+        .deconnexion {
+            padding: 10px 12px;
+
+            color: white;
+            background: transparent;
+
+            border: none;
+            border-radius: 9px;
+
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 700;
+
+            cursor: pointer;
+        }
+
+        .menu a:hover,
+        .deconnexion:hover {
+            color: var(--or-clair);
+            background: rgba(212, 175, 55, 0.10);
+        }
+
+        .container {
+            width: min(760px, 92%);
+            margin: auto;
+            padding: 55px 0 80px;
+        }
+
+        .entete {
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .entete h1 {
+            margin-bottom: 12px;
+
+            font-size: clamp(38px, 7vw, 58px);
+        }
+
+        .entete p {
+            color: var(--gris);
+            font-size: 18px;
+            line-height: 1.6;
+        }
+
+        .carte {
+            margin-bottom: 25px;
+            padding: 28px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    #202020,
+                    #101010
+                );
+
+            border: 1px solid var(--bordure);
+            border-radius: 20px;
+        }
+
+        .carte h2 {
+            margin-bottom: 10px;
+            color: var(--or-clair);
+        }
+
+        .carte-description {
+            margin-bottom: 22px;
+            color: var(--gris);
+            line-height: 1.6;
+        }
+
+        label {
+            display: block;
+            margin: 16px 0 7px;
+
+            color: var(--or-clair);
+            font-weight: 700;
+        }
+
+        input {
+            width: 100%;
+            padding: 14px;
+
+            color: white;
+            background: #0d0d0d;
+
+            border:
+                1px solid rgba(212, 175, 55, 0.35);
+
+            border-radius: 10px;
+
+            font-size: 16px;
+            outline: none;
+        }
+
+        input:focus {
+            border-color: var(--or);
+
+            box-shadow:
+                0 0 0 3px rgba(212, 175, 55, 0.12);
+        }
+
+        .bouton {
+            width: 100%;
+            padding: 15px;
+            margin-top: 22px;
+
+            border: none;
+            border-radius: 10px;
+
+            font-size: 16px;
+            font-weight: 900;
+
+            cursor: pointer;
+        }
+
+        .bouton-principal {
+            color: #111111;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    var(--or-clair),
+                    var(--or),
+                    var(--or-fonce)
+                );
+        }
+
+        .bouton-danger {
+            color: white;
+            background: var(--rouge);
+        }
+
+        .bouton:disabled {
+            opacity: 0.6;
+            cursor: wait;
+        }
+
+        .zone-danger {
+            border-color: rgba(239, 68, 68, 0.55);
+        }
+
+        .zone-danger h2 {
+            color: #fca5a5;
+        }
+
+        .message {
+            display: none;
+
+            margin-top: 16px;
+            padding: 13px;
+
+            border-radius: 10px;
+            text-align: center;
+            line-height: 1.5;
+        }
+
+        .succes {
+            display: block;
+
+            color: #bbf7d0;
+            background: rgba(34, 197, 94, 0.14);
+
+            border:
+                1px solid rgba(34, 197, 94, 0.45);
+        }
+
+        .erreur {
+            display: block;
+
+            color: #fecaca;
+            background: rgba(239, 68, 68, 0.14);
+
+            border:
+                1px solid rgba(239, 68, 68, 0.45);
+        }
+
+        @media (max-width: 760px) {
+            nav {
+                flex-direction: column;
+            }
+
+            .carte {
+                padding: 22px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+
+        <div class="logo">
+            DIAWLAL
+        </div>
+
+        <div class="menu">
+
+            <a href="dashboard.html">
+                Tableau de bord
+            </a>
+
+            <a href="profil.html">
+                Profil
+            </a>
+
+            <a href="parametres.html">
+                Paramètres
+            </a>
+
+            <button
+                class="deconnexion"
+                onclick="seDeconnecter()"
+            >
+                Déconnexion
+            </button>
+
+        </div>
+
+    </nav>
+
+
+    <main class="container">
+
+        <section class="entete">
+
+            <h1>
+                Paramètres
+            </h1>
+
+            <p>
+                Gérez la sécurité et les paramètres de votre compte DIAWLAL.
+            </p>
+
+        </section>
+
+
+        <section class="carte">
+
+            <h2>
+                Modifier le mot de passe
+            </h2>
+
+            <p class="carte-description">
+                Choisissez un nouveau mot de passe contenant au moins six caractères.
+            </p>
+
+            <form id="formMotDePasse">
+
+                <label for="nouveauMotDePasse">
+                    Nouveau mot de passe
+                </label>
+
+                <input
+                    type="password"
+                    id="nouveauMotDePasse"
+                    minlength="6"
+                    required
+                >
+
+
+                <label for="confirmationMotDePasse">
+                    Confirmer le mot de passe
+                </label>
+
+                <input
+                    type="password"
+                    id="confirmationMotDePasse"
+                    minlength="6"
+                    required
+                >
+
+
+                <button
+                    type="submit"
+                    class="bouton bouton-principal"
+                    id="boutonMotDePasse"
+                >
+                    Modifier le mot de passe
+                </button>
+
+            </form>
+
+            <div
+                id="messageMotDePasse"
+                class="message"
+            ></div>
+
+        </section>
+
+
+        <section class="carte zone-danger">
+
+            <h2>
+                Supprimer mon compte
+            </h2>
+
+            <p class="carte-description">
+                Cette action supprimera définitivement votre profil,
+                votre portefeuille, vos opérations, vos objectifs
+                et votre progression Academy.
+            </p>
+
+            <label for="confirmationSuppression">
+                Écrivez SUPPRIMER pour confirmer
+            </label>
+
+            <input
+                type="text"
+                id="confirmationSuppression"
+                placeholder="SUPPRIMER"
+            >
+
+            <button
+                type="button"
+                class="bouton bouton-danger"
+                id="boutonSuppression"
+                onclick="supprimerCompte()"
+            >
+                Supprimer définitivement mon compte
+            </button>
+
+            <div
+                id="messageSuppression"
+                class="message"
+            ></div>
+
+        </section>
+
+    </main>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="supabase.js"></script>
+
+    <script>
+        const formulaireMotDePasse =
+            document.getElementById(
+                "formMotDePasse"
+            );
+
+        const boutonMotDePasse =
+            document.getElementById(
+                "boutonMotDePasse"
+            );
+
+        const boutonSuppression =
+            document.getElementById(
+                "boutonSuppression"
+            );
+
+
+        function afficherMessage(
+            id,
+            texte,
+            type
+        ) {
+            const element =
+                document.getElementById(id);
+
+            element.textContent = texte;
+            element.className =
+                "message " + type;
+        }
+
+
+        async function verifierSession() {
+            const {
+                data,
+                error
+            } =
+                await window
+                    .diawlalSupabase
+                    .auth
+                    .getSession();
+
+            if (
+                error ||
+                !data.session
+            ) {
+                window.location.href =
+                    "connexion.html";
+
+                return false;
+            }
+
+            return true;
+        }
+
+
+        formulaireMotDePasse.addEventListener(
+            "submit",
+            async function (event) {
+                event.preventDefault();
+
+                const nouveauMotDePasse =
+                    document
+                        .getElementById(
+                            "nouveauMotDePasse"
+                        )
+                        .value;
+
+                const confirmation =
+                    document
+                        .getElementById(
+                            "confirmationMotDePasse"
+                        )
+                        .value;
+
+
+                if (
+                    nouveauMotDePasse.length < 6
+                ) {
+                    afficherMessage(
+                        "messageMotDePasse",
+                        "Le mot de passe doit contenir au moins 6 caractères.",
+                        "erreur"
+                    );
+
+                    return;
+                }
+
+
+                if (
+                    nouveauMotDePasse
+                    !== confirmation
+                ) {
+                    afficherMessage(
+                        "messageMotDePasse",
+                        "Les deux mots de passe ne correspondent pas.",
+                        "erreur"
+                    );
+
+                    return;
+                }
+
+
+                boutonMotDePasse.disabled = true;
+                boutonMotDePasse.textContent =
+                    "Modification...";
+
+
+                const {
+                    error
+                } =
+                    await window
+                        .diawlalSupabase
+                        .auth
+                        .updateUser({
+                            password:
+                                nouveauMotDePasse
+                        });
+
+
+                boutonMotDePasse.disabled = false;
+                boutonMotDePasse.textContent =
+                    "Modifier le mot de passe";
+
+
+                if (error) {
+                    afficherMessage(
+                        "messageMotDePasse",
+                        "Erreur : "
+                        + error.message,
+                        "erreur"
+                    );
+
+                    return;
+                }
+
+
+                formulaireMotDePasse.reset();
+
+                afficherMessage(
+                    "messageMotDePasse",
+                    "Mot de passe modifié avec succès.",
+                    "succes"
+                );
+            }
+        );
+
+
+        async function supprimerCompte() {
+            const confirmation =
+                document
+                    .getElementById(
+                        "confirmationSuppression"
+                    )
+                    .value
+                    .trim();
+
+
+            if (
+                confirmation !== "SUPPRIMER"
+            ) {
+                afficherMessage(
+                    "messageSuppression",
+                    "Écrivez exactement SUPPRIMER pour confirmer.",
+                    "erreur"
+                );
+
+                return;
+            }
+
+
+            const validation =
+                confirm(
+                    "Cette action est définitive. Supprimer le compte ?"
+                );
+
+
+            if (!validation) {
+                return;
+            }
+
+
+            boutonSuppression.disabled = true;
+            boutonSuppression.textContent =
+                "Suppression en cours...";
+
+
+            const {
+                error
+            } =
+                await window
+                    .diawlalSupabase
+                    .rpc(
+                        "supprimer_mon_compte"
+                    );
+
+
+            if (error) {
+                boutonSuppression.disabled = false;
+                boutonSuppression.textContent =
+                    "Supprimer définitivement mon compte";
+
+                afficherMessage(
+                    "messageSuppression",
+                    "Erreur : "
+                    + error.message,
+                    "erreur"
+                );
+
+                return;
+            }
+
+
+            await window
+                .diawlalSupabase
+                .auth
+                .signOut();
+
+
+            alert(
+                "Votre compte a été supprimé."
+            );
+
+
+            window.location.href =
+                "index.html";
+        }
+
+
+        async function seDeconnecter() {
+            await window
+                .diawlalSupabase
+                .auth
+                .signOut();
+
+            window.location.href =
+                "connexion.html";
+        }
+
+
+        async function demarrer() {
+            await verifierSession();
+        }
+
+
+        demarrer();
+    </script>
+
+</body>
+
+</html>
